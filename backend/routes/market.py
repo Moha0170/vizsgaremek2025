@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from sqlalchemy import text
 from backend import db
 from backend.models.model import Termek
 
@@ -10,6 +11,10 @@ def allProducts():
     data = [{column.name: getattr(row, column.name) for column in Termek.__table__.columns} for row in results]
     return jsonify(data)
 
-@market_bp.route("/getProduct/<type>", methods=['GET'])
-def getProducts(type):
-    return jsonify({"type": type})
+@market_bp.route("/getProduct/<kat>", methods=['GET'])
+def getProducts(kat):
+    a = []
+    results = db.session.execute(text("SELECT * FROM `termekek` WHERE `kat` = :kat"), {'kat': kat})
+    for row in results.mappings():
+        a.append(dict(row))
+    return jsonify(a)
