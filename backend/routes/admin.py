@@ -19,3 +19,13 @@ def create():
     db.session.execute(text("INSERT INTO termekek (neve, ara, kat, gyarto_beszallito) VALUES (:nev, :ar, :kat, :gyarto)"), {"nev": neve, "ar": int(ara), "kat": kat, "gyarto": gyarto_beszallito})
     db.session.commit()
     return {"message": "Product created!"}
+
+@admin_bp.route("/product/update/<id>", methods=['PATCH'])
+def update(id):
+    neve = request.json['neve']
+    ara = request.json['ara']
+    kat = request.json['kat']
+    gyarto_beszallito = request.json['gyarto_beszallito']
+    db.session.execute(text("UPDATE termekek SET neve = :nev, ara = :ar, kat = :kat, gyarto_beszallito = :gyarto WHERE id = :id"), {"nev": neve, "ar": int(ara), "kat": kat, "gyarto": gyarto_beszallito, "id": id})
+    db.session.commit()
+    return {"message": "Product updated!"}
