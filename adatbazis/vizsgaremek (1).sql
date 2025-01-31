@@ -33,7 +33,7 @@ CREATE TABLE `felhasznalok` (
   `email` varchar(255) NOT NULL,
   `telefonszam` varchar(20) DEFAULT NULL,
   `szuldatum` date DEFAULT NULL,
-  `husegpont` int(11) DEFAULT 0
+  `husegpont` int(11) DEFAULT 0,
   `admin` BOOLEAN NOT NULL DEFAULT FALSE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -41,7 +41,7 @@ CREATE TABLE `felhasznalok` (
 -- Dumping data for table `felhasznalok`
 --
 
-INSERT INTO `felhasznalok` (`id`, `neve`, `email`, `telefonszam`, `szuldatum`, `husegpont` `admin`) VALUES
+INSERT INTO `felhasznalok` (`id`, `neve`, `email`, `telefonszam`, `szuldatum`, `husegpont`, `admin`) VALUES
 (1, 'Kovacs Adam', 'adam.kovacs@example.com', '123456789', '1985-05-20', 10, TRUE),
 (2, 'Szabo Eva', 'eva.szabo@example.com', '987654321', '1990-07-15', 20, FALSE),
 (3, 'Nagy Bela', 'bela.nagy@example.com', '456123789', '1982-03-12', 15, FALSE),
