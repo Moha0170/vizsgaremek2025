@@ -29,3 +29,17 @@ def update(id):
     db.session.execute(text("UPDATE termekek SET neve = :nev, ara = :ar, kat = :kat, gyarto_beszallito = :gyarto WHERE id = :id"), {"nev": neve, "ar": int(ara), "kat": kat, "gyarto": gyarto_beszallito, "id": id})
     db.session.commit()
     return {"message": "Product updated!"}
+
+@admin_bp.route("/users/update/", methods=['PATCH'])
+def update_user():
+    id = request.json['id']
+    neve = request.json['neve']
+    email = request.json['email']
+    telefonszam = request.json['telefonszam']
+    szuldatum = request.json['szuldatum']
+    husegpont = request.json['husegpont']
+    admin = request.json['admin']
+    db.session.execute(text("UPDATE users SET neve = :nev, email = :email, telefonszam = :telefonszam, szuldatum = :szuldatum, husegpont = :husegpont, admin = :admin WHERE id = :id"), {"nev": neve, "email": email, "telefonszam": telefonszam, "szuldatum": szuldatum, "husegpont": husegpont, "id": id, "admin": admin})
+    db.session.commit()
+    return {"message": "User updated!"}
+    
