@@ -174,21 +174,21 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`felhasznalo_id`, `user`, `password`) VALUES
-(1, 'adamkovacs', 'password1'),
-(2, 'evaszabo', 'password2'),
-(3, 'belanagy', 'password3'),
-(4, 'krisztinatoth', 'password4'),
-(5, 'petervarga', 'password5'),
-(6, 'annakiss', 'password6'),
-(7, 'lajosmolnar', 'password7'),
-(8, 'zoltanhorvath', 'password8'),
-(9, 'katalinfarkas', 'password9'),
-(10, 'csillabalogh', 'password10'),
-(11, 'andrassimons', 'password11'),
-(12, 'jozsefpapp', 'password12'),
-(13, 'eszterszilagyi', 'password13'),
-(14, 'karolyveres', 'password14'),
-(15, 'erzsebetbodnar', 'password15');
+(1, 'adamkovacs', '$argon2id$v=19$m=16,t=2,p=1$TUZZM3Y1OFlIUm0yY2NWMQ$qGQDyOu54Ws4RI9KnR12xQ'),
+(2, 'evaszabo', '$argon2id$v=19$m=16,t=2,p=1$Tll5Zm9qMTJyS2VmQUhkbQ$VXmMTa9ZjB6ZHmPtp/BgFA'),
+(3, 'belanagy', '$argon2id$v=19$m=16,t=2,p=1$UnlKTkdIc1FMWXhFOFM5Tg$9kz+2FRn8EBubKnjPpQPdA'),
+(4, 'krisztinatoth', '$argon2id$v=19$m=16,t=2,p=1$b0JuMkVNekEzZmJacngxYQ$T2pxGgCDqhs+3boa5cieiQ'),
+(5, 'petervarga', '$argon2id$v=19$m=16,t=2,p=1$VXQ4MEFBUzZHTENMREN5dA$43l20TvsqrKCowEV+2EEBA'),
+(6, 'annakiss', '$argon2id$v=19$m=16,t=2,p=1$cEVNaWRlcDJ5V294RWhDeQ$CaudKCU517TK46ngUC+gpQ'),
+(7, 'lajosmolnar', '$argon2id$v=19$m=16,t=2,p=1$enhKdXNoWTFMR0tOa1NFTw$OQIRuIesbhoypsUCNyg+Nw'),
+(8, 'zoltanhorvath', '$argon2id$v=19$m=16,t=2,p=1$bnViMDRjdEMwVzQxWmVERQ$XTnVGutzOjB9iI0JQgI2Vw'),
+(9, 'katalinfarkas', '$argon2id$v=19$m=16,t=2,p=1$WHpNVjZiUm5CWDZqT3FIRQ$798xqdbqcx8F9grtN3Uogg'),
+(10, 'csillabalogh', '$argon2id$v=19$m=16,t=2,p=1$YTh2M0NMaHhzTnVXU2pERA$2Ed+qyvJ06LY3X8WjLOJiQ'),
+(11, 'andrassimons', '$argon2id$v=19$m=16,t=2,p=1$bFBzOWZCMklyUFptUE9iRA$7mxGHBe9iEsVUtQUl8ZWHQ'),
+(12, 'jozsefpapp', '$argon2id$v=19$m=16,t=2,p=1$UHpaRWtIM05COTlQV2N5ag$D1uu37vb3xzHG/P5RK4Zmg'),
+(13, 'eszterszilagyi', '$argon2id$v=19$m=16,t=2,p=1$UHpaRWtIM05COTlQV2N5ag$D1uu37vb3xzHG/P5RK4Zmg'),
+(14, 'karolyveres', '$argon2id$v=19$m=16,t=2,p=1$c05FVmZ5cnhOZjNRajZPbQ$HxFUttQWbRHcBkXv9INmLA'),
+(15, 'erzsebetbodnar', '$argon2id$v=19$m=16,t=2,p=1$aHI0MTFhN05aSUZya1J0Wg$yPgtPtWtc8qff5yOgquLYw');
 
 -- --------------------------------------------------------
 
