@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
 db = SQLAlchemy()
+app = Flask(__name__)
+argon2 = Argon2(app)
 
 def create_app():
     app = Flask(__name__)
