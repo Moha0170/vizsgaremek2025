@@ -42,4 +42,3 @@ def update_user():
     db.session.execute(text("UPDATE users SET neve = :nev, email = :email, telefonszam = :telefonszam, szuldatum = :szuldatum, husegpont = :husegpont, admin = :admin WHERE id = :id"), {"nev": neve, "email": email, "telefonszam": telefonszam, "szuldatum": szuldatum, "husegpont": husegpont, "id": id, "admin": admin})
     db.session.commit()
     return {"message": "User updated!"}
-    
