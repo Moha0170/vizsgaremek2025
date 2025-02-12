@@ -7,20 +7,22 @@ profile_bp = Blueprint("profile_bp", __name__, url_prefix="/profile")
 @profile_bp.route("/login/", methods=['POST'])
 def login():
     results = db.session.execute(
-        text("SELECT `password` FROM `login` WHERE `user` = :user"), 
+        text("SELECT l.password, f.admin FROM login l JOIN felhasznalok f ON l.felhasznalo_id = f.id WHERE l.user = :user"), 
         {"user": request.json['user']}
     )
     results = results.fetchone()
 
     if results is None:
-        return "Nincs ilyen felhasználó!", 404
+        return {"message": "Nincs ilyen felhasználó!"}, 404
 
-    stored_password = results[0]
+    stored_password, is_admin = results
 
     if argon2.check_password_hash(stored_password, request.json['password']):
-        return "Sikeres bejelentkezés", 200
+        return {"message": "Sikeres bejelentkezés", "isAdmin": bool(is_admin)}, 200
     else:
-        return "Sikertelen bejelentkezés", 401
+        return {"message": "Sikertelen bejelentkezés"}, 401
+
+
 
 @profile_bp.route("/register/", methods=['POST'])
 def register():

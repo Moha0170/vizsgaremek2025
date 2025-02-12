@@ -4,6 +4,7 @@ import Market from "./components/Market";
 import Contacts from "./components/Contacts";
 import Profile from "./components/Profile";
 import Register from "./components/Register";
+import Admin from "./components/Admin";
 import "./index.css";
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
         <Route path="/" element={<Market />} />
         <Route path="/contact" element={<Contacts />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/register" element={<Register />} /> {}
+        <Route path="/register" element={<Register />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </Router>
   );

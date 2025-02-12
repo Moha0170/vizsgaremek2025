@@ -9,7 +9,7 @@ argon2 = Argon2(app)
 
 def create_app():
     app = Flask(__name__)
-    CORS(app, origins=["http://localhost:5173"])
+    CORS(app)
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/hypercharge?charset=utf8mb4'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
