@@ -35,6 +35,7 @@ CREATE TABLE `felhasznalok` (
   `szuldatum` date DEFAULT NULL,
   `husegpont` int(11) DEFAULT 0,
   `admin` BOOLEAN NOT NULL DEFAULT FALSE
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
