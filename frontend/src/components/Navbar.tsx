@@ -29,7 +29,7 @@ function Navbar() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/termekek" className="nav-links" onClick={() => setIsOpen(false)}>
+            <Link to="/" className="nav-links" onClick={() => setIsOpen(false)}>
               Termékek
             </Link>
           </li>
@@ -39,7 +39,7 @@ function Navbar() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/kapcsolat" className="nav-links" onClick={() => setIsOpen(false)}>
+            <Link to="/contact" className="nav-links" onClick={() => setIsOpen(false)}>
               Kapcsolat
             </Link>
           </li>

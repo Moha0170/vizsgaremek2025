@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Market from "./components/Market";
 import Contacts from "./components/Contacts";
 import Profile from "./components/Profile";
+import Register from "./components/Register";
 import "./index.css";
 
 function App() {
@@ -10,9 +11,10 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/termekek" element={<Market />} />
-        <Route path="/kapcsolat" element={<Contacts />} />
-        <Route path="/profile" element={<Profile />} /> {}
+        <Route path="/" element={<Market />} />
+        <Route path="/contact" element={<Contacts />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/register" element={<Register />} /> {}
       </Routes>
     </Router>
   );

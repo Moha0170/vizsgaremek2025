@@ -46,6 +46,7 @@ function Profile() {
         <button type="submit">Bejelentkezés</button>
       </form>
       {message && <p>{message}</p>}
+      <p>Még nincs fiókod? <a href="/register">Regisztrálj itt</a></p>
     </div>
   );
 }
