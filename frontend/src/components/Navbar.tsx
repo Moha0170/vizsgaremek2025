@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../index.css";
-import { FiMenu, FiX } from "react-icons/fi"; // Menü ikonok
+import { FiMenu, FiX } from "react-icons/fi";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("isLoggedIn") === "true"
+  );
 
   return (
     <nav className="navbar">
@@ -13,12 +16,12 @@ function Navbar() {
           Webshop
         </Link>
         
-        {/* Menü ikon (mobil nézethez) */}
+        {}
         <div className="menu-icon" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <FiX className="icon" /> : <FiMenu className="icon" />}
         </div>
 
-        {/* Menü elemek */}
+        {}
         <ul className={isOpen ? "nav-menu active" : "nav-menu"}>
           <li className="nav-item">
             <Link to="/" className="nav-links" onClick={() => setIsOpen(false)}>
@@ -26,7 +29,7 @@ function Navbar() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/products" className="nav-links" onClick={() => setIsOpen(false)}>
+            <Link to="/termekek" className="nav-links" onClick={() => setIsOpen(false)}>
               Termékek
             </Link>
           </li>
@@ -36,10 +39,23 @@ function Navbar() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/contact" className="nav-links" onClick={() => setIsOpen(false)}>
+            <Link to="/kapcsolat" className="nav-links" onClick={() => setIsOpen(false)}>
               Kapcsolat
             </Link>
           </li>
+          {isLoggedIn ? (
+            <li className="nav-item">
+              <Link to="/profile" className="nav-links" onClick={() => setIsOpen(false)}>
+                Profil
+              </Link>
+            </li>
+          ) : (
+            <li className="nav-item">
+              <Link to="/profile" className="nav-links" onClick={() => setIsOpen(false)}>
+                Bejelentkezés
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </nav>
