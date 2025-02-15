@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2025 at 01:22 PM
+-- Generation Time: Feb 13, 2025 at 02:03 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -33,63 +33,29 @@ CREATE TABLE `felhasznalok` (
   `email` varchar(255) NOT NULL,
   `telefonszam` varchar(20) DEFAULT NULL,
   `szuldatum` date DEFAULT NULL,
-  `husegpont` int(11) DEFAULT 0,
-  `admin` BOOLEAN NOT NULL DEFAULT FALSE
-
+  `husegpont` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `felhasznalok`
 --
 
-INSERT INTO `felhasznalok` (`id`, `neve`, `email`, `telefonszam`, `szuldatum`, `husegpont`, `admin`) VALUES
-(1, 'Kovacs Adam', 'adam.kovacs@example.com', '123456789', '1985-05-20', 10, TRUE),
-(2, 'Szabo Eva', 'eva.szabo@example.com', '987654321', '1990-07-15', 20, FALSE),
-(3, 'Nagy Bela', 'bela.nagy@example.com', '456123789', '1982-03-12', 15, FALSE),
-(4, 'Toth Krisztina', 'krisztina.toth@example.com', '789321456', '1995-09-22', 30, FALSE),
-(5, 'Varga Peter', 'peter.varga@example.com', '321654987', '1988-01-05', 25, FALSE),
-(6, 'Kiss Anna', 'anna.kiss@example.com', '654789123', '1992-11-30', 5, FALSE),
-(7, 'Molnar Lajos', 'lajos.molnar@example.com', '741852963', '1980-06-18', 40, FALSE),
-(8, 'Horvath Zoltan', 'zoltan.horvath@example.com', '963258741', '1978-02-14', 50, FALSE),
-(9, 'Farkas Katalin', 'katalin.farkas@example.com', '159753486', '1987-04-25', 35, FALSE),
-(10, 'Balogh Csilla', 'csilla.balogh@example.com', '852741369', '1994-12-10', 20, FALSE),
-(11, 'Simon Andras', 'andras.simon@example.com', '753951456', '1986-10-01', 15, FALSE),
-(12, 'Papp Jozsef', 'jozsef.papp@example.com', '951753852', '1991-08-17', 25, FALSE),
-(13, 'Szilagyi Eszter', 'eszter.szilagyi@example.com', '147258369', '1984-12-05', 10, FALSE),
-(14, 'Veres Karoly', 'karoly.veres@example.com', '369258147', '1983-03-08', 5, FALSE),
-(15, 'Bodnar Erzsebet', 'erzsebet.bodnar@example.com', '258147369', '1996-07-20', 30, FALSE);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `kosar`
---
-
-CREATE TABLE `kosar` (
-  `id` int(11) NOT NULL,
-  `felhasznalo_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `kosar`
---
-
-INSERT INTO `kosar` (`id`, `felhasznalo_id`) VALUES
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5),
-(6, 6),
-(7, 7),
-(8, 8),
-(9, 9),
-(10, 10),
-(11, 11),
-(12, 12),
-(13, 13),
-(14, 14),
-(15, 15);
+INSERT INTO `felhasznalok` (`id`, `neve`, `email`, `telefonszam`, `szuldatum`, `husegpont`) VALUES
+(1, 'Kovacs Adam', 'adam.kovacs@example.com', '123456789', '1985-05-20', 10),
+(2, 'Szabo Eva', 'eva.szabo@example.com', '987654321', '1990-07-15', 20),
+(3, 'Nagy Bela', 'bela.nagy@example.com', '456123789', '1982-03-12', 15),
+(4, 'Toth Krisztina', 'krisztina.toth@example.com', '789321456', '1995-09-22', 30),
+(5, 'Varga Peter', 'peter.varga@example.com', '321654987', '1988-01-05', 25),
+(6, 'Kiss Anna', 'anna.kiss@example.com', '654789123', '1992-11-30', 5),
+(7, 'Molnar Lajos', 'lajos.molnar@example.com', '741852963', '1980-06-18', 40),
+(8, 'Horvath Zoltan', 'zoltan.horvath@example.com', '963258741', '1978-02-14', 50),
+(9, 'Farkas Katalin', 'katalin.farkas@example.com', '159753486', '1987-04-25', 35),
+(10, 'Balogh Csilla', 'csilla.balogh@example.com', '852741369', '1994-12-10', 20),
+(11, 'Simon Andras', 'andras.simon@example.com', '753951456', '1986-10-01', 15),
+(12, 'Papp Jozsef', 'jozsef.papp@example.com', '951753852', '1991-08-17', 25),
+(13, 'Szilagyi Eszter', 'eszter.szilagyi@example.com', '147258369', '1984-12-05', 10),
+(14, 'Veres Karoly', 'karoly.veres@example.com', '369258147', '1983-03-08', 5),
+(15, 'Bodnar Erzsebet', 'erzsebet.bodnar@example.com', '258147369', '1996-07-20', 30);
 
 -- --------------------------------------------------------
 
@@ -98,7 +64,7 @@ INSERT INTO `kosar` (`id`, `felhasznalo_id`) VALUES
 --
 
 CREATE TABLE `kosar_termekek` (
-  `kosar_id` int(11) NOT NULL,
+  `felhasznalo_id` int(11) NOT NULL,
   `termek_id` int(11) NOT NULL,
   `mennyiseg` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -107,7 +73,7 @@ CREATE TABLE `kosar_termekek` (
 -- Dumping data for table `kosar_termekek`
 --
 
-INSERT INTO `kosar_termekek` (`kosar_id`, `termek_id`, `mennyiseg`) VALUES
+INSERT INTO `kosar_termekek` (`felhasznalo_id`, `termek_id`, `mennyiseg`) VALUES
 (1, 1, 1),
 (2, 2, 2),
 (3, 3, 1),
@@ -175,21 +141,21 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`felhasznalo_id`, `user`, `password`) VALUES
-(1, 'adamkovacs', '$argon2id$v=19$m=16,t=2,p=1$TUZZM3Y1OFlIUm0yY2NWMQ$qGQDyOu54Ws4RI9KnR12xQ'),
-(2, 'evaszabo', '$argon2id$v=19$m=16,t=2,p=1$Tll5Zm9qMTJyS2VmQUhkbQ$VXmMTa9ZjB6ZHmPtp/BgFA'),
-(3, 'belanagy', '$argon2id$v=19$m=16,t=2,p=1$UnlKTkdIc1FMWXhFOFM5Tg$9kz+2FRn8EBubKnjPpQPdA'),
-(4, 'krisztinatoth', '$argon2id$v=19$m=16,t=2,p=1$b0JuMkVNekEzZmJacngxYQ$T2pxGgCDqhs+3boa5cieiQ'),
-(5, 'petervarga', '$argon2id$v=19$m=16,t=2,p=1$VXQ4MEFBUzZHTENMREN5dA$43l20TvsqrKCowEV+2EEBA'),
-(6, 'annakiss', '$argon2id$v=19$m=16,t=2,p=1$cEVNaWRlcDJ5V294RWhDeQ$CaudKCU517TK46ngUC+gpQ'),
-(7, 'lajosmolnar', '$argon2id$v=19$m=16,t=2,p=1$enhKdXNoWTFMR0tOa1NFTw$OQIRuIesbhoypsUCNyg+Nw'),
-(8, 'zoltanhorvath', '$argon2id$v=19$m=16,t=2,p=1$bnViMDRjdEMwVzQxWmVERQ$XTnVGutzOjB9iI0JQgI2Vw'),
-(9, 'katalinfarkas', '$argon2id$v=19$m=16,t=2,p=1$WHpNVjZiUm5CWDZqT3FIRQ$798xqdbqcx8F9grtN3Uogg'),
-(10, 'csillabalogh', '$argon2id$v=19$m=16,t=2,p=1$YTh2M0NMaHhzTnVXU2pERA$2Ed+qyvJ06LY3X8WjLOJiQ'),
-(11, 'andrassimons', '$argon2id$v=19$m=16,t=2,p=1$bFBzOWZCMklyUFptUE9iRA$7mxGHBe9iEsVUtQUl8ZWHQ'),
-(12, 'jozsefpapp', '$argon2id$v=19$m=16,t=2,p=1$UHpaRWtIM05COTlQV2N5ag$D1uu37vb3xzHG/P5RK4Zmg'),
-(13, 'eszterszilagyi', '$argon2id$v=19$m=16,t=2,p=1$UHpaRWtIM05COTlQV2N5ag$D1uu37vb3xzHG/P5RK4Zmg'),
-(14, 'karolyveres', '$argon2id$v=19$m=16,t=2,p=1$c05FVmZ5cnhOZjNRajZPbQ$HxFUttQWbRHcBkXv9INmLA'),
-(15, 'erzsebetbodnar', '$argon2id$v=19$m=16,t=2,p=1$aHI0MTFhN05aSUZya1J0Wg$yPgtPtWtc8qff5yOgquLYw');
+(1, 'adamkovacs', 'password1'),
+(2, 'evaszabo', 'password2'),
+(3, 'belanagy', 'password3'),
+(4, 'krisztinatoth', 'password4'),
+(5, 'petervarga', 'password5'),
+(6, 'annakiss', 'password6'),
+(7, 'lajosmolnar', 'password7'),
+(8, 'zoltanhorvath', 'password8'),
+(9, 'katalinfarkas', 'password9'),
+(10, 'csillabalogh', 'password10'),
+(11, 'andrassimons', 'password11'),
+(12, 'jozsefpapp', 'password12'),
+(13, 'eszterszilagyi', 'password13'),
+(14, 'karolyveres', 'password14'),
+(15, 'erzsebetbodnar', 'password15');
 
 -- --------------------------------------------------------
 
@@ -237,19 +203,11 @@ ALTER TABLE `felhasznalok`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
-
---
--- Indexes for table `kosar`
---
-ALTER TABLE `kosar`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `felhasznalo_id` (`felhasznalo_id`);
-
 --
 -- Indexes for table `kosar_termekek`
 --
 ALTER TABLE `kosar_termekek`
-  ADD PRIMARY KEY (`kosar_id`,`termek_id`),
+  ADD PRIMARY KEY (`felhasznalo_id`,`termek_id`),
   ADD KEY `termek_id` (`termek_id`);
 
 --
@@ -282,12 +240,6 @@ ALTER TABLE `felhasznalok`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `kosar`
---
-ALTER TABLE `kosar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
 -- AUTO_INCREMENT for table `kuponkodok`
 --
 ALTER TABLE `kuponkodok`
@@ -304,16 +256,10 @@ ALTER TABLE `termekek`
 --
 
 --
--- Constraints for table `kosar`
---
-ALTER TABLE `kosar`
-  ADD CONSTRAINT `kosar_ibfk_1` FOREIGN KEY (`felhasznalo_id`) REFERENCES `felhasznalok` (`id`);
-
---
 -- Constraints for table `kosar_termekek`
 --
 ALTER TABLE `kosar_termekek`
-  ADD CONSTRAINT `kosar_termekek_ibfk_1` FOREIGN KEY (`kosar_id`) REFERENCES `kosar` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `kosar_termekek_ibfk_1` FOREIGN KEY (`felhasznalo_id`) REFERENCES `kosar` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `kosar_termekek_ibfk_2` FOREIGN KEY (`termek_id`) REFERENCES `termekek` (`id`) ON DELETE CASCADE;
 
 --
