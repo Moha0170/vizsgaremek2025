@@ -1,6 +1,7 @@
-import React from 'react';
+import {  } from "react";
+import "../index.css";
 
-const IndexPage = () => {
+const kezdooldal = () => {
   return (
     <div className="no-js" lang="en">
       <head>
@@ -209,4 +210,4 @@ const IndexPage = () => {
   );
 };
 
-export default IndexPage;
+export default kezdooldal;
