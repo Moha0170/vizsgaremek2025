@@ -223,3 +223,80 @@ input, select {
 .contact-form button:hover {
   background: #0056b3;
 }
+
+
+/* admin panel */
+
+.admin-container {
+  padding: 20px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.admin-table th, .admin-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.admin-table th {
+  background-color: #007bff;
+  color: white;
+}
+
+.delete-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.edit-button {
+  background-color: #ffc107;
+  color: black;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: darkred;
+}
+
+.edit-button:hover {
+  background-color: #e0a800;
+}
+
+.product-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.product-form input {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.product-form button {
+  padding: 8px 12px;
+  cursor: pointer;
+  border: none;
+}
+
+.product-form button:first-of-type {
+  background-color: #28a745;
+  color: white;
+}
+
+.product-form button:last-of-type {
+  background-color: gray;
+  color: white;
+}
