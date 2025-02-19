@@ -5,6 +5,7 @@ import Contacts from "./components/Contacts";
 import Profile from "./components/Profile";
 import Register from "./components/Register";
 import Admin from "./components/Admin";
+
 import "./index.css";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/register" element={<Register />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/kezdooldal" element={<Admin />} />
       </Routes>
     </Router>
   );
