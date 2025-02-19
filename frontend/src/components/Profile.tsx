@@ -7,7 +7,7 @@ function Profile() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     const response = await fetch("http://localhost:5000/profile/login/", {
       method: "POST",
@@ -38,6 +38,7 @@ function Profile() {
         <button type="submit">Bejelentkezés</button>
       </form>
       {message && <p>{message}</p>}
+      <p>Még nincs fiókod? <a href="/register">Regisztrálj itt</a></p>
     </div>
   );
 }
