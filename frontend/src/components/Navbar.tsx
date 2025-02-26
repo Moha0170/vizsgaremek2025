@@ -51,7 +51,12 @@ function Navbar() {
             </li>
           )}
 
-          {isLoggedIn ? (
+          {isLoggedIn ? ( <>
+            <li className="nav-item">
+              <Link to="/cart" className="nav-links" onClick={() => setIsOpen(false)}>
+                Kosár
+              </Link>
+            </li>
             <li className="nav-item profile-menu">
               <div className="nav-links" onClick={() => setShowProfileMenu(!showProfileMenu)}>
                 {username} ▼
@@ -63,7 +68,7 @@ function Navbar() {
                 </ul>
               )}
             </li>
-          ) : (
+            </> ) : (
             <li className="nav-item">
               <Link to="/profile" className="nav-links">Bejelentkezés</Link>
             </li>

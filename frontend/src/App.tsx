@@ -5,7 +5,8 @@ import Contacts from "./components/Contacts";
 import Profile from "./components/Profile";
 import Register from "./components/Register";
 import Admin from "./components/Admin";
-import Kezdooldal from "./components/Kezdooldal";
+import Kezdooldal from "./components/kezdooldal";
+import Cart from "./components/Cart";
 
 
 import "./index.css";
@@ -20,7 +21,8 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/register" element={<Register />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/Market" element={<Market />} />
+        <Route path="/products" element={<Market />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </Router>
   );
