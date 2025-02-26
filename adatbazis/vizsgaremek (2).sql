@@ -33,29 +33,30 @@ CREATE TABLE `felhasznalok` (
   `email` varchar(255) NOT NULL,
   `telefonszam` varchar(20) DEFAULT NULL,
   `szuldatum` date DEFAULT NULL,
-  `husegpont` int(11) DEFAULT 0
+  `husegpont` int(11) DEFAULT 0,
+  `admin` BOOLEAN NOT NULL DEFAULT FALSE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `felhasznalok`
 --
 
-INSERT INTO `felhasznalok` (`id`, `neve`, `email`, `telefonszam`, `szuldatum`, `husegpont`) VALUES
-(1, 'Kovacs Adam', 'adam.kovacs@example.com', '123456789', '1985-05-20', 10),
-(2, 'Szabo Eva', 'eva.szabo@example.com', '987654321', '1990-07-15', 20),
-(3, 'Nagy Bela', 'bela.nagy@example.com', '456123789', '1982-03-12', 15),
-(4, 'Toth Krisztina', 'krisztina.toth@example.com', '789321456', '1995-09-22', 30),
-(5, 'Varga Peter', 'peter.varga@example.com', '321654987', '1988-01-05', 25),
-(6, 'Kiss Anna', 'anna.kiss@example.com', '654789123', '1992-11-30', 5),
-(7, 'Molnar Lajos', 'lajos.molnar@example.com', '741852963', '1980-06-18', 40),
-(8, 'Horvath Zoltan', 'zoltan.horvath@example.com', '963258741', '1978-02-14', 50),
-(9, 'Farkas Katalin', 'katalin.farkas@example.com', '159753486', '1987-04-25', 35),
-(10, 'Balogh Csilla', 'csilla.balogh@example.com', '852741369', '1994-12-10', 20),
-(11, 'Simon Andras', 'andras.simon@example.com', '753951456', '1986-10-01', 15),
-(12, 'Papp Jozsef', 'jozsef.papp@example.com', '951753852', '1991-08-17', 25),
-(13, 'Szilagyi Eszter', 'eszter.szilagyi@example.com', '147258369', '1984-12-05', 10),
-(14, 'Veres Karoly', 'karoly.veres@example.com', '369258147', '1983-03-08', 5),
-(15, 'Bodnar Erzsebet', 'erzsebet.bodnar@example.com', '258147369', '1996-07-20', 30);
+INSERT INTO `felhasznalok` (`id`, `neve`, `email`, `telefonszam`, `szuldatum`, `husegpont`, `admin`) VALUES
+(1, 'Kovacs Adam', 'adam.kovacs@example.com', '123456789', '1985-05-20', 10, TRUE),
+(2, 'Szabo Eva', 'eva.szabo@example.com', '987654321', '1990-07-15', 20, FALSE),
+(3, 'Nagy Bela', 'bela.nagy@example.com', '456123789', '1982-03-12', 15, FALSE),
+(4, 'Toth Krisztina', 'krisztina.toth@example.com', '789321456', '1995-09-22', 30, FALSE),
+(5, 'Varga Peter', 'peter.varga@example.com', '321654987', '1988-01-05', 25, FALSE),
+(6, 'Kiss Anna', 'anna.kiss@example.com', '654789123', '1992-11-30', 5, FALSE),
+(7, 'Molnar Lajos', 'lajos.molnar@example.com', '741852963', '1980-06-18', 40, FALSE),
+(8, 'Horvath Zoltan', 'zoltan.horvath@example.com', '963258741', '1978-02-14', 50, FALSE),
+(9, 'Farkas Katalin', 'katalin.farkas@example.com', '159753486', '1987-04-25', 35, FALSE),
+(10, 'Balogh Csilla', 'csilla.balogh@example.com', '852741369', '1994-12-10', 20, FALSE),
+(11, 'Simon Andras', 'andras.simon@example.com', '753951456', '1986-10-01', 15, FALSE),
+(12, 'Papp Jozsef', 'jozsef.papp@example.com', '951753852', '1991-08-17', 25, FALSE),
+(13, 'Szilagyi Eszter', 'eszter.szilagyi@example.com', '147258369', '1984-12-05', 10, FALSE),
+(14, 'Veres Karoly', 'karoly.veres@example.com', '369258147', '1983-03-08', 5, FALSE),
+(15, 'Bodnar Erzsebet', 'erzsebet.bodnar@example.com', '258147369', '1996-07-20', 30, FALSE);
 
 -- --------------------------------------------------------
 
