@@ -4,6 +4,7 @@ body {
   font-family: 'Roboto', sans-serif;
   background: #FFFAF0; /* floral white */
   color: #333333; /* dark gray */
+  user-select: none;
 }
 
 h1 {
@@ -334,6 +335,112 @@ h1 {
   background: #65a7f7; /* tomato */
 }
 
+.admin-container,
+.register-container,
+.profile-container,
+.filter-container {
+  background: #FFFAF0; /* floral white */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-container h2,
+.admin-container h3,
+.register-container h2,
+.profile-container h2,
+.contacts-container h1 {
+  font-size: 2rem;
+  color: #65a7f7; /* tomato */
+  margin-bottom: 20px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.admin-table th,
+.admin-table td {
+  border: 1px solid #65a7f7; /* tomato */
+  padding: 10px;
+  text-align: left;
+}
+
+.admin-table th {
+  background: #4f67f0; /* gold */
+  color: #FFFFFF; /* white */
+}
+
+.admin-table td {
+  background: #FFFFFF; /* white */
+  color: #333333; /* dark gray */
+}
+
+.admin-container button,
+.register-container button,
+.profile-container button,
+.contact-form button {
+  background: #4f67f0; /* gold */
+  color: #FFFFFF; /* white */
+  padding: 15px 30px;
+  border: 2px solid #65a7f7; /* tomato */
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.admin-container button:hover,
+.register-container button:hover,
+.profile-container button:hover,
+.contact-form button:hover {
+  background: #65a7f7; /* tomato */
+}
+
+.delete-button {
+  background: #ff4d4d; /* red */
+  border: 2px solid #ff4d4d; /* red */
+}
+
+.delete-button:hover {
+  background: #ff1a1a; /* darker red */
+}
+
+.edit-button {
+  background: #4f67f0; /* gold */
+  border: 2px solid #65a7f7; /* tomato */
+}
+
+.edit-button:hover {
+  background: #65a7f7; /* tomato */
+}
+
+.product-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.product-form input {
+  flex: 1 1 200px;
+  padding: 10px;
+  border: 2px solid #65a7f7; /* tomato */
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.product-form button {
+  padding: 10px 20px;
+}
+
 /* Mobile adjustments */
 @media (max-width: 768px) {
   .menu-icon {
@@ -395,5 +502,25 @@ h1 {
   .register-container button,
   .profile-container button {
     padding: 10px 20px;
+  }
+
+  .admin-container,
+  .register-container,
+  .profile-container {
+    padding: 15px;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 5px;
+  }
+
+  .product-form input {
+    flex: 1 1 100%;
+    margin: 5px 0;
+  }
+
+  .product-form button {
+    padding: 10px;
   }
 }

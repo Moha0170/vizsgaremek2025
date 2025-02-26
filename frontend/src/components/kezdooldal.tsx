@@ -3,7 +3,7 @@ import "../index.css";
 
 const kezdooldal = () => {
   return (<>
-    
+    <h1>Kezdőoldal</h1>
     </>);
 };
 
