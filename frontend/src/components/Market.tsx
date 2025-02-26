@@ -53,7 +53,7 @@ function Market() {
 
   return (
     <div className="market-container">
-      <h1>Webshop</h1>
+      <h1>Market</h1>
       <div className="filter-container">
         <input
           type="text"
