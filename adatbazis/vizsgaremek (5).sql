@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 13, 2025 at 02:03 PM
+-- Generation Time: Mar 03, 2025 at 05:12 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -141,21 +141,68 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`felhasznalo_id`, `user`, `password`) VALUES
-(1, 'adamkovacs', '$argon2id$v=19$m=16,t=2,p=1$TUZZM3Y1OFlIUm0yY2NWMQ$qGQDyOu54Ws4RI9KnR12xQ'),
-(2, 'evaszabo', '$argon2id$v=19$m=16,t=2,p=1$Tll5Zm9qMTJyS2VmQUhkbQ$VXmMTa9ZjB6ZHmPtp/BgFA'),
-(3, 'belanagy', '$argon2id$v=19$m=16,t=2,p=1$UnlKTkdIc1FMWXhFOFM5Tg$9kz+2FRn8EBubKnjPpQPdA'),
-(4, 'krisztinatoth', '$argon2id$v=19$m=16,t=2,p=1$b0JuMkVNekEzZmJacngxYQ$T2pxGgCDqhs+3boa5cieiQ'),
-(5, 'petervarga', '$argon2id$v=19$m=16,t=2,p=1$VXQ4MEFBUzZHTENMREN5dA$43l20TvsqrKCowEV+2EEBA'),
-(6, 'annakiss', '$argon2id$v=19$m=16,t=2,p=1$cEVNaWRlcDJ5V294RWhDeQ$CaudKCU517TK46ngUC+gpQ'),
-(7, 'lajosmolnar', '$argon2id$v=19$m=16,t=2,p=1$enhKdXNoWTFMR0tOa1NFTw$OQIRuIesbhoypsUCNyg+Nw'),
-(8, 'zoltanhorvath', '$argon2id$v=19$m=16,t=2,p=1$bnViMDRjdEMwVzQxWmVERQ$XTnVGutzOjB9iI0JQgI2Vw'),
-(9, 'katalinfarkas', '$argon2id$v=19$m=16,t=2,p=1$WHpNVjZiUm5CWDZqT3FIRQ$798xqdbqcx8F9grtN3Uogg'),
-(10, 'csillabalogh', '$argon2id$v=19$m=16,t=2,p=1$YTh2M0NMaHhzTnVXU2pERA$2Ed+qyvJ06LY3X8WjLOJiQ'),
-(11, 'andrassimons', '$argon2id$v=19$m=16,t=2,p=1$bFBzOWZCMklyUFptUE9iRA$7mxGHBe9iEsVUtQUl8ZWHQ'),
-(12, 'jozsefpapp', '$argon2id$v=19$m=16,t=2,p=1$UHpaRWtIM05COTlQV2N5ag$D1uu37vb3xzHG/P5RK4Zmg'),
-(13, 'eszterszilagyi', '$argon2id$v=19$m=16,t=2,p=1$UHpaRWtIM05COTlQV2N5ag$D1uu37vb3xzHG/P5RK4Zmg'),
-(14, 'karolyveres', '$argon2id$v=19$m=16,t=2,p=1$c05FVmZ5cnhOZjNRajZPbQ$HxFUttQWbRHcBkXv9INmLA'),
-(15, 'erzsebetbodnar', '$argon2id$v=19$m=16,t=2,p=1$aHI0MTFhN05aSUZya1J0Wg$yPgtPtWtc8qff5yOgquLYw');
+(1, 'adamkovacs', 'password1'),
+(2, 'evaszabo', 'password2'),
+(3, 'belanagy', 'password3'),
+(4, 'krisztinatoth', 'password4'),
+(5, 'petervarga', 'password5'),
+(6, 'annakiss', 'password6'),
+(7, 'lajosmolnar', 'password7'),
+(8, 'zoltanhorvath', 'password8'),
+(9, 'katalinfarkas', 'password9'),
+(10, 'csillabalogh', 'password10'),
+(11, 'andrassimons', 'password11'),
+(12, 'jozsefpapp', 'password12'),
+(13, 'eszterszilagyi', 'password13'),
+(14, 'karolyveres', 'password14'),
+(15, 'erzsebetbodnar', 'password15');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rendelesek`
+--
+
+CREATE TABLE `rendelesek` (
+  `id` int(11) NOT NULL,
+  `felhasznalo_id` int(11) NOT NULL,
+  `cim` varchar(255) NOT NULL,
+  `vasarlas_osszeg` decimal(10,2) NOT NULL,
+  `rendeles_datum` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `rendelesek`
+--
+
+INSERT INTO `rendelesek` (`id`, `felhasznalo_id`, `cim`, `vasarlas_osszeg`, `rendeles_datum`) VALUES
+(1, 1, 'Budapest, Kossuth utca 12.', '250000.00', '2025-03-03 15:55:14'),
+(2, 2, 'Debrecen, Fő tér 5.', '180000.00', '2025-03-03 15:55:14'),
+(3, 2, 'Debrecen, Petőfi utca 8.', '120000.00', '2025-03-03 15:55:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rendeles_termekek`
+--
+
+CREATE TABLE `rendeles_termekek` (
+  `rendeles_id` int(11) NOT NULL,
+  `termek_id` int(11) NOT NULL,
+  `mennyiseg` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `rendeles_termekek`
+--
+
+INSERT INTO `rendeles_termekek` (`rendeles_id`, `termek_id`, `mennyiseg`) VALUES
+(1, 1, 1),
+(1, 5, 1),
+(2, 3, 1),
+(3, 2, 1),
+(1, 5, 1),
+(1, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -224,6 +271,19 @@ ALTER TABLE `login`
   ADD UNIQUE KEY `user` (`user`);
 
 --
+-- Indexes for table `rendelesek`
+--
+ALTER TABLE `rendelesek`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `felhasznalo_id` (`felhasznalo_id`);
+
+--
+-- Indexes for table `rendeles_termekek`
+--
+ALTER TABLE `rendeles_termekek`
+  ADD KEY `termek_id` (`termek_id`);
+
+--
 -- Indexes for table `termekek`
 --
 ALTER TABLE `termekek`
@@ -244,6 +304,12 @@ ALTER TABLE `felhasznalok`
 --
 ALTER TABLE `kuponkodok`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `rendelesek`
+--
+ALTER TABLE `rendelesek`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `termekek`
@@ -267,6 +333,12 @@ ALTER TABLE `kosar_termekek`
 --
 ALTER TABLE `login`
   ADD CONSTRAINT `login_ibfk_1` FOREIGN KEY (`felhasznalo_id`) REFERENCES `felhasznalok` (`id`);
+
+--
+-- Constraints for table `rendelesek`
+--
+ALTER TABLE `rendelesek`
+  ADD CONSTRAINT `rendelesek_ibfk_1` FOREIGN KEY (`felhasznalo_id`) REFERENCES `felhasznalok` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
