@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../index.css";
+import axios from "axios";
 
 interface Product {
   id: number;
@@ -9,11 +10,17 @@ interface Product {
   gyarto_beszallito: string;
 }
 
+interface User {
+  id: number;
+  neve: string;
+}
+
 function Market() {
   const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [sortOption, setSortOption] = useState<string>("");
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     fetch("http://localhost:5000/market/allProducts")
@@ -23,6 +30,19 @@ function Market() {
         setFilteredProducts(data);
       })
       .catch((err) => console.error("Hiba a termékek lekérésekor:", err));
+  }, []);
+
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    const storedUsername = localStorage.getItem("username");
+    console.log("Retrieved userId from localStorage:", storedUserId);
+    console.log("Retrieved username from localStorage:", storedUsername);
+
+    if (storedUserId && storedUsername) {
+      setUser({ id: parseInt(storedUserId), neve: storedUsername });
+    } else {
+      console.warn("userId or username is missing in localStorage");
+    }
   }, []);
 
   useEffect(() => {
@@ -45,6 +65,22 @@ function Market() {
     setFilteredProducts(filtered);
   }, [searchTerm, sortOption, allProducts]);
 
+  const addToCart = async (productId: number) => {
+    if (!user) {
+      alert("Előbb be kell jelentkezned, hogy terméket adhass a kosárhoz!");
+      console.log(user);
+      return;
+    }
+
+    try {
+      await axios.post(`http://localhost:5000/cart/${user.id}/${productId}/1`);
+      alert("Termék sikeresen hozzáadva a kosárhoz!");
+    } catch (error) {
+      console.error("Hiba a kosárhoz adáskor:", error);
+      alert("Hiba történt a kosárhoz adás során.");
+    }
+  };
+
   const highlightText = (text: string) => {
     if (!searchTerm) return text;
     const regex = new RegExp(`(${searchTerm})`, "gi");
@@ -53,7 +89,7 @@ function Market() {
 
   return (
     <div className="market-container">
-      <h1>Webshop</h1>
+      <h1>Market</h1>
       <div className="filter-container">
         <input
           type="text"
@@ -77,6 +113,7 @@ function Market() {
               <p>Ár: {product.ara} Ft</p>
               <p>Kategória: <span dangerouslySetInnerHTML={{ __html: highlightText(product.kat) }}></span></p>
               <p>Gyártó: <span dangerouslySetInnerHTML={{ __html: highlightText(product.gyarto_beszallito) }}></span></p>
+              <button onClick={() => addToCart(product.id)}>Kosárba rakás</button>
             </div>
           ))
         ) : (

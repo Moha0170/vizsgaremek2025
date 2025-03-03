@@ -11,12 +11,22 @@ function Navbar() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const loggedIn = localStorage.getItem("isLoggedIn") === "true";
-    const adminStatus = localStorage.getItem("isAdmin") === "true";
-    const storedUsername = localStorage.getItem("username") || "";
-    setIsLoggedIn(loggedIn);
-    setIsAdmin(adminStatus);
-    setUsername(storedUsername);
+    const handleStorageChange = () => {
+      const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+      const adminStatus = localStorage.getItem("isAdmin") === "true";
+      const storedUsername = localStorage.getItem("username") || "";
+      setIsLoggedIn(loggedIn);
+      setIsAdmin(adminStatus);
+      setUsername(storedUsername);
+    };
+
+    const intervalId = setInterval(handleStorageChange, 200);
+
+    handleStorageChange();
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   const handleLogout = () => {
@@ -28,6 +38,7 @@ function Navbar() {
     setUsername("");
     navigate("/");
   };
+  
 
   return (
     <nav className="navbar">
@@ -51,27 +62,51 @@ function Navbar() {
             </li>
           )}
 
-          {isLoggedIn ? (
-            <li className="nav-item profile-menu">
-              <div className="nav-links" onClick={() => setShowProfileMenu(!showProfileMenu)}>
+            {isLoggedIn ? (
+              <>
+              <li className="nav-item">
+                <Link
+                to="/cart"
+                className="nav-links"
+                onClick={() => setIsOpen(false)}
+                >
+                Kosár
+                </Link>
+              </li>
+              <li className="nav-item profile-menu">
+                <div
+                className="nav-links"
+                onClick={() => setShowProfileMenu(!showProfileMenu)}
+                >
                 {username} ▼
-              </div>
-              {showProfileMenu && (
+                </div>
+                {showProfileMenu && (
                 <ul className="profile-dropdown">
-                  <li><Link to="/profile" onClick={() => setShowProfileMenu(false)}>Profil</Link></li>
-                  <li><button onClick={handleLogout}>Kijelentkezés</button></li>
+                  <li>
+                  <Link
+                    to="/profile"
+                    onClick={() => setShowProfileMenu(false)}
+                  >
+                    Profil
+                  </Link>
+                  </li>
+                  <li>
+                  <button onClick={handleLogout}>Kijelentkezés</button>
+                  </li>
                 </ul>
-              )}
-            </li>
-          ) : (
-            <li className="nav-item">
-              <Link to="/profile" className="nav-links">Bejelentkezés</Link>
-            </li>
-          )}
+                )}
+              </li>
+              </>
+            ) : (
+              <li className="nav-item">
+              <Link to="/profile" className="nav-links">
+                Bejelentkezés
+              </Link>
+              </li>
+            )}
         </ul>
       </div>
     </nav>
   );
 }
-
 export default Navbar;

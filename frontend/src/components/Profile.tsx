@@ -70,12 +70,14 @@ function LoginForm({ setUserData }) {
       localStorage.setItem("email", data.email);
       localStorage.setItem("telefonszam", data.telefonszam);
       localStorage.setItem("isAdmin", data.isAdmin ? "true" : "false");
+      localStorage.setItem("userId", data.id);
 
       setUserData({ 
         username: data.username, 
         email: data.email, 
         telefonszam: data.telefonszam, 
-        isAdmin: data.isAdmin 
+        isAdmin: data.isAdmin,
+        userId: data.id
       });
 
       navigate("/");
