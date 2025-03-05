@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
+import DarkModeToggle from "./DarkModeToggle"; // Importáljuk a sötét mód gombot
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,6 +9,7 @@ function Navbar() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [username, setUsername] = useState("");
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,12 +23,9 @@ function Navbar() {
     };
 
     const intervalId = setInterval(handleStorageChange, 200);
-
     handleStorageChange();
 
-    return () => {
-      clearInterval(intervalId);
-    };
+    return () => clearInterval(intervalId);
   }, []);
 
   const handleLogout = () => {
@@ -38,12 +37,14 @@ function Navbar() {
     setUsername("");
     navigate("/");
   };
-  
 
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">Webshop</Link>
+
+        {/* Sötét mód kapcsoló */}
+        <DarkModeToggle />
 
         <div className="menu-icon" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <FiX className="icon" /> : <FiMenu className="icon" />}
@@ -62,51 +63,42 @@ function Navbar() {
             </li>
           )}
 
-            {isLoggedIn ? (
-              <>
+          {isLoggedIn ? (
+            <>
               <li className="nav-item">
-                <Link
-                to="/cart"
-                className="nav-links"
-                onClick={() => setIsOpen(false)}
-                >
-                Kosár
+                <Link to="/cart" className="nav-links" onClick={() => setIsOpen(false)}>
+                  Kosár
                 </Link>
               </li>
               <li className="nav-item profile-menu">
-                <div
-                className="nav-links"
-                onClick={() => setShowProfileMenu(!showProfileMenu)}
-                >
-                {username} ▼
+                <div className="nav-links" onClick={() => setShowProfileMenu(!showProfileMenu)}>
+                  {username} ▼
                 </div>
                 {showProfileMenu && (
-                <ul className="profile-dropdown">
-                  <li>
-                  <Link
-                    to="/profile"
-                    onClick={() => setShowProfileMenu(false)}
-                  >
-                    Profil
-                  </Link>
-                  </li>
-                  <li>
-                  <button onClick={handleLogout}>Kijelentkezés</button>
-                  </li>
-                </ul>
+                  <ul className="profile-dropdown">
+                    <li>
+                      <Link to="/profile" onClick={() => setShowProfileMenu(false)}>
+                        Profil
+                      </Link>
+                    </li>
+                    <li>
+                      <button onClick={handleLogout}>Kijelentkezés</button>
+                    </li>
+                  </ul>
                 )}
               </li>
-              </>
-            ) : (
-              <li className="nav-item">
+            </>
+          ) : (
+            <li className="nav-item">
               <Link to="/profile" className="nav-links">
                 Bejelentkezés
               </Link>
-              </li>
-            )}
+            </li>
+          )}
         </ul>
       </div>
     </nav>
   );
 }
+
 export default Navbar;

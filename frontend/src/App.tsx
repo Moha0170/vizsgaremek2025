@@ -8,7 +8,6 @@ import Admin from "./components/Admin";
 import Kezdooldal from "./components/kezdooldal";
 import Cart from "./components/Cart";
 
-
 import "./index.css";
 
 function App() {

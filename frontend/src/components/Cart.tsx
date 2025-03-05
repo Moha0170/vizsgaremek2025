@@ -13,7 +13,6 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [userId, setUserId] = useState<string | null>(null);
 
-  // Bejelentkezett felhasználó azonosítása
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
     if (storedUserId) {
@@ -22,17 +21,16 @@ const Cart = () => {
     }
   }, []);
 
-  // Kosár lekérése a szerverről
   const fetchCartItems = async (id: string) => {
     try {
       const response = await axios.get(`http://localhost:5000/cart/${id}`);
       setCartItems(response.data);
     } catch (error) {
       console.error("Hiba a kosár lekérésekor:", error);
+      setCartItems([]);
     }
   };
 
-  // Mennyiség növelése vagy csökkentése
   const updateQuantity = async (itemId: number, amount: number) => {
     if (!userId) return;
 
@@ -53,23 +51,21 @@ const Cart = () => {
     }
   };
 
-  // Termék törlése a kosárból
   const removeFromCart = async (itemId: number) => {
     if (!userId) return;
     try {
       await axios.delete(`http://localhost:5000/cart/${userId}/${itemId}`);
-      fetchCartItems(userId);
+      setCartItems((prevItems) => prevItems.filter((item) => item.termek_id !== itemId));
     } catch (error) {
       console.error("Hiba a termék eltávolításakor:", error);
     }
   };
 
-  // Kosár teljes ürítése
   const clearCart = async () => {
     if (!userId) return;
     try {
       await axios.delete(`http://localhost:5000/cart/${userId}`);
-      setCartItems([]); // Kiürítjük a frontend oldalon is
+      setCartItems([]);
     } catch (error) {
       console.error("Hiba a kosár törlésekor:", error);
     }
@@ -84,8 +80,8 @@ const Cart = () => {
           <ul className="cart-list">
             {cartItems.map((item) => (
               <li key={item.termek_id} className="cart-item">
-                <span className="product-name">{item.neve}</span>
-                <span className="product-price">{item.ar} Ft</span>
+                <span className="product-name">{item.neve || "Ismeretlen termék"}</span>
+                <span className="product-price">{item.ar ? `${item.ar} Ft` : "Ár nem elérhető"}</span>
 
                 <div className="quantity-controls">
                   <button onClick={() => updateQuantity(item.termek_id, -1)}>-</button>
