@@ -8,7 +8,7 @@ profile_bp = Blueprint("profile_bp", __name__, url_prefix="/profile")
 def login():
     results = db.session.execute(
         text("""
-            SELECT l.password, f.id, f.neve, f.email, f.telefonszam, f.szuldatum, f.husegpont, f.admin
+            SELECT l.password, f.id, f.neve, f.email, f.telefonszam, f.szuldatum, f.admin
             FROM login l 
             JOIN felhasznalok f ON l.felhasznalo_id = f.id 
             WHERE l.user = :user
@@ -20,7 +20,7 @@ def login():
     if results is None:
         return {"message": "Nincs ilyen felhasználó!"}, 404
 
-    stored_password, user_id, neve, email, telefonszam, szuldatum, husegpont, is_admin = results
+    stored_password, user_id, neve, email, telefonszam, szuldatum, is_admin = results
 
     if argon2.check_password_hash(stored_password, request.json['password']):
         return {
@@ -30,7 +30,6 @@ def login():
             "email": email,
             "telefonszam": telefonszam,
             "szuldatum": szuldatum,
-            "husegpont": husegpont,
             "isAdmin": bool(is_admin)
         }, 200
     else:

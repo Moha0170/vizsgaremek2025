@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Profile() {
-  const [userData, setUserData] = useState<{ username: string; email: string; telefonszam: string; isAdmin: boolean } | null>(null);
+  const [userData, setUserData] = useState<{ username: string; email: string; telefonszam: string; isAdmin: boolean; userId: number } | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -12,7 +12,8 @@ function Profile() {
         username: localStorage.getItem("username") || "",
         email: localStorage.getItem("email") || "",
         telefonszam: localStorage.getItem("telefonszam") || "",
-        isAdmin: localStorage.getItem("isAdmin") === "true"
+        isAdmin: localStorage.getItem("isAdmin") === "true",
+        userId: parseInt(localStorage.getItem("userId") || "0")
       });
     }
   }, []);
@@ -70,14 +71,14 @@ function LoginForm({ setUserData }) {
       localStorage.setItem("email", data.email);
       localStorage.setItem("telefonszam", data.telefonszam);
       localStorage.setItem("isAdmin", data.isAdmin ? "true" : "false");
-      localStorage.setItem("userId", data.id);
+      localStorage.setItem("userId", data.userId.toString());
 
       setUserData({ 
         username: data.username, 
         email: data.email, 
         telefonszam: data.telefonszam, 
         isAdmin: data.isAdmin,
-        userId: data.id
+        userId: data.userId
       });
 
       navigate("/");

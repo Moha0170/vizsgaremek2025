@@ -39,7 +39,12 @@ function Market() {
     console.log("Retrieved username from localStorage:", storedUsername);
 
     if (storedUserId && storedUsername) {
-      setUser({ id: parseInt(storedUserId), neve: storedUsername });
+      const userId = parseInt(storedUserId);
+      if (!isNaN(userId)) {
+        setUser({ id: userId, neve: storedUsername });
+      } else {
+        console.error("Invalid userId retrieved from localStorage:", storedUserId);
+      }
     } else {
       console.warn("userId or username is missing in localStorage");
     }
@@ -68,7 +73,13 @@ function Market() {
   const addToCart = async (productId: number) => {
     if (!user) {
       alert("Előbb be kell jelentkezned, hogy terméket adhass a kosárhoz!");
-      console.log(user);
+      console.log(user); 
+      return;
+    }
+
+    if (isNaN(user.id)) {
+      console.error("Invalid user ID:", user.id);
+      alert("Érvénytelen felhasználói azonosító.");
       return;
     }
 
