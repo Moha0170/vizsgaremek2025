@@ -6,7 +6,7 @@ interface CartItem {
   termek_id: number;
   mennyiseg: number;
   neve: string;
-  ar: number;
+  ara: number;
 }
 
 const Cart = () => {
@@ -81,7 +81,7 @@ const Cart = () => {
             {cartItems.map((item) => (
               <li key={item.termek_id} className="cart-item">
                 <span className="product-name">{item.neve || "Ismeretlen termék"}</span>
-                <span className="product-price">{item.ar ? `${item.ar} Ft` : "Ár nem elérhető"}</span>
+                <span className="product-price">{item.ara ? `${item.ara} Ft` : "Ár nem elérhető"}</span>
 
                 <div className="quantity-controls">
                   <button onClick={() => updateQuantity(item.termek_id, -1)}>-</button>

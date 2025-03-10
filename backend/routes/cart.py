@@ -8,11 +8,11 @@ cart_bp = Blueprint("cart_bp", __name__, url_prefix="/cart")
 def cartById(id):
     a = db.session.execute(text("SELECT termekek.ara, termekek.neve, kosar_termekek.mennyiseg, kosar_termekek.termek_id FROM kosar_termekek INNER JOIN termekek ON kosar_termekek.termek_id = termekek.id WHERE kosar_termekek.felhasznalo_id = :id"), {"id": id})
     result = [row._asdict() for row in a]
+    for row in result:
+        row["ara"] = int(row["ara"]) * int(row["mennyiseg"])
     if result == []:
-        print(result)
         return "Nincs ilyen kosar", 404
     else:
-        print(result)
         return result, 200
 
 @cart_bp.route("/<cartID>/<itemID>/<ammount>", methods=["POST"])
