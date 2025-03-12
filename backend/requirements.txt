@@ -1,6 +1,6 @@
 flask
 pymysql
-sqlaclhemy
+sqlalchemy
 flask_sqlalchemy
 flask_argon2
 pyjwt

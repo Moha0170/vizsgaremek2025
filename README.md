@@ -1,12 +1,11 @@
-# 📌 Vizsgaremek 2025
+# 📌 Vizsgaremek 2025 
+---
 
 ##  🚀 Frontend futtatásához szükséges parancsok
 
 ```sh
 npm install
-npm install react-router-dom
-npm install axios
-npm install jwt-decode
+
 npm run dev
 ```
 
@@ -14,9 +13,12 @@ npm run dev
 A backend Flask + SQLAlchemy alapú, és kezeli az adatbázis műveleteket, felhasználói azonosítást.
 
 ```sh
-  teszt
+  pip install -r requirements.txt
+
+  python -m backend.main
 ```
 
+---
 ## Projekt leírása
 
 A **Hypercharge Market** egy webshop alkalmazás, amely lehetővé teszi a felhasználók számára a termékek böngészését, vásárlását.
@@ -29,6 +31,7 @@ A **Hypercharge Market** egy webshop alkalmazás, amely lehetővé teszi a felha
 - Felhasználói profil
 - Admin felület a termékek kezelésére
 
+---
 ## 📱 Mobil alkalmazás
 A projekt egy React Native alapú mobil alkalmazást is tartalmaz.
 
