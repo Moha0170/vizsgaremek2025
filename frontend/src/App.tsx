@@ -8,6 +8,7 @@ import Admin from "./components/Admin";
 import Kezdooldal from "./components/kezdooldal";
 import Cart from "./components/Cart";
 import ProductDetail from "./components/ProductDetail"; 
+import Footer from "./components/Footer";
 
 import "./index.css";
 
@@ -28,6 +29,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
           </Routes>
         </div>
+        <Footer />
       </div>
     </Router>
   );
