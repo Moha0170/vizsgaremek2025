@@ -1,6 +1,6 @@
-# Vizsgaremek 2025
+# 📌 Vizsgaremek 2025
 
-## Frontend futtatásához szükséges parancsok
+##  🚀 Frontend futtatásához szükséges parancsok
 
 ```sh
 npm install
@@ -10,7 +10,8 @@ npm install jwt-decode
 npm run dev
 ```
 
-## Backendhez szükséges információk
+## 🛠️ Backend futtatása
+A backend Flask + SQLAlchemy alapú, és kezeli az adatbázis műveleteket, felhasználói azonosítást.
 
 ```sh
   teszt
@@ -28,7 +29,12 @@ A **Hypercharge Market** egy webshop alkalmazás, amely lehetővé teszi a felha
 - Felhasználói profil
 - Admin felület a termékek kezelésére
 
+## 📱 Mobil alkalmazás
+A projekt egy React Native alapú mobil alkalmazást is tartalmaz.
 
-## Elérhetőségek
+🔗 **Mobil alkalmazás GitHub repo:** [Mobil alkalmazás](https://github.com/Csaboo64/react_native_kerek)
+
+---
+## 📞 Elérhetőségek
 
 Ha bármilyen kérdésed van, akkor vedd fel a kapcsolatot a megfelelő fejlesztővel!
