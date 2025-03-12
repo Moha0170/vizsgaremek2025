@@ -1,6 +1,7 @@
-from flask import Blueprint, request
-from backend import db, argon2
+from flask import Blueprint, request, jsonify
+from backend import db, argon2, app
 from sqlalchemy import text
+from jwt import encode
 
 profile_bp = Blueprint("profile_bp", __name__, url_prefix="/profile")
 
@@ -23,15 +24,16 @@ def login():
     stored_password, user_id, neve, email, telefonszam, szuldatum, is_admin = results
 
     if argon2.check_password_hash(stored_password, request.json['password']):
-        return {
+        token = encode({
             "message": "Sikeres bejelentkezés",
             "userId": user_id,
             "username": neve,
             "email": email,
             "telefonszam": telefonszam,
-            "szuldatum": szuldatum,
+            "szuldatum": str(szuldatum),
             "isAdmin": bool(is_admin)
-        }, 200
+        }, app.config["SECRET_KEY"], algorithm="HS256")
+        return jsonify({"token": token}), 200
     else:
         return {"message": "Sikertelen bejelentkezés"}, 401
 

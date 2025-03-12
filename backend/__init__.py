@@ -8,11 +8,11 @@ app = Flask(__name__)
 argon2 = Argon2(app)
 
 def create_app():
-    app = Flask(__name__)
     CORS(app)
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/hypercharge?charset=utf8mb4'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SECRET_KEY'] = "supersecretkey"
 
     db.init_app(app)
 

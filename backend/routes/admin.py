@@ -1,16 +1,19 @@
 from flask import Flask, Blueprint, request
 from sqlalchemy import text
 from backend import db
+from ..dec import token_required
 
 admin_bp = Blueprint("admin_bp", __name__, url_prefix="/admin")
 
 @admin_bp.route("/product/delete/<id>", methods=['DELETE'])
+@token_required
 def delete(id):
     db.session.execute(text("DELETE FROM termekek WHERE id = :id"), {"id": id})
     db.session.commit()
     return {"message": "Product deleted!"}
 
 @admin_bp.route("/product/create/", methods=['POST'])
+@token_required
 def create():
     try:
         neve = request.json['neve']
@@ -24,6 +27,7 @@ def create():
         return str(e), 500
 
 @admin_bp.route("/product/update/<id>", methods=['PATCH'])
+@token_required
 def update(id):
     try:
         neve = request.json['neve']
@@ -37,6 +41,7 @@ def update(id):
         return str(e), 500
 
 @admin_bp.route("/users/update/", methods=['PATCH'])
+@token_required
 def update_user():
     try:
         id = request.json['id']
