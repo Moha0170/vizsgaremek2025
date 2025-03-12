@@ -1,3 +1,7 @@
+.content {
+  height: 100vh;
+}
+
 .dark-mode {
   background-color: #121212;
   color: #ffffff;
@@ -464,6 +468,11 @@ h1 {
   padding: 10px 20px;
 }
 
+.admin-container {
+  height: 99vh;
+  overflow: scroll;
+}
+
 /* Mobile adjustments */
 @media (max-width: 768px) {
   .menu-icon {
@@ -546,4 +555,5 @@ h1 {
   .product-form button {
     padding: 10px;
   }
+  
 }
