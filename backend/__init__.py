@@ -10,10 +10,23 @@ argon2 = Argon2(app)
 
 def create_app():
     CORS(app)
+    Swagger(app, template={
+        "swagger": "2.0",
+        "info": {
+            "title": "Hypercharge API",
+            "description": "API for Hypercharge",
+            "version": "1.0.0"
+        }
+    })
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/hypercharge?charset=utf8mb4'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = "supersecretkey"
+    app.config['SWAGGER'] = {
+    'title': 'Hypercharge API',
+    'uiversion': 2,
+    'template': './resources/flasgger/swagger_ui.html'
+    }
 
     db.init_app(app)
 
