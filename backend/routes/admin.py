@@ -38,6 +38,7 @@ def update(id):
         db.session.commit()
         return {"message": "Product updated!"}
     except (Exception) as e:
+        print(str(e))
         return str(e), 500
 
 @admin_bp.route("/users/update/", methods=['PATCH'])

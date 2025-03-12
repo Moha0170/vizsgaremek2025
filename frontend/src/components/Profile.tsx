@@ -8,6 +8,7 @@ function Profile() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    console.log(token);
     if (token) {
       try {
         const decoded: any = jwtDecode(token);

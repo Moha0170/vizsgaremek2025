@@ -7,13 +7,14 @@ def token_required(f):
     def decorated(*args, **kwargs):
         token = None
         if 'Authorization' in request.headers:
-            token = request.headers['Authorization'].split(" ")[1]
+            token = request.headers['Authorization']
 
         if not token:
             return jsonify({"message": "Nincs token!"}), 401
 
         try:
             data = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=["HS256"])
+            print(data)
             if not data.get('isAdmin'):
                 return jsonify({"message": "Nem vagy admin!"}), 403
         except jwt.ExpiredSignatureError:
