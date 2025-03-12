@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../index.css";
+import "../style/index.css";
 import axios from "axios";
 
 interface Product {

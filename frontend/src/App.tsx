@@ -10,7 +10,7 @@ import Cart from "./components/Cart";
 import ProductDetail from "./components/ProductDetail"; 
 import Footer from "./components/Footer";
 
-import "./index.css";
+import "./style/index.css";
 
 function App() {
   return (

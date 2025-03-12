@@ -6,8 +6,8 @@ html, body {
   }
   
   .main-content {
-    flex: 1; /* Kitölti a rendelkezésre álló helyet */
-    padding-bottom: 100px; /* Helyet biztosítunk a footer számára */
+    flex: 1;
+    padding-bottom: 100px;
   }
   
   .footer {
