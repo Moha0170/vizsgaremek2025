@@ -21,5 +21,6 @@ def getProducts(kat):
 
 @market_bp.route("/getProduct/<id>", methods=['GET'])
 def getProductById(id):
-    results = db.session.execute(text("SELECT * FROM `termekek` WHERE `id` = :id"), {'id': id}).mappings().fetchone()
-    return {"nev": results['neve'], "ar": results['ara']}
+    a = db.session.execute(text("SELECT * FROM `termekek` WHERE `id` = :id"), {'id': id})
+    result = [row._asdict() for row in a]
+    return result, 200
