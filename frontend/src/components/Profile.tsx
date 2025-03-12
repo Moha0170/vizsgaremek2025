@@ -1,20 +1,28 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 function Profile() {
   const [userData, setUserData] = useState<{ username: string; email: string; telefonszam: string; isAdmin: boolean; userId: number } | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedLogin = localStorage.getItem("isLoggedIn");
-    if (storedLogin === "true") {
-      setUserData({
-        username: localStorage.getItem("username") || "",
-        email: localStorage.getItem("email") || "",
-        telefonszam: localStorage.getItem("telefonszam") || "",
-        isAdmin: localStorage.getItem("isAdmin") === "true",
-        userId: parseInt(localStorage.getItem("userId") || "0")
-      });
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decoded: any = jwtDecode(token);
+        setUserData({
+          username: decoded.username,
+          email: decoded.email,
+          telefonszam: decoded.telefonszam,
+          isAdmin: decoded.isAdmin,
+          userId: decoded.userId
+        });
+      } catch (error) {
+        console.error("Invalid token:", error);
+        localStorage.clear();
+        setUserData(null);
+      }
     }
   }, []);
 
@@ -66,20 +74,23 @@ function LoginForm({ setUserData }) {
     const data = await response.json();
 
     if (response.status === 200) {
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("username", data.username);
-      localStorage.setItem("email", data.email);
-      localStorage.setItem("telefonszam", data.telefonszam);
-      localStorage.setItem("isAdmin", data.isAdmin ? "true" : "false");
-      localStorage.setItem("userId", data.userId.toString());
+      localStorage.setItem("token", data.token);
 
-      setUserData({ 
-        username: data.username, 
-        email: data.email, 
-        telefonszam: data.telefonszam, 
-        isAdmin: data.isAdmin,
-        userId: data.userId
+      const decoded: any = jwtDecode(data.token);
+      setUserData({
+        username: decoded.username,
+        email: decoded.email,
+        telefonszam: decoded.telefonszam,
+        isAdmin: decoded.isAdmin,
+        userId: decoded.userId
       });
+
+      localStorage.setItem("username", decoded.username);
+      localStorage.setItem("email", decoded.email);
+      localStorage.setItem("telefonszam", decoded.telefonszam);
+      localStorage.setItem("isAdmin", decoded.isAdmin.toString());
+      localStorage.setItem("userId", decoded.userId.toString());
+      localStorage.setItem("isLoggedIn", "true");
 
       navigate("/");
     } else {
