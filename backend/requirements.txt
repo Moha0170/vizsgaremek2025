@@ -1,0 +1,8 @@
+flask
+pymysql
+sqlaclhemy
+flask_sqlalchemy
+flask_argon2
+pyjwt
+flask_cors
+flasgger
