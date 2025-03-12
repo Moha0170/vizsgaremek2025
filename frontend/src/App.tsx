@@ -9,6 +9,8 @@ import Kezdooldal from "./components/kezdooldal";
 import Cart from "./components/Cart";
 import ProductDetail from "./components/ProductDetail"; 
 import Footer from "./components/Footer";
+import About from "./components/About";
+import Terms from "./components/Terms";
 
 import "./style/index.css";
 
@@ -27,6 +29,8 @@ function App() {
             <Route path="/products" element={<Market />} />
             <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/terms" element={<Terms />} /> 
           </Routes>
         </div>
         <Footer />
