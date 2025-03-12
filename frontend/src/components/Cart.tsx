@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "../cart.css";
+import "../style/cart.css";
 
 interface CartItem {
   termek_id: number;

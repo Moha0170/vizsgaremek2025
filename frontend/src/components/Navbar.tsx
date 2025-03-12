@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
-import DarkModeToggle from "./DarkModeToggle"; // Importáljuk a sötét mód gombot
+import DarkModeToggle from "./DarkModeToggle";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import "../index.css";
+import { useNavigate } from "react-router-dom";
+import "../style/index.css";
 import axios from "axios";
 
 interface Product {
@@ -21,6 +22,7 @@ function Market() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [sortOption, setSortOption] = useState<string>("");
   const [user, setUser] = useState<User | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:5000/market/allProducts")
@@ -35,18 +37,12 @@ function Market() {
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
     const storedUsername = localStorage.getItem("username");
-    console.log("Retrieved userId from localStorage:", storedUserId);
-    console.log("Retrieved username from localStorage:", storedUsername);
 
     if (storedUserId && storedUsername) {
       const userId = parseInt(storedUserId);
       if (!isNaN(userId)) {
         setUser({ id: userId, neve: storedUsername });
-      } else {
-        console.error("Invalid userId retrieved from localStorage:", storedUserId);
       }
-    } else {
-      console.warn("userId or username is missing in localStorage");
     }
   }, []);
 
@@ -73,13 +69,6 @@ function Market() {
   const addToCart = async (productId: number) => {
     if (!user) {
       alert("Előbb be kell jelentkezned, hogy terméket adhass a kosárhoz!");
-      console.log(user); 
-      return;
-    }
-
-    if (isNaN(user.id)) {
-      console.error("Invalid user ID:", user.id);
-      alert("Érvénytelen felhasználói azonosító.");
       return;
     }
 
@@ -92,10 +81,8 @@ function Market() {
     }
   };
 
-  const highlightText = (text: string) => {
-    if (!searchTerm) return text;
-    const regex = new RegExp(`(${searchTerm})`, "gi");
-    return text.replace(regex, "<span class='highlight'>$1</span>");
+  const navigateToProductDetail = (productId: number) => {
+    navigate(`/products/${productId}`);
   };
 
   return (
@@ -119,12 +106,14 @@ function Market() {
       <div className="product-list">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
-            <div key={product.id} className="product-card">
-              <h2 dangerouslySetInnerHTML={{ __html: highlightText(product.neve) }}></h2>
+            <div key={product.id} className="product-card" onClick={() => navigateToProductDetail(product.id)}>
+              <h2>{product.neve}</h2>
               <p>Ár: {product.ara} Ft</p>
-              <p>Kategória: <span dangerouslySetInnerHTML={{ __html: highlightText(product.kat) }}></span></p>
-              <p>Gyártó: <span dangerouslySetInnerHTML={{ __html: highlightText(product.gyarto_beszallito) }}></span></p>
-              <button onClick={() => addToCart(product.id)}>Kosárba rakás</button>
+              <p>Kategória: {product.kat}</p>
+              <p>Gyártó: {product.gyarto_beszallito}</p>
+              <button onClick={(e) => { e.stopPropagation(); addToCart(product.id); }}>
+                Kosárba rakás
+              </button>
             </div>
           ))
         ) : (

@@ -7,22 +7,30 @@ import Register from "./components/Register";
 import Admin from "./components/Admin";
 import Kezdooldal from "./components/kezdooldal";
 import Cart from "./components/Cart";
+import ProductDetail from "./components/ProductDetail"; 
+import Footer from "./components/Footer";
 
-import "./index.css";
+import "./style/index.css";
 
 function App() {
   return (
     <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Kezdooldal />} />
-        <Route path="/contact" element={<Contacts />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/products" element={<Market />} />
-        <Route path="/cart" element={<Cart />} />
-      </Routes>
+      <div className="app-container">
+        <Navbar />
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Kezdooldal />} />
+            <Route path="/contact" element={<Contacts />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/products" element={<Market />} />
+            <Route path="/products/:id" element={<ProductDetail />} />
+            <Route path="/cart" element={<Cart />} />
+          </Routes>
+        </div>
+        <Footer />
+      </div>
     </Router>
   );
 }

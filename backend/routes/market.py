@@ -19,8 +19,14 @@ def getProducts(kat):
         a.append(dict(row))
     return jsonify(a)
 
-@market_bp.route("/getProduct/<id>", methods=['GET'])
+@market_bp.route("/getProduct/<int:id>", methods=['GET'])
 def getProductById(id):
-    a = db.session.execute(text("SELECT * FROM `termekek` WHERE `id` = :id"), {'id': id})
-    result = [row._asdict() for row in a]
-    return result, 200
+    result = db.session.execute(
+        text("SELECT * FROM `termekek` WHERE `id` = :id"),
+        {'id': id}
+    ).mappings().fetchone()
+
+    if not result:
+        return jsonify({"error": "Termék nem található"}), 404
+
+    return jsonify(dict(result))

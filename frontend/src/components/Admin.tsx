@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../index.css";
+import "../style/index.css";
 
 interface Product {
   id: number;
