@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../style/cart.css";
 
@@ -12,6 +13,7 @@ interface CartItem {
 const Cart = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [userId, setUserId] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
@@ -71,6 +73,11 @@ const Cart = () => {
     }
   };
 
+  const proceedToTransaction = () => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    navigate("/transaction");
+  };
+
   return (
     <div className="cart-container">
       <h2>Kosarad</h2>
@@ -80,8 +87,8 @@ const Cart = () => {
           <ul className="cart-list">
             {cartItems.map((item) => (
               <li key={item.termek_id} className="cart-item">
-                <span className="product-name">{item.neve || "Ismeretlen termék"}</span>
-                <span className="product-price">{item.ara ? `${item.ara} Ft` : "Ár nem elérhető"}</span>
+                <span className="product-name">{item.neve}</span>
+                <span className="product-price">{item.ara} Ft</span>
 
                 <div className="quantity-controls">
                   <button onClick={() => updateQuantity(item.termek_id, -1)}>-</button>
@@ -95,7 +102,14 @@ const Cart = () => {
               </li>
             ))}
           </ul>
-          <button onClick={clearCart} className="clear-cart-btn">Kosár ürítése</button>
+          <div className="cart-actions">
+            <button onClick={clearCart} className="clear-cart-btn">
+              Kosár ürítése
+            </button>
+            <button onClick={proceedToTransaction} className="checkout-btn">
+              Tovább a fizetéshez
+            </button>
+          </div>
         </>
       ) : (
         <p>A kosarad üres.</p>
