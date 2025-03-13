@@ -5,6 +5,7 @@ from backend.models.model import Termek
 
 market_bp = Blueprint("market_bp", __name__, url_prefix="/market")
 
+#ezt még fixálni kell
 @market_bp.route("/allProducts", methods=['GET'])
 def allProducts():
     results = Termek.query.all()
@@ -13,20 +14,14 @@ def allProducts():
 
 @market_bp.route("/getProductByKat/<kat>", methods=['GET'])
 def getProducts(kat):
-    a = []
     results = db.session.execute(text("SELECT * FROM `termekek` WHERE `kat` = :kat"), {'kat': kat})
-    for row in results.mappings():
-        a.append(dict(row))
-    return jsonify(a)
+    return jsonify([row._asdict() for row in results])
 
-@market_bp.route("/getProduct/<int:id>", methods=['GET'])
+@market_bp.route("/getProduct/<id>", methods=['GET'])
 def getProductById(id):
-    result = db.session.execute(
-        text("SELECT * FROM `termekek` WHERE `id` = :id"),
-        {'id': id}
-    ).mappings().fetchone()
-
-    if not result:
+    results = db.session.execute(text("SELECT * FROM `termekek` WHERE `id` = :id"), {'id': id}).fetchone()
+    results = jsonify([row._asdict() for row in results])
+    if not results:
         return jsonify({"error": "Termék nem található"}), 404
-
-    return jsonify(dict(result))
+    else:
+        return results, 200

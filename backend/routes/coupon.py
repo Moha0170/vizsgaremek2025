@@ -10,12 +10,12 @@ coupon_bp = Blueprint("coupon_bp", __name__, url_prefix="/coupon")
 def couponById(id):
     a = db.session.execute(text("SELECT * FROM kuponok WHERE id = :id"), {"id": id})
     result = [row._asdict() for row in a]
-    if result == []:
+    if not result:
         return "Nincs ilyen kupon", 404
     else:
         return result, 200
 
-@coupon_bp.route("/addCoupon/<type>", methods=["GET"])
+@coupon_bp.route("/addCoupon/<type>", methods=["POST"])
 def addCoupon(type):
     couponList = ["10", "20", "0", "50", "1000", "ingyen"]
     selectedCoupon = couponList[int(type)]

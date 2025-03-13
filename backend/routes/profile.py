@@ -54,15 +54,14 @@ def register():
         email = request.json['email']
         telefonszam = request.json['telefonszam']
         szuldatum = request.json['szuldatum']
-        husegpont = request.json.get('husegpont', 0) 
         nev = request.json['neve']
 
         db.session.execute(
             text("""
-                INSERT INTO felhasznalok (neve, email, telefonszam, szuldatum, husegpont) 
-                VALUES (:nev, :email, :telefonszam, :szuldatum, :husegpont)
+                INSERT INTO felhasznalok (neve, email, telefonszam, szuldatum) 
+                VALUES (:nev, :email, :telefonszam, :szuldatum)
             """), 
-            {"nev": nev, "email": email, "telefonszam": telefonszam, "szuldatum": szuldatum, "husegpont": husegpont}
+            {"nev": nev, "email": email, "telefonszam": telefonszam, "szuldatum": szuldatum}
         )
         db.session.commit()
 
@@ -81,7 +80,6 @@ def register():
             "email": email,
             "telefonszam": telefonszam,
             "szuldatum": szuldatum,
-            "husegpont": husegpont,
             "isAdmin": False
         }, 200
 

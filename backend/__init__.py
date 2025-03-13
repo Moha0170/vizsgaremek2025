@@ -35,11 +35,13 @@ def create_app():
     from .routes.market import market_bp
     from .routes.profile import profile_bp
     from .routes.coupon import coupon_bp
+    from .routes.orders import order_bp
 
     app.register_blueprint(admin_bp)
     app.register_blueprint(cart_bp)
     app.register_blueprint(market_bp)
     app.register_blueprint(profile_bp)
     app.register_blueprint(coupon_bp)
+    app.register_blueprint(order_bp)
 
     return app
