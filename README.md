@@ -3,6 +3,13 @@
 
 ##  🚀 Frontend futtatásához szükséges parancsok
 
+Frontend fájlban kell lenni a terminálban a parancsok futtatásához. 
+
+```sh
+cd frontend
+```
+Npm csomagok letöltése és kód futtatása.
+
 ```sh
 npm install
 
