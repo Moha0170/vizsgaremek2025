@@ -10,8 +10,8 @@ interface Order {
 
 const Orders = () => {
   const [orders, setOrders] = useState<Order[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -24,13 +24,9 @@ const Orders = () => {
         }
 
         const response = await axios.get(`http://localhost:5000/orders/${userId}`);
-        if (response.data.length === 0) {
-          setError("Még nincs rendelésed.");
-        } else {
-          setOrders(response.data);
-        }
+        setOrders(response.data);
       } catch (err) {
-        setError("Hiba történt a rendelések lekérésekor. Kérlek, próbáld újra később.");
+        setError("Hiba történt a rendelések lekérésekor.");
       } finally {
         setLoading(false);
       }
@@ -40,16 +36,16 @@ const Orders = () => {
   }, []);
 
   return (
-    <div>
+    <div className="orders-container">
       <h1>Korábbi rendeléseid</h1>
       {loading ? (
         <p>Betöltés...</p>
       ) : error ? (
         <p>{error}</p>
       ) : (
-        <ul>
+        <ul className="order-list">
           {orders.map((order) => (
-            <li key={order.id}>
+            <li key={order.id} className="order-item">
               <p>Rendelés azonosító: {order.id}</p>
               <p>Státusz: {order.status}</p>
               <p>Összeg: {order.total} Ft</p>

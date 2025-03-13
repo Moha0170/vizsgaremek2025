@@ -12,6 +12,7 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import Terms from "./components/Terms";
 import Orders from "./components/Orders";
+import Transaction from "./components/Transaction";
 
 import "./style/index.css";
 
@@ -33,6 +34,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/terms" element={<Terms />} /> 
             <Route path="/orders" element={<Orders />} />
+            <Route path="/transaction" element={<Transaction />} />
           </Routes>
         </div>
         <Footer />
