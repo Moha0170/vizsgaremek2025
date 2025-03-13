@@ -11,6 +11,7 @@ import ProductDetail from "./components/ProductDetail";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Terms from "./components/Terms";
+import Orders from "./components/Orders";
 
 import "./style/index.css";
 
@@ -31,6 +32,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/about" element={<About />} />
             <Route path="/terms" element={<Terms />} /> 
+            <Route path="/orders" element={<Orders />} />
           </Routes>
         </div>
         <Footer />
