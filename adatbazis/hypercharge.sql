@@ -155,17 +155,18 @@ CREATE TABLE `rendelesek` (
   `felhasznalo_id` int(11) DEFAULT NULL,
   `cim` varchar(255) NOT NULL,
   `vasarlas_osszeg` int(11) NOT NULL,
-  `rendeles_datum` datetime NOT NULL
+  `rendeles_datum` datetime NOT NULL,
+  `kezbesitett` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `rendelesek`
 --
 
-INSERT INTO `rendelesek` (`id`, `felhasznalo_id`, `cim`, `vasarlas_osszeg`, `rendeles_datum`) VALUES
-(1, 1, 'Budapest, Kossuth utca 12.', '250000', '2025-03-03 15:55:14'),
-(2, 2, 'Debrecen, Fő tér 5.', '180000', '2025-03-03 15:55:14'),
-(3, 2, 'Debrecen, Petőfi utca 8.', '120000', '2025-03-03 15:55:14');
+INSERT INTO `rendelesek` (`id`, `felhasznalo_id`, `cim`, `vasarlas_osszeg`, `rendeles_datum`, `kezbesitett`) VALUES
+(1, 1, 'Budapest, Kossuth utca 12.', '250000', '2025-03-03 15:55:14', 0),
+(2, 2, 'Debrecen, Fő tér 5.', '180000', '2025-03-03 15:55:14', 0),
+(3, 2, 'Debrecen, Petőfi utca 8.', '120000', '2025-03-03 15:55:14', 0);
 
 -- --------------------------------------------------------
 
