@@ -19,18 +19,21 @@ def couponById(id):
 def addCoupon(type):
     couponList = ["10", "20", "0", "50", "1000", "ingyen"]
     selectedCoupon = couponList[int(type)]
-    kod = ""
-    for a in range(3):
-        kod += ''.join(random.choices(string.ascii_uppercase + string.digits, k=3))
-        if a < 2:
-            kod += "-"
-    a = db.session.execute(text("SELECT * FROM kuponkodok WHERE kod = :kod"), {"kod": kod})
-    result = [row._asdict() for row in a]
-    if result == []:
-        db.session.execute(text("INSERT INTO kuponkodok (kod, ertek) VALUES (:kod, :ertek)"), {"kod": kod, "ertek": selectedCoupon})
-        db.session.commit()
-        return kod, 200
+    if selectedCoupon == "0":
+            return "Most nem nyertél, de holnap újra megpróbálhatod!", 200
     else:
-        return "Hiba történt, kérlek próbáld újra!", 500
+        kod = ""
+        for a in range(3):
+            kod += ''.join(random.choices(string.ascii_uppercase + string.digits, k=3))
+            if a < 2:
+                kod += "-"
+        a = db.session.execute(text("SELECT * FROM kuponkodok WHERE kod = :kod"), {"kod": kod})
+        result = [row._asdict() for row in a]
+        if result == []:
+            db.session.execute(text("INSERT INTO kuponkodok (kod, ertek) VALUES (:kod, :ertek)"), {"kod": kod, "ertek": selectedCoupon})
+            db.session.commit()
+            return kod, 200
+        else:
+            return "Hiba történt, kérlek próbáld újra!", 500
 
         
