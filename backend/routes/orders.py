@@ -40,7 +40,17 @@ def createOrderFromCart(felhasznalo_id):
         kosar = [row._asdict() for row in kosar]
 
         cim = request.json['cim']
+        kupon = request.json['kupon']
+        if kupon != "":
+            kupon_ertek = db.session.execute(text("SELECT ertek FROM kuponkodok WHERE kod = :kod"), {"kod": kupon}).fetchone()
+            if kupon_ertek:
+                kupon_ertek = kupon_ertek[0]
+            else:
+                kupon_ertek = 0
+        else:
+            kupon_ertek = 0
         vasarlas_osszeg = 0
+        
         for termek in kosar:
             termek_osszeg = db.session.execute(text("SELECT ara FROM termekek WHERE id = :id"), {"id": termek['termek_id']}).fetchone()[0] * termek['mennyiseg']
             vasarlas_osszeg += termek_osszeg
