@@ -12,30 +12,51 @@ interface CartItem {
 const Transaction = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [userId, setUserId] = useState<string | null>(null);
+  const [cim, setCim] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
-    const storedCart = localStorage.getItem("cartItems");
-
-    if (storedUserId && storedCart) {
+    if (storedUserId) {
       setUserId(storedUserId);
-      setCartItems(JSON.parse(storedCart));
+      fetchCartItems(storedUserId);
     }
   }, []);
+
+  const fetchCartItems = async (id: string) => {
+    try {
+      const response = await axios.get(`http://localhost:5000/cart/${id}`);
+      setCartItems(response.data);
+    } catch (error) {
+      console.error("Hiba a kosár lekérésekor:", error);
+      setCartItems([]);
+    }
+  };
+
+  const clearCart = async () => {
+    if (!userId) return;
+    try {
+      await axios.delete(`http://localhost:5000/cart/${userId}`);
+      setCartItems([]);
+    } catch (error) {
+      console.error("Hiba a kosár törlésekor:", error);
+    }
+  };
 
   const completePurchase = async () => {
     if (!userId || cartItems.length === 0) return;
 
     try {
-      await axios.post("http://localhost:5000/orders", {
-        userId,
-        items: cartItems,
-        total: cartItems.reduce((sum, item) => sum + item.ara * item.mennyiseg, 0),
-      });
-
-      localStorage.removeItem("cartItems");
-      navigate("/orders");
+      const response = await axios.post(
+        `http://localhost:5000/orders/createOrderFromCart/${userId}`,
+        { cim }
+      );
+      
+      if (response.status === 200) {
+        localStorage.removeItem("cartItems");
+        clearCart();
+        navigate("/orders");
+      }
     } catch (error) {
       console.error("Hiba a vásárlás során:", error);
     }
@@ -56,6 +77,13 @@ const Transaction = () => {
               </li>
             ))}
           </ul>
+          <input
+            type="text"
+            placeholder="Szállítási cím"
+            value={cim}
+            onChange={(e) => setCim(e.target.value)}
+            className="address-input"
+          />
           <button onClick={completePurchase} className="complete-btn">
             Vásárlás befejezése
           </button>

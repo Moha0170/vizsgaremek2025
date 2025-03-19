@@ -23,7 +23,7 @@ const Orders = () => {
           return;
         }
 
-        const response = await axios.get(`http://localhost:5000/orders/${userId}`);
+        const response = await axios.get(`http://localhost:5000/orders/getOrders/${userId}`);
         setOrders(response.data);
       } catch (err) {
         setError("Hiba történt a rendelések lekérésekor.");
