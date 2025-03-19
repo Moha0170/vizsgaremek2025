@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "../style/index.css";
+import "../style/orders.css";
 
 interface Order {
   id: number;

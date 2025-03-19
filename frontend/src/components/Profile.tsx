@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 function Profile() {
   const [userData, setUserData] = useState<{ username: string; email: string; telefonszam: string; isAdmin: boolean; userId: number } | null>(null);
+  const [orders, setOrders] = useState<any[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token);
     if (token) {
       try {
         const decoded: any = jwtDecode(token);
@@ -19,6 +20,7 @@ function Profile() {
           isAdmin: decoded.isAdmin,
           userId: decoded.userId
         });
+        fetchOrders(decoded.userId);
       } catch (error) {
         console.error("Invalid token:", error);
         localStorage.clear();
@@ -26,6 +28,15 @@ function Profile() {
       }
     }
   }, []);
+
+  const fetchOrders = async (userId: number) => {
+    try {
+      const response = await axios.get(`http://localhost:5000/orders/getOrders/${userId}`);
+      setOrders(response.data);
+    } catch (error) {
+      console.error("Hiba a rendelések lekérésekor:", error);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.clear();
@@ -43,6 +54,18 @@ function Profile() {
           <p>{userData.isAdmin ? "Adminisztrátor vagy" : "Felhasználó vagy"}</p>
           {userData.isAdmin && (
             <button onClick={() => navigate("/admin")}>Admin felület</button>
+          )}
+          <h3>Korábbi rendeléseid:</h3>
+          {orders.length > 0 ? (
+            <ul>
+              {orders.map((order) => (
+                <li key={order.id}>
+                  Rendelési azonosító: {order.id}, Összeg: {order.vasarlas_osszeg} Ft, Dátum: {new Date(order.rendeles_datum).toLocaleString()}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>Még nem adtál le rendelést.</p>
           )}
           <button className="logout-button" onClick={handleLogout}>
             Kijelentkezés

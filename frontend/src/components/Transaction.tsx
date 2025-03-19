@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import "../style/orders.css";
+
 
 interface CartItem {
   termek_id: number;
@@ -64,19 +66,19 @@ const Transaction = () => {
 
   return (
     <div className="transaction-container">
-      <h2>Vásárlás befejezése</h2>
+      <h2>Vásárlás befejezése</h2> <br></br>
 
       {cartItems.length > 0 ? (
         <>
-          <ul className="transaction-list">
+          <div className="transaction-list">
             {cartItems.map((item) => (
-              <li key={item.termek_id} className="transaction-item">
-                <span>{item.neve}</span>
-                <span>{item.ara} Ft</span>
-                <span>Mennyiség: {item.mennyiseg}</span>
-              </li>
+              <div key={item.termek_id} className="transaction-item">
+                <span className="item-name">{item.neve}</span>
+                <span className="item-price">{item.ara} Ft</span>
+                <span className="item-quantity">Mennyiség: {item.mennyiseg}</span>
+              </div>
             ))}
-          </ul>
+          </div>
           <input
             type="text"
             placeholder="Szállítási cím"
@@ -87,6 +89,7 @@ const Transaction = () => {
           <button onClick={completePurchase} className="complete-btn">
             Vásárlás befejezése
           </button>
+          <Link to="/orders" className="orders-link">Korábbi rendeléseim</Link>
         </>
       ) : (
         <p>Nincsenek termékek a vásárláshoz.</p>
