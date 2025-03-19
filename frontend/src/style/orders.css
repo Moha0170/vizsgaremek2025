@@ -1,78 +1,51 @@
-.transaction-container {
-    max-width: 600px;
+.orders-container {
+    max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background: #fff;
+    background: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
   }
   
-  h2 {
+  .orders-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
     color: #333;
-    margin-bottom: 15px;
   }
   
-  .transaction-list {
+  .orders-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .order-item {
+    background: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 15px;
+    gap: 5px;
   }
   
-  .transaction-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background: #f9f9f9;
-    border-radius: 5px;
-  }
-  
-  .item-name {
-    font-weight: bold;
-  }
-  
-  .item-price {
-    color: #28a745;
-    font-weight: bold;
-  }
-  
-  .item-quantity {
-    font-size: 14px;
+  .order-item span {
+    font-size: 16px;
     color: #555;
   }
   
-  .address-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  .order-item strong {
+    color: #222;
   }
   
-  .complete-btn {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
+  @media (max-width: 600px) {
+    .orders-container {
+      padding: 15px;
+    }
+  
+    .order-item {
+      padding: 10px;
+    }
   }
   
-  .complete-btn:hover {
-    background: #0056b3;
-  }
-  
-  .orders-link {
-    display: block;
-    margin-top: 10px;
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .orders-link:hover {
-    text-decoration: underline;
-  }
