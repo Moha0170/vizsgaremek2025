@@ -23,9 +23,9 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = "supersecretkey"
     app.config['SWAGGER'] = {
-    'title': 'Hypercharge API',
-    'uiversion': 2,
-    'template': './resources/flasgger/swagger_ui.html'
+        'title': 'Hypercharge API',
+        'uiversion': 2,
+        'template': './resources/flasgger/swagger_ui.html'
     }
 
     db.init_app(app)
