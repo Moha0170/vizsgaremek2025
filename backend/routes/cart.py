@@ -7,9 +7,13 @@ cart_bp = Blueprint("cart_bp", __name__, url_prefix="/cart")
 @cart_bp.route("/<id>", methods=["GET"])
 def cartById(id):
     a = db.session.execute(text("SELECT termekek.ara, termekek.neve, kosar_termekek.mennyiseg, kosar_termekek.termek_id FROM kosar_termekek INNER JOIN termekek ON kosar_termekek.termek_id = termekek.id WHERE kosar_termekek.felhasznalo_id = :id"), {"id": id})
+    ossz = 0
     result = [row._asdict() for row in a]
     for row in result:
         row["ara"] = int(row["ara"]) * int(row["mennyiseg"])
+    for row in result:
+        ossz += row["ara"]
+    result.append({"osszeg": ossz})
     if result == []:
         return "Nincs ilyen kosar", 404
     else:
