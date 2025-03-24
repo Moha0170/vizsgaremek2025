@@ -3,7 +3,6 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "../style/transaction.css";
 
-
 interface CartItem {
   termek_id: number;
   mennyiseg: number;
@@ -13,6 +12,7 @@ interface CartItem {
 
 const Transaction = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
   const [userId, setUserId] = useState<string | null>(null);
   const [cim, setCim] = useState("");
   const navigate = useNavigate();
@@ -28,10 +28,20 @@ const Transaction = () => {
   const fetchCartItems = async (id: string) => {
     try {
       const response = await axios.get(`http://localhost:5000/cart/${id}`);
-      setCartItems(response.data);
+      const data = response.data;
+      if (data.length > 0) {
+        const items = data.filter((item: any) => item.osszeg === undefined);
+        const total = data.find((item: any) => item.osszeg !== undefined)?.osszeg || 0;
+        setCartItems(items);
+        setTotalPrice(total);
+      } else {
+        setCartItems([]);
+        setTotalPrice(0);
+      }
     } catch (error) {
       console.error("Hiba a kosár lekérésekor:", error);
       setCartItems([]);
+      setTotalPrice(0);
     }
   };
 
@@ -40,6 +50,7 @@ const Transaction = () => {
     try {
       await axios.delete(`http://localhost:5000/cart/${userId}`);
       setCartItems([]);
+      setTotalPrice(0);
     } catch (error) {
       console.error("Hiba a kosár törlésekor:", error);
     }
@@ -47,13 +58,11 @@ const Transaction = () => {
 
   const completePurchase = async () => {
     if (!userId || cartItems.length === 0) return;
-
     try {
       const response = await axios.post(
         `http://localhost:5000/orders/createOrderFromCart/${userId}`,
         { cim }
       );
-      
       if (response.status === 200) {
         localStorage.removeItem("cartItems");
         clearCart();
@@ -66,7 +75,7 @@ const Transaction = () => {
 
   return (
     <div className="transaction-container">
-      <h2>Vásárlás befejezése</h2> <br></br>
+      <h2>Vásárlás befejezése</h2>
 
       {cartItems.length > 0 ? (
         <>
@@ -79,6 +88,7 @@ const Transaction = () => {
               </div>
             ))}
           </div>
+          <div className="total-price">Összesen: {totalPrice} Ft</div>
           <input
             type="text"
             placeholder="Szállítási cím"
