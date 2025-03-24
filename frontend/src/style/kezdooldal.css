@@ -1,0 +1,84 @@
+.kezdooldal-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .product-card {
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;
+  }
+  
+  .product-card h3 {
+    font-size: 1.2em;
+    color: black; /* Fekete színű szöveg */
+  }
+  
+  .product-card p {
+    color: black; /* Ár is fekete */
+    font-size: 1em;
+  }
+  
+  .product-card button {
+    background: #4f67f0; /* Az oldal alapszíne */
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  .product-card button:hover {
+    background: #3d54c7; /* Sötétebb árnyalat hover effectre */
+  }
+  
+  /* Információs szekció */
+  .info-section {
+    margin-top: 50px;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .info-section h2 {
+    font-size: 1.4em;
+    color: black; /* Fekete szöveg */
+    margin-bottom: 10px;
+  }
+  
+  .info-section p {
+    font-size: 1em;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .info-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .info-links a {
+    text-decoration: none;
+    color: #4f67f0; /* Linkek az oldal fő színével */
+    font-weight: bold;
+  }
+  
+  .info-links a:hover {
+    text-decoration: underline;
+    color: #3d54c7; /* Sötétebb kék hover effectre */
+  }
+  
