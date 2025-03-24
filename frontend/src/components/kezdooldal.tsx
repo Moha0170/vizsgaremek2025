@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../style/index.css";
+import "../style/kezdooldal.css";
 import axios from "axios";
 
 interface Product {
@@ -21,7 +22,7 @@ const Kezdooldal = () => {
       .then((response) => {
         setAllProducts(response.data);
         const shuffled = [...response.data].sort(() => 0.5 - Math.random());
-        setFeaturedProducts(shuffled.slice(0, 4)); 
+        setFeaturedProducts(shuffled.slice(0, 4));
         setLoading(false);
       })
       .catch((error) => {
@@ -63,6 +64,17 @@ const Kezdooldal = () => {
               </Link>
             </div>
           ))}
+        </div>
+      </section>
+
+      {}
+      <section className="info-section">
+        <h2>📢 Tudj meg többet rólunk!</h2>
+        <p>Vásárlási feltételek, kapcsolatfelvétel és további információk:</p>
+        <div className="info-links">
+          <Link to="/contact">Kapcsolat</Link>
+          <Link to="/about">Rólunk</Link>
+          <Link to="/terms">Általános szerződési feltételek</Link>
         </div>
       </section>
     </div>

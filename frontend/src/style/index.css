@@ -123,7 +123,7 @@ h1 {
 
 .product-card h2 {
   font-size: 1.5rem;
-  color: #FFFFFF; /* white */
+  color: #65a7f7; /* white */
   margin-bottom: 10px;
 }
 
@@ -411,7 +411,7 @@ h1 {
 .register-container button,
 .profile-container button,
 .contact-form button {
-  background: #4f67f0; /* gold */
+  background: #65a7f7; /* gold */
   color: #FFFFFF; /* white */
   padding: 15px 30px;
   border: 2px solid #65a7f7; /* tomato */
@@ -438,7 +438,7 @@ h1 {
 }
 
 .edit-button {
-  background: #4f67f0; /* gold */
+  background: #65a7f7; /* gold */
   border: 2px solid #65a7f7; /* tomato */
 }
 
@@ -482,7 +482,7 @@ h1 {
     position: absolute;
     top: 60px;
     left: -100%;
-    background: #4f67f0; /* gold */
+    background: #65a7f7; /* gold */
     width: 100%;
     flex-direction: column;
     transition: left 0.3s ease-in;
@@ -500,7 +500,7 @@ h1 {
 
   .product-card {
     width: 100%;
-    background: #65a7f7; /* tomato */
+    background: #65a7f7; 
     padding: 20px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;

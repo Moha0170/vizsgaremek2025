@@ -12,6 +12,7 @@ interface CartItem {
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
   const [userId, setUserId] = useState<string | null>(null);
   const navigate = useNavigate();
 
@@ -26,10 +27,14 @@ const Cart = () => {
   const fetchCartItems = async (id: string) => {
     try {
       const response = await axios.get(`http://localhost:5000/cart/${id}`);
-      setCartItems(response.data);
+      const items = response.data.filter((item: any) => item.termek_id !== undefined);
+      const total = response.data.find((item: any) => item.osszeg !== undefined)?.osszeg || 0;
+      setCartItems(items);
+      setTotalPrice(total);
     } catch (error) {
       console.error("Hiba a kosár lekérésekor:", error);
       setCartItems([]);
+      setTotalPrice(0);
     }
   };
 
@@ -57,7 +62,7 @@ const Cart = () => {
     if (!userId) return;
     try {
       await axios.delete(`http://localhost:5000/cart/${userId}/${itemId}`);
-      setCartItems((prevItems) => prevItems.filter((item) => item.termek_id !== itemId));
+      fetchCartItems(userId);
     } catch (error) {
       console.error("Hiba a termék eltávolításakor:", error);
     }
@@ -68,6 +73,7 @@ const Cart = () => {
     try {
       await axios.delete(`http://localhost:5000/cart/${userId}`);
       setCartItems([]);
+      setTotalPrice(0);
     } catch (error) {
       console.error("Hiba a kosár törlésekor:", error);
     }
@@ -76,6 +82,10 @@ const Cart = () => {
   const proceedToTransaction = () => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
     navigate("/transaction");
+  };
+
+  const goToOrders = () => {
+    navigate("/orders");
   };
 
   return (
@@ -102,18 +112,29 @@ const Cart = () => {
               </li>
             ))}
           </ul>
-          <div className="cart-actions">
+          <div className="cart-summary">
+            <strong>Összeg: {totalPrice} Ft</strong>
+          </div>
+        </>
+      ) : (
+        <p>A kosarad üres.</p>
+      )}
+
+      <div className="cart-actions">
+        {cartItems.length > 0 && (
+          <>
             <button onClick={clearCart} className="clear-cart-btn">
               Kosár ürítése
             </button>
             <button onClick={proceedToTransaction} className="checkout-btn">
               Tovább a fizetéshez
             </button>
-          </div>
-        </>
-      ) : (
-        <p>A kosarad üres.</p>
-      )}
+          </>
+        )}
+        <button onClick={goToOrders} className="orders-btn">
+          Megnézem a rendeléseimet
+        </button>
+      </div>
     </div>
   );
 };
