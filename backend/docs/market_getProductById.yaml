@@ -1,5 +1,5 @@
 tags:
-  - Products
+  - Market
 summary: Retrieve products by category
 description: |
   This endpoint retrieves a list of products based on the specified category.

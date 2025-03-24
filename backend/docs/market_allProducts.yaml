@@ -1,5 +1,5 @@
 tags:
-  - Products
+  - Market
 summary: Retrieve all products
 description: Retrieves all products from the `termekek` table.
 responses:
