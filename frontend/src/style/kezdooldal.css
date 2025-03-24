@@ -22,7 +22,7 @@
   
   .product-card h3 {
     font-size: 1.2em;
-    color: black; /* Fekete színű szöveg */
+    color: #4f67f0; /* Fekete színű szöveg */
   }
   
   .product-card p {
@@ -41,7 +41,7 @@
   }
   
   .product-card button:hover {
-    background: #3d54c7; /* Sötétebb árnyalat hover effectre */
+    background: #4f67f0; /* Sötétebb árnyalat hover effectre */
   }
   
   /* Információs szekció */
