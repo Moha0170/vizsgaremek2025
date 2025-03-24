@@ -8,7 +8,6 @@ import Admin from "./components/Admin";
 import Kezdooldal from "./components/kezdooldal";
 import Cart from "./components/Cart";
 import ProductDetail from "./components/ProductDetail"; 
-import Footer from "./components/Footer";
 import About from "./components/About";
 import Terms from "./components/Terms";
 import Orders from "./components/Orders";
@@ -37,7 +36,6 @@ function App() {
             <Route path="/transaction" element={<Transaction />} />
           </Routes>
         </div>
-        <Footer />
       </div>
     </Router>
   );
