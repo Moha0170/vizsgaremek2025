@@ -112,6 +112,7 @@ const Cart = () => {
               </li>
             ))}
           </ul>
+          <p>Szállítás: 1999 Ft</p>
           <div className="cart-summary">
             <strong>Összeg: {totalPrice} Ft</strong>
           </div>

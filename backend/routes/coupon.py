@@ -8,7 +8,7 @@ coupon_bp = Blueprint("coupon_bp", __name__, url_prefix="/coupon")
 
 @coupon_bp.route("/<kod>", methods=["GET"])
 def couponById(kod):
-    a = db.session.execute(text("SELECT * FROM kuponok WHERE kod = :kod"), {"kod": kod})
+    a = db.session.execute(text("SELECT * FROM kuponkodok WHERE kod = :kod"), {"kod": kod})
     result = [row._asdict() for row in a]
     if not result:
         return "Nincs ilyen kupon", 404

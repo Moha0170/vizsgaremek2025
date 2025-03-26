@@ -13,7 +13,7 @@ def cartById(id):
         row["ara"] = int(row["ara"]) * int(row["mennyiseg"])
     for row in result:
         ossz += row["ara"]
-    result.append({"osszeg": ossz})
+    result.append({"osszeg": ossz + 1999})
     if result == []:
         return "Nincs ilyen kosar", 404
     else:
