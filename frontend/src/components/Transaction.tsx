@@ -2,21 +2,28 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "../style/transaction.css";
-
+ 
 interface CartItem {
   termek_id: number;
   mennyiseg: number;
   neve: string;
   ara: number;
 }
-
+ 
 const Transaction = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [userId, setUserId] = useState<string | null>(null);
-  const [cim, setCim] = useState("");
+  const [orszag, setOrszag] = useState("");
+  const [iranyitoszam, setIranyitoszam] = useState("");
+  const [varos, setVaros] = useState("");
+  const [kozterulet, setKozterulet] = useState("");
+  const [kozteruletJellege, setKozteruletJellege] = useState("");
+  const [hazszam, setHazszam] = useState("");
+  const [kupon, setKupon] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
-
+ 
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
     if (storedUserId) {
@@ -24,7 +31,7 @@ const Transaction = () => {
       fetchCartItems(storedUserId);
     }
   }, []);
-
+ 
   const fetchCartItems = async (id: string) => {
     try {
       const response = await axios.get(`http://localhost:5000/cart/${id}`);
@@ -44,7 +51,29 @@ const Transaction = () => {
       setTotalPrice(0);
     }
   };
-
+ 
+  const validateCoupon = async () => {
+    if (!kupon) return;
+ 
+    try {
+      const response = await axios.get(`http://localhost:5000/coupon/${kupon}`);
+      if (response.status === 200) {
+        const discount = response.data[0].ertek;
+        if (discount.includes("%")) {
+          const percentage = parseInt(discount.replace("%", ""));
+          setTotalPrice((prev) => Math.max(0, prev - (prev * percentage) / 100));
+        } else {
+          setTotalPrice((prev) => Math.max(0, prev - parseInt(discount)));
+        }
+        setMessage("Kupon sikeresen alkalmazva!");
+      } else {
+        setMessage("Érvénytelen kuponkód!");
+      }
+    } catch (error) {
+      setMessage("Hiba történt a kupon ellenőrzésekor!");
+    }
+  };
+ 
   const clearCart = async () => {
     if (!userId) return;
     try {
@@ -55,28 +84,50 @@ const Transaction = () => {
       console.error("Hiba a kosár törlésekor:", error);
     }
   };
-
+ 
   const completePurchase = async () => {
-    if (!userId || cartItems.length === 0) return;
+    if (!userId || cartItems.length === 0) {
+      setMessage("A kosár üres vagy nincs bejelentkezve!");
+      return;
+    }
+ 
+    if (!orszag || !iranyitoszam || !varos || !kozterulet || !kozteruletJellege || !hazszam) {
+      setMessage("Minden mező kitöltése kötelező!");
+      return;
+    }
+ 
     try {
       const response = await axios.post(
         `http://localhost:5000/orders/createOrderFromCart/${userId}`,
-        { cim }
+        {
+          orszag,
+          iranyitoszam,
+          varos,
+          kozterulet,
+          kozterulet_jellege: kozteruletJellege,
+          hazszam,
+          kupon,
+        }
       );
+ 
       if (response.status === 200) {
         localStorage.removeItem("cartItems");
         clearCart();
         navigate("/orders");
+        setMessage("Rendelés sikeresen leadva!");
+      } else {
+        setMessage(response.data);
       }
     } catch (error) {
       console.error("Hiba a vásárlás során:", error);
+      setMessage("Hiba történt a rendelés során!");
     }
   };
-
+ 
   return (
     <div className="transaction-container">
       <h2>Vásárlás befejezése</h2>
-
+ 
       {cartItems.length > 0 ? (
         <>
           <div className="transaction-list">
@@ -89,23 +140,26 @@ const Transaction = () => {
             ))}
           </div>
           <div className="total-price">Összesen: {totalPrice} Ft</div>
-          <input
-            type="text"
-            placeholder="Szállítási cím"
-            value={cim}
-            onChange={(e) => setCim(e.target.value)}
-            className="address-input"
-          />
-          <button onClick={completePurchase} className="complete-btn">
-            Vásárlás befejezése
-          </button>
+ 
+          <input type="text" placeholder="Ország" value={orszag} onChange={(e) => setOrszag(e.target.value)} />
+          <input type="text" placeholder="Irányítószám" value={iranyitoszam} onChange={(e) => setIranyitoszam(e.target.value)} />
+          <input type="text" placeholder="Város" value={varos} onChange={(e) => setVaros(e.target.value)} />
+          <input type="text" placeholder="Közterület" value={kozterulet} onChange={(e) => setKozterulet(e.target.value)} />
+          <input type="text" placeholder="Közterület jellege" value={kozteruletJellege} onChange={(e) => setKozteruletJellege(e.target.value)} />
+          <input type="text" placeholder="Házszám" value={hazszam} onChange={(e) => setHazszam(e.target.value)} />
+          <input type="text" placeholder="Kuponkód (opcionális)" value={kupon} onChange={(e) => setKupon(e.target.value)} />
+          <button onClick={validateCoupon}>Kupon ellenőrzése</button>
+          <button onClick={completePurchase} className="complete-btn">Vásárlás befejezése</button>
           <Link to="/orders" className="orders-link">Korábbi rendeléseim</Link>
         </>
       ) : (
         <p>Nincsenek termékek a vásárláshoz.</p>
       )}
+ 
+      {message && <p>{message}</p>}
     </div>
   );
 };
-
+ 
 export default Transaction;
+ 
