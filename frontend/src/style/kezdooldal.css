@@ -22,16 +22,16 @@
   
   .product-card h3 {
     font-size: 1.2em;
-    color: #4f67f0; /* Fekete színű szöveg */
+    color: #4f67f0; 
   }
   
   .product-card p {
-    color: black; /* Ár is fekete */
+    color: black; 
     font-size: 1em;
   }
   
   .product-card button {
-    background: #4f67f0; /* Az oldal alapszíne */
+    background: #4f67f0;
     color: white;
     border: none;
     padding: 10px;
@@ -41,10 +41,10 @@
   }
   
   .product-card button:hover {
-    background: #4f67f0; /* Sötétebb árnyalat hover effectre */
+    background: #4f67f0; 
   }
   
-  /* Információs szekció */
+
   .info-section {
     margin-top: 50px;
     padding: 20px;
@@ -55,7 +55,7 @@
   
   .info-section h2 {
     font-size: 1.4em;
-    color: black; /* Fekete szöveg */
+    color: black; 
     margin-bottom: 10px;
   }
   
@@ -73,12 +73,12 @@
   
   .info-links a {
     text-decoration: none;
-    color: #4f67f0; /* Linkek az oldal fő színével */
+    color: #4f67f0; 
     font-weight: bold;
   }
   
   .info-links a:hover {
     text-decoration: underline;
-    color: #3d54c7; /* Sötétebb kék hover effectre */
+    color: #3d54c7; 
   }
   
