@@ -28,13 +28,13 @@ function Admin() {
   }, []);
 
   const fetchProducts = async () => {
-    const res = await fetch("http://localhost:5000/market/allProducts");
+    const res = await fetch(`${import.meta.env.VITE_API_URI}/market/allProducts`);
     const data = await res.json();
     setProducts(data);
   };
 
   const handleDeleteProduct = async (id: number) => {
-    await fetch(`http://localhost:5000/admin/product/delete/${id}`, {
+    await fetch(`${import.meta.env.VITE_API_URI}/admin/product/delete/${id}`, {
       method: "DELETE",
       headers: { "Authorization": localStorage.getItem("token") || "" },
     });
@@ -42,7 +42,7 @@ function Admin() {
   };
 
   const handleCreateProduct = async () => {
-    await fetch("http://localhost:5000/admin/product/create/", {
+    await fetch(`${import.meta.env.VITE_API_URI}/admin/product/create/`, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Authorization": localStorage.getItem("token") || "" },
       body: JSON.stringify(newProduct),
@@ -53,7 +53,7 @@ function Admin() {
 
   const handleEditProduct = async () => {
     if (editProduct) {
-      const response = await fetch(`http://localhost:5000/admin/product/update/${editProduct.id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URI}/admin/product/update/${editProduct.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json", "Authorization": localStorage.getItem("token") || "" },
         body: JSON.stringify(editProduct),

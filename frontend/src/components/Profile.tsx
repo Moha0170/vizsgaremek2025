@@ -31,7 +31,7 @@ function Profile() {
 
   const fetchOrders = async (userId: number) => {
     try {
-      const response = await axios.get(`http://localhost:5000/orders/getOrders/${userId}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URI}/orders/getOrders/${userId}`);
       setOrders(response.data);
     } catch (error) {
       console.error("Hiba a rendelések lekérésekor:", error);
@@ -89,7 +89,7 @@ function LoginForm({ setUserData }) {
 
   const handleLogin = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/profile/login/", {
+    const response = await fetch(`${import.meta.env.VITE_API_URI}/profile/login/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ user, password })

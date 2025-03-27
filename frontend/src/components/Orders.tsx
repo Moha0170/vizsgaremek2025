@@ -25,7 +25,7 @@ const Orders = () => {
 
   const fetchOrders = async (id: string) => {
     try {
-      const response = await axios.get(`http://localhost:5000/orders/getOrders/${id}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URI}/orders/getOrders/${id}`);
       console.log("Kapott rendelések:", response.data);
       setOrders(response.data);
       setError(null);

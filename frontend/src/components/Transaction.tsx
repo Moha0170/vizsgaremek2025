@@ -34,7 +34,7 @@ const Transaction = () => {
  
   const fetchCartItems = async (id: string) => {
     try {
-      const response = await axios.get(`http://localhost:5000/cart/${id}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URI}/cart/${id}`);
       const data = response.data;
       if (data.length > 0) {
         const items = data.filter((item: any) => item.osszeg === undefined);
@@ -56,7 +56,7 @@ const Transaction = () => {
     if (!kupon) return;
  
     try {
-      const response = await axios.get(`http://localhost:5000/coupon/${kupon}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URI}/coupon/${kupon}`);
       if (response.status === 200) {
         const discount = response.data[0].ertek;
         if (discount.includes("%")) {
@@ -77,7 +77,7 @@ const Transaction = () => {
   const clearCart = async () => {
     if (!userId) return;
     try {
-      await axios.delete(`http://localhost:5000/cart/${userId}`);
+      await axios.delete(`${import.meta.env.VITE_API_URI}/cart/${userId}`);
       setCartItems([]);
       setTotalPrice(0);
     } catch (error) {
@@ -98,7 +98,7 @@ const Transaction = () => {
  
     try {
       const response = await axios.post(
-        `http://localhost:5000/orders/createOrderFromCart/${userId}`,
+        `${import.meta.env.VITE_API_URI}/orders/createOrderFromCart/${userId}`,
         {
           orszag,
           iranyitoszam,

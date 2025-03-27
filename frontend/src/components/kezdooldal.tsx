@@ -18,7 +18,7 @@ const Kezdooldal = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/market/allProducts")
+    axios.get(`${import.meta.env.VITE_API_URI}/market/allProducts`)
       .then((response) => {
         setAllProducts(response.data);
         const shuffled = [...response.data].sort(() => 0.5 - Math.random());

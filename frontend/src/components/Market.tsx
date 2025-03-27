@@ -25,7 +25,7 @@ function Market() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/market/allProducts")
+    fetch(`${import.meta.env.VITE_API_URI}/market/allProducts`)
       .then((res) => res.json())
       .then((data) => {
         setAllProducts(data);
@@ -73,7 +73,7 @@ function Market() {
     }
 
     try {
-      await axios.post(`http://localhost:5000/cart/${user.id}/${productId}/1`);
+      await axios.post(`${import.meta.env.VITE_API_URI}/cart/${user.id}/${productId}/1`);
       alert("Termék sikeresen hozzáadva a kosárhoz!");
     } catch (error) {
       console.error("Hiba a kosárhoz adáskor:", error);
