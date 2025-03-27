@@ -22,7 +22,7 @@ const ProductDetail = () => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/market/getProduct/${id}`)
+    fetch(`${import.meta.env.VITE_API_URI}/market/getProduct/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
@@ -53,7 +53,7 @@ const ProductDetail = () => {
     }
 
     try {
-      await axios.post(`http://localhost:5000/cart/${user.id}/${product?.id}/1`);
+      await axios.post(`${import.meta.env.VITE_API_URI}/cart/${user.id}/${product?.id}/1`);
       alert("Termék sikeresen hozzáadva a kosárhoz!");
     } catch (error) {
       console.error("Hiba a kosárhoz adáskor:", error);

@@ -26,7 +26,7 @@ const Cart = () => {
 
   const fetchCartItems = async (id: string) => {
     try {
-      const response = await axios.get(`http://localhost:5000/cart/${id}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URI}/cart/${id}`);
       const items = response.data.filter((item: any) => item.termek_id !== undefined);
       const total = response.data.find((item: any) => item.osszeg !== undefined)?.osszeg || 0;
       setCartItems(items);
@@ -51,7 +51,7 @@ const Cart = () => {
     }
 
     try {
-      await axios.post(`http://localhost:5000/cart/${userId}/${itemId}/${amount}`);
+      await axios.post(`${import.meta.env.VITE_API_URI}/cart/${userId}/${itemId}/${amount}`);
       fetchCartItems(userId);
     } catch (error) {
       console.error("Hiba a mennyiség frissítésekor:", error);
@@ -61,7 +61,7 @@ const Cart = () => {
   const removeFromCart = async (itemId: number) => {
     if (!userId) return;
     try {
-      await axios.delete(`http://localhost:5000/cart/${userId}/${itemId}`);
+      await axios.delete(`${import.meta.env.VITE_API_URI}/cart/${userId}/${itemId}`);
       fetchCartItems(userId);
     } catch (error) {
       console.error("Hiba a termék eltávolításakor:", error);
@@ -71,7 +71,7 @@ const Cart = () => {
   const clearCart = async () => {
     if (!userId) return;
     try {
-      await axios.delete(`http://localhost:5000/cart/${userId}`);
+      await axios.delete(`${import.meta.env.VITE_API_URI}/cart/${userId}`);
       setCartItems([]);
       setTotalPrice(0);
     } catch (error) {
