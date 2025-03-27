@@ -49,3 +49,22 @@
     }
   }
   
+  .dark-mode .orders-container {
+    background: #333;
+  }
+
+  .dark-mode .orders-container h2 {
+    color: #ffffff;
+  }
+
+  .dark-mode .orders-container .orders-list .order-item {
+    background: #444;
+  }
+
+  .dark-mode .orders-container .orders-list .order-item span {
+    color: #fff;
+  }
+
+  .dark-mode .orders-container .orders-list .order-item span strong {
+    color: #c9c9c9;
+  }

@@ -82,3 +82,30 @@
     color: #3d54c7; 
   }
   
+  .dark-mode .kezdooldal-container h2 {
+    color: #fff;
+  }
+
+  .dark-mode .product-card {
+    background: #333;
+  }
+
+  .dark-mode .product-card p {
+    color: #fff;
+  }
+
+  .dark-mode .product-card h3 {
+    color: #65a7f7;
+  }
+
+  .dark-mode .info-section {
+    background: #444;
+  }
+
+  .dark-mode .info-section p {
+    color: #fff;
+  }
+
+  .dark-mode .info-section a {
+    color: #c0ffff;
+  }

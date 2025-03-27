@@ -81,7 +81,45 @@
   background-color: #333;
 }
 
+.dark-mode .filter-container {
+  background: #1e1e1e;
+}
 
+.dark-mode .filter-container input {
+  background: #333;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
+
+.dark-mode .contacts-container {
+  background: #121212;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .contacts-container p {
+  color: #ffffff;
+}
+
+.dark-mode .contacts-container h2 {
+  color: #e0e0e0;
+}
+
+.dark-mode .contacts-container input, .dark-mode .contacts-container textarea {
+  background: #333;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
+
+.dark-mode .admin-container input {
+  background: #333;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
+
+.dark-mode .admin-table tbody tr td {
+  background: #383838;
+  color: #ffffff;
+}
 
 body {
   margin: 0;
@@ -288,13 +326,21 @@ h1 {
 }
 
 .filter-container select {
-  background: #65a7f7; /* tomato */
-  color: #FFFFFF; /* white */
+  background: #65a7f7;
+  color: #FFFFFF;
   outline: none;
 }
 
+.dark-mode .profile-container {
+  background: #1e1e1e;
+}
+
+.dark-mode .profile-container p {
+  color: #ffffff;
+}
+
 .profile-container {
-  background: #FFFAF0; /* floral white */
+  background: #FFFAF0;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

@@ -59,13 +59,26 @@ const Transaction = () => {
       const response = await axios.get(`${import.meta.env.VITE_API_URI}/coupon/${kupon}`);
       if (response.status === 200) {
         const discount = response.data[0].ertek;
-        if (discount.includes("%")) {
-          const percentage = parseInt(discount.replace("%", ""));
-          setTotalPrice((prev) => Math.max(0, prev - (prev * percentage) / 100));
-        } else {
-          setTotalPrice((prev) => Math.max(0, prev - parseInt(discount)));
+        switch (discount) {
+          case "10":
+            setMessage("10% kedvezményre feljogosító kuponkód!");
+            break;
+          case "20":
+            setMessage("20% kedvezményre feljogosító kuponkód!");
+            break;
+          case "50":
+            setMessage("50% kedvezményre feljogosító kuponkód!");
+            break;
+          case "1000":
+            setMessage("1000Ft kedvezményre feljogosító kuponkód!");
+            break;
+          case "ingyen":
+            setMessage("Ingyenes szállításra feljogosító kuponkód!");
+            break;
+          default:
+            setMessage("Ismeretlen kuponkód!");
+            break;
         }
-        setMessage("Kupon sikeresen alkalmazva!");
       } else {
         setMessage("Érvénytelen kuponkód!");
       }
@@ -140,15 +153,16 @@ const Transaction = () => {
             ))}
           </div>
           <div className="total-price">Összesen: {totalPrice} Ft</div>
- 
-          <input type="text" placeholder="Ország" value={orszag} onChange={(e) => setOrszag(e.target.value)} />
-          <input type="text" placeholder="Irányítószám" value={iranyitoszam} onChange={(e) => setIranyitoszam(e.target.value)} />
-          <input type="text" placeholder="Város" value={varos} onChange={(e) => setVaros(e.target.value)} />
-          <input type="text" placeholder="Közterület" value={kozterulet} onChange={(e) => setKozterulet(e.target.value)} />
-          <input type="text" placeholder="Közterület jellege" value={kozteruletJellege} onChange={(e) => setKozteruletJellege(e.target.value)} />
-          <input type="text" placeholder="Házszám" value={hazszam} onChange={(e) => setHazszam(e.target.value)} />
-          <input type="text" placeholder="Kuponkód (opcionális)" value={kupon} onChange={(e) => setKupon(e.target.value)} />
-          <button onClick={validateCoupon}>Kupon ellenőrzése</button>
+          <div className="btn-wrapper">
+            <input type="text" placeholder="Ország" value={orszag} onChange={(e) => setOrszag(e.target.value)} />
+            <input type="text" placeholder="Irányítószám" value={iranyitoszam} onChange={(e) => setIranyitoszam(e.target.value)} />
+            <input type="text" placeholder="Város" value={varos} onChange={(e) => setVaros(e.target.value)} />
+            <input type="text" placeholder="Közterület" value={kozterulet} onChange={(e) => setKozterulet(e.target.value)} />
+            <input type="text" placeholder="Közterület jellege" value={kozteruletJellege} onChange={(e) => setKozteruletJellege(e.target.value)} />
+            <input type="text" placeholder="Házszám" value={hazszam} onChange={(e) => setHazszam(e.target.value)} />
+          </div>
+          <input type="text" className="coupon-inp" placeholder="Kuponkód (opcionális)" value={kupon} onChange={(e) => setKupon(e.target.value)} />
+          <button onClick={validateCoupon} className="coupon-check">Kupon ellenőrzése</button>
           <button onClick={completePurchase} className="complete-btn">Vásárlás befejezése</button>
           <Link to="/orders" className="orders-link">Korábbi rendeléseim</Link>
         </>

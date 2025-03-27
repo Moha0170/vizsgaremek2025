@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import "../style/product.css";
 
 interface Product {
   id: number;
@@ -67,9 +68,15 @@ const ProductDetail = () => {
   return (
     <div className="product-detail">
       <h1>{product.neve}</h1>
+      <img src="https://picsum.photos/200" alt={product.neve} />
+      <h2>Termék részletei</h2>
       <p>Ár: {product.ara} Ft</p>
       <p>Kategória: {product.kat}</p>
       <p>Gyártó: {product.gyarto_beszallito}</p>
+      <br />
+      <br />
+      <br />
+      <br />
       <button onClick={addToCart}>Kosárba rakás</button>
     </div>
   );
