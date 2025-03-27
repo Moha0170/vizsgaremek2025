@@ -44,7 +44,7 @@ function Navbar() {
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">Webshop</Link>
 
-        {/* Sötét mód kapcsoló */}
+        {}
         <DarkModeToggle />
 
         <div className="menu-icon" onClick={() => setIsOpen(!isOpen)}>
