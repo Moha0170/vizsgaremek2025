@@ -21,6 +21,10 @@ def upload():
     file.save(os.path.join(img_path, filename))
     return jsonify({'message': 'File uploaded successfully', 'filename': filename})
 
-@images_bp.route("/<filename>", methods=["GET"])
+@images_bp.route("/getImg/<filename>", methods=["GET"])
 def uploaded_file(filename):
-    return send_from_directory(app.config['IMG_PATH'], filename)
+    try:
+        return send_from_directory(os.path.join(app.root_path, "uploads"), filename)
+    except (Exception) as e:
+        print(e)
+        return jsonify({"error": "File not found"}), 404

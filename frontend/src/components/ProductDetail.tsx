@@ -9,6 +9,7 @@ interface Product {
   ara: number;
   kat: string;
   gyarto_beszallito: string;
+  kep: string; // Assuming the product data includes a kep for the image
 }
 
 interface User {
@@ -65,10 +66,13 @@ const ProductDetail = () => {
   if (loading) return <p>Betöltés...</p>;
   if (!product) return <p>Termék nem található.</p>;
 
+  // Construct the image URL using the kep
+  const imageUrl = `${import.meta.env.VITE_API_URI}/images/getImg/${product.kep}`;
+
   return (
     <div className="product-detail">
       <h1>{product.neve}</h1>
-      <img src="https://picsum.photos/200" alt={product.neve} />
+      <img src={imageUrl} alt={product.neve} />
       <h2>Termék részletei</h2>
       <p>Ár: {product.ara} Ft</p>
       <p>Kategória: {product.kat}</p>
