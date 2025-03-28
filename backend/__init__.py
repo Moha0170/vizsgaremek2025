@@ -36,6 +36,7 @@ def create_app():
     from .routes.profile import profile_bp
     from .routes.coupon import coupon_bp
     from .routes.orders import order_bp
+    from .routes.images import images_bp
 
     app.register_blueprint(admin_bp)
     app.register_blueprint(cart_bp)
@@ -43,5 +44,6 @@ def create_app():
     app.register_blueprint(profile_bp)
     app.register_blueprint(coupon_bp)
     app.register_blueprint(order_bp)
+    app.register_blueprint(images_bp)
 
     return app

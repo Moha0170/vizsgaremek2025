@@ -2,6 +2,7 @@ from flask import Flask, Blueprint, request
 from sqlalchemy import text
 from backend import db
 from ..dec import token_required
+from werkzeug.utils import secure_filename
 
 admin_bp = Blueprint("admin_bp", __name__, url_prefix="/admin")
 
@@ -16,29 +17,34 @@ def delete(id):
 @token_required
 def create():
     try:
-        neve = request.json['neve']
-        ara = request.json['ara']
-        kat = request.json['kat']
-        gyarto_beszallito = request.json['gyarto_beszallito']
-        db.session.execute(text("INSERT INTO termekek (neve, ara, kat, gyarto_beszallito) VALUES (:nev, :ar, :kat, :gyarto)"), {"nev": neve, "ar": int(ara), "kat": kat, "gyarto": gyarto_beszallito})
+        neve = request.form['neve']
+        ara = request.form['ara']
+        kat = request.form['kat']
+        file = request.files['file']
+        filename = secure_filename(file.filename)
+        gyarto_beszallito = request.form['gyarto_beszallito']
+        db.session.execute(text("INSERT INTO termekek (neve, ara, kat, gyarto_beszallito, kep) VALUES (:nev, :ar, :kat, :gyarto, :kep)"), {"nev": neve, "ar": int(ara), "kat": kat, "gyarto": gyarto_beszallito, "kep": filename})
         db.session.commit()
         return {"message": "Product created!"}
     except (Exception) as e:
+        print(e)
         return str(e), 500
 
 @admin_bp.route("/product/update/<id>", methods=['PATCH'])
 @token_required
 def update(id):
     try:
-        neve = request.json['neve']
-        ara = request.json['ara']
-        kat = request.json['kat']
-        gyarto_beszallito = request.json['gyarto_beszallito']
-        db.session.execute(text("UPDATE termekek SET neve = :nev, ara = :ar, kat = :kat, gyarto_beszallito = :gyarto WHERE id = :id"), {"nev": neve, "ar": int(ara), "kat": kat, "gyarto": gyarto_beszallito, "id": id})
+        neve = request.form['neve']
+        ara = request.form['ara']
+        kat = request.form['kat']
+        file = request.files['file']
+        filename = secure_filename(file.filename)
+        gyarto_beszallito = request.form['gyarto_beszallito']
+        db.session.execute(text("UPDATE termekek SET neve = :nev, ara = :ar, kat = :kat, gyarto_beszallito = :gyarto, kep = :kep WHERE id = :id"), {"nev": neve, "ar": int(ara), "kat": kat, "gyarto": gyarto_beszallito, "id": id, "kep": filename})
         db.session.commit()
         return {"message": "Product updated!"}
     except (Exception) as e:
-        print(str(e))
+        print(e)
         return str(e), 500
 
 @admin_bp.route("/users/update/", methods=['PATCH'])
@@ -50,9 +56,8 @@ def update_user():
         email = request.json['email']
         telefonszam = request.json['telefonszam']
         szuldatum = request.json['szuldatum']
-        husegpont = request.json['husegpont']
         admin = request.json['admin']
-        db.session.execute(text("UPDATE users SET neve = :nev, email = :email, telefonszam = :telefonszam, szuldatum = :szuldatum, husegpont = :husegpont, admin = :admin WHERE id = :id"), {"nev": neve, "email": email, "telefonszam": telefonszam, "szuldatum": szuldatum, "husegpont": husegpont, "id": id, "admin": admin})
+        db.session.execute(text("UPDATE users SET neve = :nev, email = :email, telefonszam = :telefonszam, szuldatum = :szuldatum, admin = :admin WHERE id = :id"), {"nev": neve, "email": email, "telefonszam": telefonszam, "szuldatum": szuldatum, "id": id, "admin": admin})
         db.session.commit()
         return {"message": "User updated!"}
     except (Exception) as e:

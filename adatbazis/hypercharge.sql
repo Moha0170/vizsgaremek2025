@@ -203,29 +203,35 @@ CREATE TABLE `termekek` (
   `neve` varchar(255) NOT NULL,
   `ara` int(11) NOT NULL,
   `kat` varchar(100) DEFAULT NULL,
-  `gyarto_beszallito` varchar(255) DEFAULT NULL
+  `gyarto_beszallito` varchar(255) DEFAULT NULL,
+  `kep` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `termekek`
 --
 
-INSERT INTO `termekek` (`id`, `neve`, `ara`, `kat`, `gyarto_beszallito`) VALUES
-(1, 'Laptop', '250000', 'Elektronika', 'Dell'),
-(2, 'Telefon', '120000', 'Elektronika', 'Samsung'),
-(3, 'Televízió', '180000', 'Elektronika', 'LG'),
-(4, 'Hűtőszekrény', '200000', 'Háztartás', 'Bosch'),
-(5, 'Mosógép', '150000', 'Háztartás', 'Whirlpool'),
-(6, 'Porszívó', '80000', 'Háztartás', 'Dyson'),
-(7, 'Fülhallgató', '25000', 'Elektronika', 'Sony'),
-(8, 'Okosóra', '60000', 'Elektronika', 'Apple'),
-(9, 'Tablet', '90000', 'Elektronika', 'Huawei'),
-(10, 'Nyomtató', '50000', 'Elektronika', 'HP'),
-(11, 'Szék', '20000', 'Bútor', 'IKEA'),
-(12, 'Asztal', '40000', 'Bútor', 'IKEA'),
-(13, 'Szekrény', '60000', 'Bútor', 'JYSK'),
-(14, 'Könyvespolc', '30000', 'Bútor', 'IKEA'),
-(15, 'Ágy', '70000', 'Bútor', 'JYSK');
+INSERT INTO `termekek` (`id`, `neve`, `ara`, `kat`, `gyarto_beszallito`, `kep`) VALUES
+(1, 'Laptop', '250000', 'Elektronika', 'Dell', 'laptop.jpg'),
+(2, 'Telefon', '120000', 'Elektronika', 'Samsung', 'telefon.jpg'),
+(3, 'Televízió', '180000', 'Elektronika', 'LG', 'televizio.jpg'),
+(4, 'Hűtőszekrény', '200000', 'Háztartás', 'Bosch', 'huto.jpg'),
+(5, 'Mosógép', '150000', 'Háztartás', 'Whirlpool', 'mosogep.jpg'),
+(6, 'Porszívó', '80000', 'Háztartás', 'Dyson', 'porszivo.jpg'),
+(7, 'Fülhallgató', '25000', 'Elektronika', 'Sony', 'fulhallgato.jpg'),
+(8, 'Okosóra', '60000', 'Elektronika', 'Apple', 'okosora.jpg'),
+(9, 'Tablet', '90000', 'Elektronika', 'Huawei', 'tablet.jpg'),
+(10, 'Nyomtató', '50000', 'Elektronika', 'HP', 'nyomtató.jpg'),
+(11, 'Szék', '20000', 'Bútor', 'IKEA', 'szek.jpg'),
+(12, 'Asztal', '40000', 'Bútor', 'IKEA', 'asztal.jpg'),
+(13, 'Szekrény', '60000', 'Bútor', 'JYSK', 'szekreny.jpg'),
+(14, 'Könyvespolc', '30000', 'Bútor', 'IKEA', 'konyvespolc.jpg'),
+(15, 'Ágy', '70000', 'Bútor', 'JYSK', 'agy.jpg'),
+(16, 'Kanapé', '120000', 'Bútor', 'IKEA', 'kanape.jpg'),
+(17, 'Fotel', '50000', 'Bútor', 'JYSK', 'fotel.jpg'),
+(18, 'Tükör', '15000', 'Bútor', 'IKEA', 'tukor.jpg'),
+(19, 'Lámpa', '20000', 'Bútor', 'Philips', 'lamp.jpg'),
+(20, 'Szőnyeg', '30000', 'Bútor', 'IKEA', 'szonyeg.jpg');
 
 --
 -- Indexek a kiírt táblákhoz

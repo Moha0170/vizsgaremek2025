@@ -7,6 +7,7 @@ interface Product {
   ara: number;
   kat: string;
   gyarto_beszallito: string;
+  kep?: File;
 }
 
 function Admin() {
@@ -20,6 +21,7 @@ function Admin() {
     ara: 0,
     kat: "",
     gyarto_beszallito: "",
+    kep: undefined,
   });
   const [editProduct, setEditProduct] = useState<Product | null>(null);
 
@@ -42,21 +44,43 @@ function Admin() {
   };
 
   const handleCreateProduct = async () => {
+    const formData = new FormData();
+    formData.append("id", newProduct.id ? newProduct.id.toString() : "0");
+    formData.append("neve", newProduct.neve.trim());
+    formData.append("ara", newProduct.ara > 0 ? newProduct.ara.toString() : "0");
+    formData.append("kat", newProduct.kat.trim());
+    formData.append("gyarto_beszallito", newProduct.gyarto_beszallito.trim());
+
+    if (newProduct.kep) {
+      formData.append("file", newProduct.kep);
+    }
+
     await fetch(`${import.meta.env.VITE_API_URI}/admin/product/create/`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": localStorage.getItem("token") || "" },
-      body: JSON.stringify(newProduct),
+      headers: { "Authorization": localStorage.getItem("token") || "" },
+      body: formData,
     });
-    setNewProduct({ id: 0, neve: "", ara: 0, kat: "", gyarto_beszallito: "" });
+    setNewProduct({ id: 0, neve: "", ara: 0, kat: "", gyarto_beszallito: "", kep: undefined });
     fetchProducts();
   };
 
   const handleEditProduct = async () => {
     if (editProduct) {
+      const formData = new FormData();
+      formData.append("id", editProduct.id.toString());
+      formData.append("neve", editProduct.neve);
+      formData.append("ara", editProduct.ara.toString());
+      formData.append("kat", editProduct.kat);
+      formData.append("gyarto_beszallito", editProduct.gyarto_beszallito);
+
+      if (editProduct.kep) {
+        formData.append("file", editProduct.kep);
+      }
+
       const response = await fetch(`${import.meta.env.VITE_API_URI}/admin/product/update/${editProduct.id}`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json", "Authorization": localStorage.getItem("token") || "" },
-        body: JSON.stringify(editProduct),
+        headers: { "Authorization": localStorage.getItem("token") || "" },
+        body: formData,
       });
 
       if (response.status === 401) {
@@ -66,6 +90,44 @@ function Admin() {
         setEditProduct(null);
         fetchProducts();
       }
+    }
+  };
+
+  const handleUploadImage = async () => {
+    if (newProduct.kep) {
+      const formData = new FormData();
+      formData.append("file", newProduct.kep);
+
+      const response = await fetch(`${import.meta.env.VITE_API_URI}/images/upload`, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Image uploaded successfully:", data);
+      } else {
+        const errorData = await response.json();
+        console.error("Failed to upload image:", errorData);
+      }
+    } else if (editProduct?.kep) {
+      const formData = new FormData();
+      formData.append("file", editProduct.kep);
+
+      const response = await fetch(`${import.meta.env.VITE_API_URI}/images/upload`, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Image uploaded successfully:", data);
+      } else {
+        const errorData = await response.json();
+        console.error("Failed to upload image:", errorData);
+      }
+    } else {
+      console.error("No kep selected for upload");
     }
   };
 
@@ -103,8 +165,18 @@ function Admin() {
                   value={editProduct.gyarto_beszallito}
                   onChange={(e) => setEditProduct({ ...editProduct, gyarto_beszallito: e.target.value })}
                 />
-                <button onClick={handleEditProduct}>Mentés</button>
-                <button onClick={() => setEditProduct(null)}>Mégse</button>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    setEditProduct({ ...editProduct, kep: file });
+                  }
+                  }}
+                />
+                <button onClick={() => { handleEditProduct(); handleUploadImage(); }}>Mentés</button>
+                 <button onClick={() => setEditProduct(null)}>Mégse</button>
               </div>
             </>
           )}
@@ -135,8 +207,18 @@ function Admin() {
               value={newProduct.gyarto_beszallito}
               onChange={(e) => setNewProduct({ ...newProduct, gyarto_beszallito: e.target.value })}
             />
-            <button onClick={handleCreateProduct}>Hozzáadás</button>
-          </div>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                setNewProduct({ ...newProduct, kep: file });
+              }
+              }}
+            />
+            <button onClick={() => { handleCreateProduct(); handleUploadImage(); }}>Hozzáadás</button>
+            </div>
 
           <h3>Termékek</h3>
           <table className="admin-table">
