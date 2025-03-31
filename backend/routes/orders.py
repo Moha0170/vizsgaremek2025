@@ -59,13 +59,21 @@ def createOrderFromCart(felhasznalo_id):
                 match kupon_ertek:
                     case "10":
                         vasarlas_osszeg = ((vasarlas_osszeg-1999) * 0.9) + 1999
+                        db.session.execute(text("DELETE FROM kuponkodok WHERE kod = :kod"), {"kod": kupon})
+                        db.session.commit()
                     case "20":
                         vasarlas_osszeg = ((vasarlas_osszeg-1999) * 0.8) + 1999
+                        db.session.execute(text("DELETE FROM kuponkodok WHERE kod = :kod"), {"kod": kupon})
+                        db.session.commit()
                     case "50":
                         vasarlas_osszeg = ((vasarlas_osszeg-1999) * 0.5) + 1999
+                        db.session.execute(text("DELETE FROM kuponkodok WHERE kod = :kod"), {"kod": kupon})
+                        db.session.commit()
                     case "1000":
                         if vasarlas_osszeg-1999 > 5000:
                             vasarlas_osszeg -= 1000
+                            db.session.execute(text("DELETE FROM kuponkodok WHERE kod = :kod"), {"kod": kupon})
+                            db.session.commit()
                         else:
                             return "A kuponkód használatához el kell érni legalább 5000 forintos kosárértéket!", 401
                     case "ingyen":

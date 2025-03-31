@@ -35,5 +35,3 @@ def addCoupon(type):
             return kod, 200
         else:
             return "Hiba történt, kérlek próbáld újra!", 500
-
-        
