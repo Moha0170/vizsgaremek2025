@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import "../style/product.css";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Product {
   id: number;
@@ -50,16 +52,16 @@ const ProductDetail = () => {
 
   const addToCart = async () => {
     if (!user) {
-      alert("Előbb be kell jelentkezned, hogy terméket adhass a kosárhoz!");
+      toast.error("Előbb be kell jelentkezned, hogy terméket adhass a kosárhoz!");  // Error toast
       return;
     }
 
     try {
       await axios.post(`${import.meta.env.VITE_API_URI}/cart/${user.id}/${product?.id}/1`);
-      alert("Termék sikeresen hozzáadva a kosárhoz!");
+      toast.success("Termék sikeresen hozzáadva a kosárhoz!");  // Success toast
     } catch (error) {
       console.error("Hiba a kosárhoz adáskor:", error);
-      alert("Hiba történt a kosárhoz adás során.");
+      toast.error("Hiba történt a kosárhoz adás során.");  // Error toast
     }
   };
 
@@ -82,6 +84,16 @@ const ProductDetail = () => {
       <br />
       <br />
       <button onClick={addToCart}>Kosárba rakás</button>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}  
+        pauseOnHover={true}
+        pauseOnFocusLoss={true}
+        aria-label="toast notifications"
+      />
+
     </div>
   );
 };
