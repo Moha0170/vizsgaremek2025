@@ -150,7 +150,9 @@ const Transaction = () => {
                 <span className="item-price">{item.ara} Ft</span>
                 <span className="item-quantity">Mennyiség: {item.mennyiseg}</span>
               </div>
+              
             ))}
+            <div>Az áraink 1999 Forint szállítási díjat tartalmaznak.</div>
           </div>
           <div className="total-price">Összesen: {totalPrice} Ft</div>
           <div className="btn-wrapper">
