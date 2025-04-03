@@ -1,0 +1,85 @@
+/* Alap */
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    margin-top: 30px;
+    color: #4CAF50;
+  }
+  
+  p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .reviews {
+    margin-top: 20px;
+  }
+  
+  blockquote {
+    background: #f9f9f9;
+    border-left: 4px solid #4CAF50;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    font-style: italic;
+    font-size: 1.1rem;
+  }
+  
+  cite {
+    display: block;
+    margin-top: 10px;
+    text-align: right;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Sötét mód */
+  .dark-mode .container {
+    background-color: #222;
+    color: #fff;
+  }
+  
+  .dark-mode h1 {
+    color: #fff;
+  }
+  
+  .dark-mode h2 {
+    color: #fff;
+  }
+  
+  .dark-mode p {
+    color: #ccc;
+  }
+  
+  .dark-mode blockquote {
+    background: #333;
+    color: #fff;
+    border-left: 4px solid #fff; 
+  }
+  
+  .dark-mode cite {
+    color: #ddd;
+  }
+  
+
+  .dark-mode .reviews blockquote p {
+    color: #fff;
+  }
+  
+  .dark-mode .reviews blockquote cite {
+    color: #bbb;
+  }
+  
