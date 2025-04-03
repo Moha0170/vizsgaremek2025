@@ -11,6 +11,7 @@ interface Product {
   ara: number;
   kat: string;
   gyarto_beszallito: string;
+  kep: string; // Hozzáadva a kép kezelése miatt
 }
 
 interface User {
@@ -105,25 +106,31 @@ function Market() {
           <option value="nameDesc">Név szerint Z-A</option>
         </select>
       </div>
+
       <div className="product-list">
         {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
-            <div key={product.id} className="product-card" onClick={() => navigateToProductDetail(product.id)}>
-              <h2>{product.neve}</h2>
-              <p>Ár: {product.ara} Ft</p>
-              <p>Kategória: {product.kat}</p>
-              <p>Gyártó: {product.gyarto_beszallito}</p>
-              <button onClick={(e) => { e.stopPropagation(); addToCart(product.id); }}>
-                Kosárba rakás
-              </button>
-            </div>
-          ))
+          filteredProducts.map((product) => {
+            const imageUrl = `${import.meta.env.VITE_API_URI}/images/getImg/${product.kep}`;
+
+            return (
+              <div key={product.id} className="product-card" onClick={() => navigateToProductDetail(product.id)}>
+             
+                <h2>{product.neve}</h2>
+                <p>Ár: {product.ara} Ft</p>
+                <p>Kategória: {product.kat}</p>
+                <p>Gyártó: {product.gyarto_beszallito}</p>
+                <img src={imageUrl} alt={product.neve} className="product-image" />
+                <button onClick={(e) => { e.stopPropagation(); addToCart(product.id); }}>
+                  Kosárba rakás
+                </button>
+              </div>
+            );
+          })
         ) : (
           <p>Nincs találat.</p>
         )}
       </div>
 
-      {}
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -131,9 +138,7 @@ function Market() {
         pauseOnHover={true}
         pauseOnFocusLoss={true}
         aria-label="toast notifications"
-      />  
-
-
+      />
     </div>
   );
 }

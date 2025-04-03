@@ -59,6 +59,20 @@
   height: 100vh;
 }
 
+/*képek a market.tsx-ben (products) */
+
+.product-card img {
+  float: right;
+  margin-right: 30px;
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+
+/*sötét mód */
+
 .dark-mode {
   background-color: #121212;
   color: #ffffff;
