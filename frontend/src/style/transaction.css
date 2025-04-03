@@ -1,3 +1,4 @@
+
 .transaction-container {
     max-width: 600px;
     margin: 20px auto;
@@ -34,7 +35,7 @@
   }
   
   .item-price {
-    color: #28a745;
+    color: #1e9107;
     font-weight: bold;
   }
   
@@ -50,9 +51,8 @@
     border: 1px solid #ccc;
     border-radius: 5px;
   }
-  
-  .complete-btn, .coupon-check {
-    background: #007bff;
+  .complete-btn {
+    background: #1e9107;;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -62,9 +62,17 @@
     margin-left: 3px;
     margin-right: 3px;
   }
-  
-  .complete-btn:hover {
-    background: #0056b3;
+
+  .coupon-check {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-left: 3px;
+    margin-right: 3px;
   }
   
   .orders-link {
@@ -98,7 +106,7 @@
   .total-price {
     font-size: 20px;
     font-weight: bold;
-    color: #28a745;
+    color: #1e9107;
     margin-top: 10px;
     margin-bottom: 10px
   }
@@ -140,3 +148,16 @@
     }
   }
  */
+
+ /* hibaüzenetek stílusa */
+.error-message {
+  color: red;
+  font-weight: bold;
+}
+
+.success-message {
+  color: #1e9107; 
+  font-weight: bold;
+}
+
+

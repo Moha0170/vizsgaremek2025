@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "../style/transaction.css";
- 
+
 interface CartItem {
   termek_id: number;
   mennyiseg: number;
   neve: string;
   ara: number;
 }
- 
+
 const Transaction = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
@@ -22,8 +22,9 @@ const Transaction = () => {
   const [hazszam, setHazszam] = useState("");
   const [kupon, setKupon] = useState("");
   const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState<"success" | "error">("error");
   const navigate = useNavigate();
- 
+
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
     if (storedUserId) {
@@ -31,7 +32,7 @@ const Transaction = () => {
       fetchCartItems(storedUserId);
     }
   }, []);
- 
+
   const fetchCartItems = async (id: string) => {
     try {
       const response = await axios.get(`${import.meta.env.VITE_API_URI}/cart/${id}`);
@@ -51,42 +52,46 @@ const Transaction = () => {
       setTotalPrice(0);
     }
   };
- 
+
   const validateCoupon = async () => {
     if (!kupon) return;
- 
+
     try {
       const response = await axios.get(`${import.meta.env.VITE_API_URI}/coupon/${kupon}`);
       if (response.status === 200) {
         const discount = response.data[0].ertek;
+        let messageText = "";
         switch (discount) {
           case "10":
-            setMessage("10% kedvezményre feljogosító kuponkód!");
+            messageText = "10% kedvezményre feljogosító kuponkód!";
             break;
           case "20":
-            setMessage("20% kedvezményre feljogosító kuponkód!");
+            messageText = "20% kedvezményre feljogosító kuponkód!";
             break;
           case "50":
-            setMessage("50% kedvezményre feljogosító kuponkód!");
+            messageText = "50% kedvezményre feljogosító kuponkód!";
             break;
           case "1000":
-            setMessage("1000Ft kedvezményre feljogosító kuponkód!");
+            messageText = "1000Ft kedvezményre feljogosító kuponkód!";
             break;
           case "ingyen":
-            setMessage("Ingyenes szállításra feljogosító kuponkód!");
+            messageText = "Ingyenes szállításra feljogosító kuponkód!";
             break;
           default:
-            setMessage("Ismeretlen kuponkód!");
-            break;
+            messageText = "Ismeretlen kuponkód!";
         }
+        setMessage(messageText);
+        setMessageType("success");
       } else {
         setMessage("Érvénytelen kuponkód!");
+        setMessageType("error");
       }
     } catch (error) {
       setMessage("Hiba történt a kupon ellenőrzésekor!");
+      setMessageType("error");
     }
   };
- 
+
   const clearCart = async () => {
     if (!userId) return;
     try {
@@ -97,18 +102,20 @@ const Transaction = () => {
       console.error("Hiba a kosár törlésekor:", error);
     }
   };
- 
+
   const completePurchase = async () => {
     if (!userId || cartItems.length === 0) {
       setMessage("A kosár üres vagy nincs bejelentkezve!");
+      setMessageType("error");
       return;
     }
- 
+
     if (!orszag || !iranyitoszam || !varos || !kozterulet || !kozteruletJellege || !hazszam) {
       setMessage("Minden mező kitöltése kötelező!");
+      setMessageType("error");
       return;
     }
- 
+
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URI}/orders/createOrderFromCart/${userId}`,
@@ -122,25 +129,28 @@ const Transaction = () => {
           kupon,
         }
       );
- 
+
       if (response.status === 200) {
         localStorage.removeItem("cartItems");
         clearCart();
         navigate("/orders");
         setMessage("Rendelés sikeresen leadva!");
+        setMessageType("success");
       } else {
         setMessage(response.data);
+        setMessageType("error");
       }
     } catch (error) {
       console.error("Hiba a vásárlás során:", error);
       setMessage("Hiba történt a rendelés során!");
+      setMessageType("error");
     }
   };
- 
+
   return (
     <div className="transaction-container">
       <h2>Vásárlás befejezése</h2>
- 
+
       {cartItems.length > 0 ? (
         <>
           <div className="transaction-list">
@@ -150,7 +160,6 @@ const Transaction = () => {
                 <span className="item-price">{item.ara} Ft</span>
                 <span className="item-quantity">Mennyiség: {item.mennyiseg}</span>
               </div>
-              
             ))}
             <div>Az áraink 1999 Forint szállítási díjat tartalmaznak.</div>
           </div>
@@ -171,11 +180,10 @@ const Transaction = () => {
       ) : (
         <p>Nincsenek termékek a vásárláshoz.</p>
       )}
- 
-      {message && <p>{message}</p>}
+
+      {message && <p className={messageType === "success" ? "success-message" : "error-message"}>{message}</p>}
     </div>
   );
 };
- 
+
 export default Transaction;
- 
