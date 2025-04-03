@@ -10,6 +10,7 @@ interface Product {
   ara: number;
   kat: string;
   gyarto_beszallito: string;
+  kep: string; // Assuming 'kep' is the image filename
 }
 
 const Kezdooldal = () => {
@@ -22,7 +23,7 @@ const Kezdooldal = () => {
       .then((response) => {
         setAllProducts(response.data);
         const shuffled = [...response.data].sort(() => 0.5 - Math.random());
-        setFeaturedProducts(shuffled.slice(0, 4));
+        setFeaturedProducts(shuffled.slice(0, 4)); // Display 4 random products
         setLoading(false);
       })
       .catch((error) => {
@@ -40,34 +41,43 @@ const Kezdooldal = () => {
       <section className="ajanlatok">
         <h2>🎉 Időszakos ajánlataink</h2>
         <div className="product-list">
-          {featuredProducts.map((product) => (
-            <div key={product.id} className="product-card">
-              <h3>{product.neve}</h3>
-              <p>Ár: {product.ara} Ft</p>
-              <Link to={`/products/${product.id}`}>
-                <button>Megnézem</button>
-              </Link>
-            </div>
-          ))}
+          {featuredProducts.map((product) => {
+            const imageUrl = `${import.meta.env.VITE_API_URI}/images/getImg/${product.kep}`;
+
+            return (
+              <div key={product.id} className="product-card">
+                <img src={imageUrl} alt={product.neve} className="product-image" />
+                <h3>{product.neve}</h3>
+                <p>Ár: {product.ara} Ft</p>
+                <Link to={`/products/${product.id}`}>
+                  <button>Megnézem</button>
+                </Link>
+              </div>
+            );
+          })}
         </div>
       </section>
 
       <section className="termekek">
         <h2>🛍️ Böngéssz termékeink között</h2>
         <div className="product-list">
-          {allProducts.slice(0, 6).map((product) => (
-            <div key={product.id} className="product-card">
-              <h3>{product.neve}</h3>
-              <p>Ár: {product.ara} Ft</p>
-              <Link to={`/products/${product.id}`}>
-                <button>Megnézem</button>
-              </Link>
-            </div>
-          ))}
+          {allProducts.slice(0, 6).map((product) => {
+            const imageUrl = `${import.meta.env.VITE_API_URI}/images/getImg/${product.kep}`;
+
+            return (
+              <div key={product.id} className="product-card">
+                <img src={imageUrl} alt={product.neve} className="product-image" />
+                <h3>{product.neve}</h3>
+                <p>Ár: {product.ara} Ft</p>
+                <Link to={`/products/${product.id}`}>
+                  <button>Megnézem</button>
+                </Link>
+              </div>
+            );
+          })}
         </div>
       </section>
 
-      {}
       <section className="info-section">
         <h2>📢 Tudj meg többet rólunk!</h2>
         <p>Vásárlási feltételek, kapcsolatfelvétel és további információk:</p>
