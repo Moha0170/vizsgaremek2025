@@ -140,6 +140,11 @@
   border: 1px solid #3a3a3a;
 }
 
+.dark-mode .register-container{
+  background: #2a2a2a;
+  border: 1px solid #3a3a3a;
+}
+
 .dark-mode .profile-dropdown li {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -554,7 +559,7 @@ h1 {
   color: #333333;
 }
 
-.admin-container button,
+
 .register-container button,
 .profile-container button,
 .contact-form button {
@@ -568,7 +573,7 @@ h1 {
   transition: background 0.3s;
 }
 
-.admin-container button:hover,
+
 .register-container button:hover,
 .profile-container button:hover,
 .contact-form button:hover {
@@ -578,6 +583,12 @@ h1 {
 .delete-button {
   background: #ff4d4d;
   border: 2px solid #ff4d4d;
+  color: #FFFFFF;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
 .delete-button:hover {
@@ -610,12 +621,18 @@ h1 {
 }
 
 .edit-button {
-  background: #4f67f0; /* gold */
-  border: 2px solid #4f67f0; /* tomato */
+  background: #ffb14b; 
+  border: 2px solid #ffb14b;
+  color: #FFFFFF;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
 .edit-button:hover {
-  background: #4f67f0; /* tomato */
+  background: #ffb14b; 
 }
 
 .product-form {
@@ -629,14 +646,21 @@ h1 {
 .product-form input {
   flex: 1 1 200px;
   padding: 10px;
-  border: 2px solid #4f67f0; /* tomato */
+  border: 2px solid #4f67f0;
   border-radius: 8px;
   font-size: 1rem;
   font-family: 'Roboto', sans-serif;
 }
 
 .product-form button {
-  padding: 10px 20px;
+  background: #4f67f0; 
+  color: #FFFFFF; 
+  padding: 15px 30px;
+  border: 2px solid #4f67f0;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
 .admin-container {
