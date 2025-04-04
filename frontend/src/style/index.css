@@ -135,6 +135,27 @@
   color: #ffffff;
 }
 
+.dark-mode .profile-dropdown {
+  background: #2a2a2a;
+  border: 1px solid #3a3a3a;
+}
+
+.dark-mode .profile-dropdown li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .profile-dropdown a,
+.dark-mode .profile-dropdown button {
+  color: #ddd;
+}
+
+.dark-mode .profile-dropdown a:hover,
+.dark-mode .profile-dropdown button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/*body */
+
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
