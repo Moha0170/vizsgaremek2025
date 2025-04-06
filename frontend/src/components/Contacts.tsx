@@ -23,6 +23,7 @@ function Contacts() {
           <textarea placeholder="Üzenet" rows={5} required></textarea>
           <button type="submit">Küldés</button>
         </form>
+        <br></br>
 
         <button className="home-button" onClick={() => navigate("/")}>
           Vissza a kezdőlapra
