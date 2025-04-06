@@ -249,7 +249,7 @@ function Admin() {
                       className="edit-button"
                       onClick={() => handleEditClick(product)}
                     >
-                      Szerkesztés
+                      Szerkeszt
                     </button>
                   </td>
                 </tr>

@@ -42,9 +42,8 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo">Webshop</Link>
+        <Link to="/" className="navbar-logo">Kezdőlap</Link>
 
-        {}
         <DarkModeToggle />
 
         <div className="menu-icon" onClick={() => setIsOpen(!isOpen)}>
@@ -52,25 +51,14 @@ function Navbar() {
         </div>
 
         <ul className={isOpen ? "nav-menu active" : "nav-menu"}>
-          <li className="nav-item"><Link to="/" className="nav-links">Kezdőlap</Link></li>
-          <li className="nav-item"><Link to="/products" className="nav-links">Termékek</Link></li>
-          <li className="nav-item"><Link to="/contact" className="nav-links">Kapcsolat</Link></li>
-
-          {isAdmin && (
-            <li className="nav-item">
-              <Link to="/admin" className="nav-links" onClick={() => setIsOpen(false)}>
-                Admin
-              </Link>
-            </li>
-          )}
+          <li className="nav-item">
+            <Link to="/products" className="nav-links" onClick={() => setIsOpen(false)}>
+              Termékek
+            </Link>
+          </li>
 
           {isLoggedIn ? (
             <>
-              <li className="nav-item">
-                <Link to="/cart" className="nav-links" onClick={() => setIsOpen(false)}>
-                  Kosár
-                </Link>
-              </li>
               <li className="nav-item profile-menu">
                 <div className="nav-links" onClick={() => setShowProfileMenu(!showProfileMenu)}>
                   {username} ▼
@@ -88,10 +76,24 @@ function Navbar() {
                   </ul>
                 )}
               </li>
+
+              <li className="nav-item">
+                <Link to="/cart" className="nav-links" onClick={() => setIsOpen(false)}>
+                  Kosár
+                </Link>
+              </li>
+
+              {isAdmin && (
+                <li className="nav-item">
+                  <Link to="/admin" className="nav-links" onClick={() => setIsOpen(false)}>
+                    Admin
+                  </Link>
+                </li>
+              )}
             </>
           ) : (
             <li className="nav-item">
-              <Link to="/profile" className="nav-links">
+              <Link to="/profile" className="nav-links" onClick={() => setIsOpen(false)}>
                 Bejelentkezés
               </Link>
             </li>
