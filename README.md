@@ -1,7 +1,7 @@
 # 📌 Vizsgaremek 2025 
 ---
 
-##  🚀 Frontend futtatásához szükséges parancsok
+## Frontend futtatásához szükséges parancsok
 
 Frontend fájlban kell lenni a terminálban a parancsok futtatásához. 
 
@@ -16,7 +16,7 @@ npm install
 npm run dev
 ```
 
-## 🛠️ Backend futtatása
+## Backend futtatása
 A backend Flask + SQLAlchemy alapú, és kezeli az adatbázis műveleteket, felhasználói azonosítást.
 
 Backend fájlban kell lenni a terminálban a parancs futtatásához. 
