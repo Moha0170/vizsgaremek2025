@@ -1,6 +1,9 @@
 import "../style/index.css";
+import { useNavigate } from "react-router-dom";
 
 const Terms = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="container">
       <h1>Felhasználási feltételek</h1>
@@ -22,6 +25,10 @@ const Terms = () => {
 
       <h2>4. Kapcsolat</h2>
       <p>Ha bármilyen kérdése van, lépjen kapcsolatba velünk az ügyfélszolgálatunkon keresztül.</p>
+
+      <button className="home-button" onClick={() => navigate("/")}>
+        Vissza a kezdőlapra
+      </button>
     </div>
   );
 };
