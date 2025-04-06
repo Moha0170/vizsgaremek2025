@@ -6,6 +6,8 @@ import axios from "axios";
 function Profile() {
   const [userData, setUserData] = useState<{ username: string; email: string; telefonszam: string; isAdmin: boolean; userId: number } | null>(null);
   const [orders, setOrders] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,11 +32,16 @@ function Profile() {
   }, []);
 
   const fetchOrders = async (userId: number) => {
+    setLoading(true);
+    setError(null);
     try {
       const response = await axios.get(`${import.meta.env.VITE_API_URI}/orders/getOrders/${userId}`);
       setOrders(response.data);
     } catch (error) {
-      console.error("Hiba a rendelések lekérésekor:", error);
+      setError("Hiba a rendelések lekérésekor.");
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -55,18 +62,29 @@ function Profile() {
           {userData.isAdmin && (
             <button onClick={() => navigate("/admin")}>Admin felület</button>
           )}
-          <h3>Korábbi rendeléseid:</h3>
-          {orders.length > 0 ? (
-            <ul>
-              {orders.map((order) => (
-                <li key={order.id}>
-                  Rendelési azonosító: {order.id}, Összeg: {order.vasarlas_osszeg} Ft, Dátum: {new Date(order.rendeles_datum).toLocaleString()}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>Még nem adtál le rendelést.</p>
-          )}
+
+          <div className="orders-container">
+            <h2>Korábbi rendeléseid</h2>
+            {loading ? (
+              <p>Betöltés...</p>
+            ) : error ? (
+              <p>{error}</p>
+            ) : orders.length > 0 ? (
+              <ul className="orders-list">
+                {orders.map((order) => (
+                  <li key={order.id} className="order-item">
+                    <span><strong>Rendelési azonosító:</strong> {order.id}</span>
+                    <span><strong>Státusz:</strong> {order.kezbesitett ? "Kézbesítve" : "Folyamatban"}</span>
+                    <span><strong>Összeg:</strong> {order.vasarlas_osszeg ? `${order.vasarlas_osszeg} Ft` : "N/A"}</span>
+                    <span><strong>Dátum:</strong> {order.rendeles_datum ? new Date(order.rendeles_datum).toLocaleString() : "Ismeretlen"}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>Még nincs leadott rendelésed.</p>
+            )}
+          </div>
+
           <button className="logout-button" onClick={handleLogout}>
             Kijelentkezés
           </button>
