@@ -103,6 +103,7 @@ function LoginForm({ setUserData }) {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);  // Jelszó láthatóság állapota
   const navigate = useNavigate();
 
   const handleLogin = async (e: { preventDefault: () => void; }) => {
@@ -143,7 +144,21 @@ function LoginForm({ setUserData }) {
   return (
     <form onSubmit={handleLogin}>
       <input type="text" placeholder="Felhasználónév" value={user} onChange={(e) => setUser(e.target.value)} required />
-      <input type="password" placeholder="Jelszó" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <input
+          type={showPassword ? "text" : "password"}  // Jelszó láthatóság változtatása
+          placeholder="Jelszó"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button
+          type="button"  //   jelszó megjelenítű gomb
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          Jelszó mutatása
+        </button>
+        <br></br>
+        <br></br>
       <button type="submit">Bejelentkezés</button>
       {message && <p>{message}</p>}
       <p>Még nincs fiókod? <a href="/register">Regisztrálj itt</a></p>
