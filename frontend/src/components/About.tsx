@@ -1,7 +1,10 @@
 import "../style/index.css";
 import "../style/about.css";
+import { useNavigate } from "react-router-dom";
 
 const About = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="container">
       <h1>Rólunk</h1>
@@ -27,6 +30,10 @@ const About = () => {
           <cite>- Gergő M.</cite>
         </blockquote>
       </div>
+
+      <button className="home-button" onClick={() => navigate("/")}>
+        Vissza a kezdőlapra
+      </button>
     </div>
   );
 };
