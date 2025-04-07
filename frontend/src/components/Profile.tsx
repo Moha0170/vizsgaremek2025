@@ -61,7 +61,8 @@ function Profile() {
           <p><strong>Telefonszám:</strong> {userData.telefonszam}</p>
           <p>{userData.isAdmin ? "Adminisztrátor vagy" : "Felhasználó vagy"}</p>
           {userData.isAdmin && (
-            <button onClick={() => navigate("/admin")}>Admin felület</button>
+            <button className="admin-interface"
+            onClick={() => navigate("/admin")}>Admin felület</button>
           )}
 
           <div className="orders-container">

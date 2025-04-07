@@ -335,7 +335,7 @@ h1 {
 }
 
 .contact-form button:hover {
-  background: #4f67f0; 
+  background: #0c30fa; 
 }
 
 .filter-container {
@@ -474,10 +474,10 @@ h1 {
 
 .register-container button,
 .contact-form button {
-  background: #4f67f0; /* gold */
-  color: #FFFFFF; /* white */
+  background: #4f67f0;
+  color: #FFFFFF; 
   padding: 15px 30px;
-  border: 2px solid #4f67f0; /* tomato */
+  border: 2px solid #4f67f0; 
   border-radius: 8px;
   font-size: 1.2rem;
   cursor: pointer;
@@ -486,7 +486,7 @@ h1 {
 
 .register-container button:hover,
 .contact-form button:hover {
-  background: #4f67f0; /* tomato */
+  background: #0c30fa; 
 }
 
 .admin-container {
@@ -560,7 +560,7 @@ h1 {
 
 .register-container button:hover,
 .contact-form button:hover {
-  background: #4f67f0;
+  background: #0c30fa;
 }
 
 .delete-button {
@@ -816,6 +816,7 @@ h1 {
 }
 
 
+/*gombok a profile oldalon*/
 .password-toggle {
   background-color: #838383;
   color: white;              
@@ -828,7 +829,7 @@ h1 {
 }
 
 .password-toggle:hover {
-  background-color: #838383;
+  background-color: #6b6b6b;
 }
 
 
@@ -845,5 +846,37 @@ h1 {
 
 
 .profile-login:hover {
-  background-color: #4f67f0;
+  background-color: #0c30fa;
+}
+
+
+
+.admin-interface {
+  background: #4f67f0;
+  color: #FFFFFF;
+  padding: 15px 30px;
+  border: 2px solid #4f67f0; 
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.admin-interface:hover {
+  background-color: #0c30fa;
+}
+
+.logout-button {
+  background: #4f67f0;
+  color: #FFFFFF;
+  padding: 15px 30px;
+  border: 2px solid #4f67f0; 
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #0c30fa;
 }
