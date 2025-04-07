@@ -10,7 +10,7 @@ function Contacts() {
         <p>Ha kérdésed van, itt elérhetsz minket:</p>
 
         <div className="contact-info">
-          <p>📍 Cím: 1234 Budapest, Webshop utca 10.</p>
+          <p>📍 Cím: 1146 Budapest, Thököly út 48.</p>
           <p>📞 Telefon: +36 1 234 5678</p>
           <p>📧 Email: info@webshop.hu</p>
         </div>

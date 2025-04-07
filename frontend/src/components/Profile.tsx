@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import "../style/index.css";
 
 function Profile() {
@@ -62,7 +64,7 @@ function Profile() {
           <p>{userData.isAdmin ? "Adminisztrátor vagy" : "Felhasználó vagy"}</p>
           {userData.isAdmin && (
             <button className="admin-interface"
-            onClick={() => navigate("/admin")}>Admin felület</button>
+              onClick={() => navigate("/admin")}>Admin felület</button>
           )}
 
           <div className="orders-container">
@@ -95,6 +97,7 @@ function Profile() {
         <>
           <h2>Bejelentkezés</h2>
           <LoginForm setUserData={setUserData} />
+          <ToastContainer />
         </>
       )}
     </div>
@@ -104,8 +107,7 @@ function Profile() {
 function LoginForm({ setUserData }) {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-  const [showPassword, setShowPassword] = useState(false);  // Jelszó láthatóság állapota
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e: { preventDefault: () => void; }) => {
@@ -119,6 +121,7 @@ function LoginForm({ setUserData }) {
     const data = await response.json();
 
     if (response.status === 200) {
+      toast.success("Sikeres bejelentkezés!");
       localStorage.setItem("token", data.token);
 
       const decoded: any = jwtDecode(data.token);
@@ -139,36 +142,34 @@ function LoginForm({ setUserData }) {
 
       navigate("/");
     } else {
-      setMessage(data.message);
+      toast.error(data.message || "Hibás bejelentkezés!");
     }
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <input type="text" placeholder="Felhasználónév" value={user} onChange={(e) => setUser(e.target.value)} required />
+    <>
+      <form onSubmit={handleLogin}>
+        <input type="text" placeholder="Felhasználónév" value={user} onChange={(e) => setUser(e.target.value)} required />
         <input
-          type={showPassword ? "text" : "password"}  // Jelszó láthatóság változtatása
+          type={showPassword ? "text" : "password"}
           placeholder="Jelszó"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
         <button
-          type="button" // jelszó megjelenítős gomb
+          type="button"
           className="password-toggle"
           onClick={() => setShowPassword(!showPassword)}
         >
           {showPassword ? "Elrejtés" : "Megjelenítés"}
         </button>
 
-        <br></br>
-        <br></br>
-      <button type="submit"
-      className="profile-login"
-      >Bejelentkezés</button>
-      {message && <p>{message}</p>}
-      <p>Még nincs fiókod? <a href="/register">Regisztrálj itt</a></p>
-    </form>
+        <br /><br />
+        <button type="submit" className="profile-login">Bejelentkezés</button>
+        <p>Még nincs fiókod? <a href="/register">Regisztrálj itt</a></p>
+      </form>
+    </>
   );
 }
 
