@@ -107,7 +107,7 @@
 }
 
 .dark-mode .contacts-container {
-  background: #121212;
+  background: #222;
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
 }
 
@@ -406,35 +406,21 @@ h1 {
   width: 100%;
   padding: 15px;
   margin: 10px 0;
-  border: 2px solid #4f67f0; /* tomato */
+  border: 2px solid #4f67f0; 
   border-radius: 8px;
   font-size: 1.1rem;
   font-family: 'Roboto', sans-serif;
 }
 
-.profile-container button {
-  background: #4f67f0; /* gold */
-  color: #FFFFFF; /* white */
-  padding: 15px 30px;
-  border: 2px solid #4f67f0; /* tomato */
-  border-radius: 8px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.profile-container button:hover {
-  background: #4f67f0; /* tomato */
-}
 
 .profile-container p {
   font-size: 1rem;
-  color: #333333; /* dark gray */
+  color: #333333; 
   margin-top: 20px;
 }
 
 .profile-container a {
-  color: #4f67f0; /* gold */
+  color: #4f67f0; 
   text-decoration: none;
 }
 
@@ -487,7 +473,6 @@ h1 {
 }
 
 .register-container button,
-.profile-container button,
 .contact-form button {
   background: #4f67f0; /* gold */
   color: #FFFFFF; /* white */
@@ -500,7 +485,6 @@ h1 {
 }
 
 .register-container button:hover,
-.profile-container button:hover,
 .contact-form button:hover {
   background: #4f67f0; /* tomato */
 }
@@ -562,7 +546,6 @@ h1 {
 
 
 .register-container button,
-.profile-container button,
 .contact-form button {
   background: #4f67f0;
   color: #FFFFFF;
@@ -576,7 +559,6 @@ h1 {
 
 
 .register-container button:hover,
-.profile-container button:hover,
 .contact-form button:hover {
   background: #4f67f0;
 }

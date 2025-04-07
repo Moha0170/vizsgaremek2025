@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
+import "../style/index.css";
 
 function Profile() {
   const [userData, setUserData] = useState<{ username: string; email: string; telefonszam: string; isAdmin: boolean; userId: number } | null>(null);
@@ -152,11 +153,13 @@ function LoginForm({ setUserData }) {
           required
         />
         <button
-          type="button"  //   jelszó megjelenítű gomb
+          type="button" // jelszó megjelenítős gomb
+          className="password-toggle"
           onClick={() => setShowPassword(!showPassword)}
         >
-          Jelszó mutatása
+          {showPassword ? "Elrejtés" : "Megjelenítés"}
         </button>
+
         <br></br>
         <br></br>
       <button type="submit">Bejelentkezés</button>

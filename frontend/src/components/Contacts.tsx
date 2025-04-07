@@ -1,8 +1,7 @@
 import "../style/index.css";
-import { useNavigate } from "react-router-dom";
+
 
 function Contacts() {
-  const navigate = useNavigate();
 
   return (
     <div className="contacts-container">
@@ -23,11 +22,6 @@ function Contacts() {
           <textarea placeholder="Üzenet" rows={5} required></textarea>
           <button type="submit">Küldés</button>
         </form>
-        <br></br>
-
-        <button className="home-button" onClick={() => navigate("/")}>
-          Vissza a kezdőlapra
-        </button>
       </div>
 
       <div className="iframe-div">

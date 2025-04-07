@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "../style/index.css";
 import "../style/kezdooldal.css";
 import axios from "axios";
+import About from "./About"; 
+import Contacts from "./Contacts";
 
 interface Product {
   id: number;
@@ -78,14 +80,19 @@ const Kezdooldal = () => {
         </div>
       </section>
 
+      <About />
+      <br></br>
+      <br></br>
+
+      <Contacts />
+      <br></br>
+      <br></br>
 
       <footer className="footer">
         <section className="info-section">
-          <h2>📢 Tudj meg többet rólunk!</h2>
-          <p>Vásárlási feltételek, kapcsolatfelvétel és további információk:</p>
+        <h2 className="vasarlasi-felteteleke">Vásárlási feltételek</h2>
+          <p>Az alábbi oldalon tájékozódhatsz az oldalunkon szabott felhasználási és megrendelési feltételekkel kapcsolatban:</p>
           <div className="info-links">
-            <Link to="/contact">Kapcsolat</Link>
-            <Link to="/about">Rólunk</Link>
             <Link to="/terms">Általános szerződési feltételek</Link>
           </div>
         </section>
