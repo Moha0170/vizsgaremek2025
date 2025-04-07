@@ -814,3 +814,36 @@ h1 {
   cursor: pointer;
   transition: background 0.3s;
 }
+
+
+.password-toggle {
+  background-color: #838383;
+  color: white;              
+  padding: 10px 20px;         
+  font-size: 12px;           
+  border: none;               
+  border-radius: 5px;         
+  cursor: pointer;         
+  transition: background-color 0.3s ease;  
+}
+
+.password-toggle:hover {
+  background-color: #838383;
+}
+
+
+.profile-login {
+  background: #4f67f0;
+  color: #FFFFFF;
+  padding: 15px 30px;
+  border: 2px solid #4f67f0; 
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+
+.profile-login:hover {
+  background-color: #4f67f0;
+}

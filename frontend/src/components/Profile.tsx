@@ -162,7 +162,9 @@ function LoginForm({ setUserData }) {
 
         <br></br>
         <br></br>
-      <button type="submit">Bejelentkezés</button>
+      <button type="submit"
+      className="profile-login"
+      >Bejelentkezés</button>
       {message && <p>{message}</p>}
       <p>Még nincs fiókod? <a href="/register">Regisztrálj itt</a></p>
     </form>

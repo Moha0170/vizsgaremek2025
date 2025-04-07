@@ -41,7 +41,7 @@ const Kezdooldal = () => {
       <h1>Üdvözlünk a webáruházunkban!</h1>
 
       <section className="ajanlatok">
-        <h2>🎉 Időszakos ajánlataink</h2>
+        <h2>🎲 Véletlenszerű ajánlatok Neked!</h2>
         <div className="product-list">
           {featuredProducts.map((product) => {
             const imageUrl = `${import.meta.env.VITE_API_URI}/images/getImg/${product.kep}`;
