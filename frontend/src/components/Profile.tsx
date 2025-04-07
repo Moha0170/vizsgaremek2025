@@ -97,7 +97,15 @@ function Profile() {
         <>
           <h2>Bejelentkezés</h2>
           <LoginForm setUserData={setUserData} />
-          <ToastContainer />
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            pauseOnHover={true}
+            pauseOnFocusLoss={true}
+            aria-label="toast notifications"
+            theme="colored"
+          />
         </>
       )}
     </div>

@@ -138,6 +138,7 @@ function Market() {
         pauseOnHover={true}
         pauseOnFocusLoss={true}
         aria-label="toast notifications"
+        theme="colored"
       />
     </div>
   );
