@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from backend import db
 from sqlalchemy import text
 from datetime import datetime
+import pytz
  
 order_bp = Blueprint("order_bp", __name__, url_prefix="/orders")
  
@@ -50,7 +51,8 @@ def createOrderFromCart(felhasznalo_id):
         vasarlas_osszeg = 1999
         for termek in kosar:
             vasarlas_osszeg += db.session.execute(text("SELECT ara FROM termekek WHERE id = :id"), {"id": termek['termek_id']}).fetchone()[0] * termek['mennyiseg']
-        rendeles_datum = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        timezone = pytz.timezone("Europe/Budapest")  # Replace with your desired timezone
+        rendeles_datum = datetime.now(timezone).strftime('%Y-%m-%d %H:%M:%S')
 
         if kupon:
             kupon_adat = db.session.execute(text("SELECT ertek FROM kuponkodok WHERE kod = :kod"), {"kod": kupon}).fetchone()

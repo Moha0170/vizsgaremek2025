@@ -23,7 +23,7 @@ function Profile() {
           email: decoded.email,
           telefonszam: decoded.telefonszam,
           isAdmin: decoded.isAdmin,
-          userId: decoded.userId
+          userId: decoded.userId,
         });
         fetchOrders(decoded.userId);
       } catch (error) {
@@ -49,7 +49,9 @@ function Profile() {
   };
 
   const handleLogout = () => {
+    console.log(localStorage)
     localStorage.clear();
+    console.log(localStorage)
     setUserData(null);
     navigate("/");
   };
