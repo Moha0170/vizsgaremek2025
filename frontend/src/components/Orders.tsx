@@ -51,7 +51,7 @@ const Orders = () => {
               <span><strong>Rendelési azonosító:</strong> {order.id}</span>
               <span><strong>Státusz:</strong> {order.kezbesitett ? "Kézbesítve" : "Folyamatban"}</span>
               <span><strong>Összeg:</strong> {order.vasarlas_osszeg ? `${order.vasarlas_osszeg} Ft` : "N/A"}</span>
-              <span><strong>Dátum:</strong> {order.rendeles_datum ? new Date(order.rendeles_datum).toLocaleString() : "Ismeretlen"}</span>
+              <span><strong>Dátum:</strong> {order.rendeles_datum ? new Date(new Date(order.rendeles_datum).getTime() + new Date().getTimezoneOffset() * 60000).toLocaleString() : "Ismeretlen"}</span>
             </li>
           ))}
         </ul>

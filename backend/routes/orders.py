@@ -51,8 +51,6 @@ def createOrderFromCart(felhasznalo_id):
         vasarlas_osszeg = 1999
         for termek in kosar:
             vasarlas_osszeg += db.session.execute(text("SELECT ara FROM termekek WHERE id = :id"), {"id": termek['termek_id']}).fetchone()[0] * termek['mennyiseg']
-        timezone = pytz.timezone("Europe/Budapest")  # Replace with your desired timezone
-        rendeles_datum = datetime.now(timezone).strftime('%Y-%m-%d %H:%M:%S')
 
         if kupon:
             kupon_adat = db.session.execute(text("SELECT ertek FROM kuponkodok WHERE kod = :kod"), {"kod": kupon}).fetchone()
@@ -85,7 +83,9 @@ def createOrderFromCart(felhasznalo_id):
             else:
                 return "Érvénytelen kupon!", 400
  
-        rendeles_datum = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        timezone = pytz.timezone("Europe/Budapest") 
+        rendeles_datum = datetime.now(timezone).strftime('%Y-%m-%d %H:%M:%S')
+        print(rendeles_datum)
  
         cim = orszag + "" + iranyitoszam + "" + varos + "" + kozterulet + "" + kozterulet_jellege + "" + hazszam
         db.session.execute(
