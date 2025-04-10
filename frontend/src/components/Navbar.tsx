@@ -28,11 +28,10 @@ function Navbar() {
     return () => clearInterval(intervalId);
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("username");
-    localStorage.removeItem("isAdmin");
-    localStorage.removeItem("token");
+  const handleLogout = async () => {
+    console.log(localStorage);
+    await localStorage.clear();
+    console.log(localStorage);
     setIsLoggedIn(false);
     setIsAdmin(false);
     setUsername("");

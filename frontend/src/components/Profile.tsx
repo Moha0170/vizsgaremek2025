@@ -48,10 +48,8 @@ function Profile() {
     }
   };
 
-  const handleLogout = () => {
-    console.log(localStorage)
-    localStorage.clear();
-    console.log(localStorage)
+  const handleLogout = async () => {
+    await localStorage.clear();
     setUserData(null);
     navigate("/");
   };
