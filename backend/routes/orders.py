@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from backend import db
 from sqlalchemy import text
 from datetime import datetime
-import pytz
+from backend.dec import token_required
  
 order_bp = Blueprint("order_bp", __name__, url_prefix="/orders")
  
@@ -21,8 +21,26 @@ def getOrder(felhasznalo_id):
 def getProductsFromOrder(id):
     try:
         results = db.session.execute(
-            text("SELECT * FROM rendeles_termekek WHERE rendeles_id = :id"),
+            text("SELECT mennyiseg, termek_id FROM rendeles_termekek WHERE rendeles_id = :id"),
             {"id": id}
+        ).fetchall()
+        resultsDict = [row._asdict() for row in results]
+        for i in range(len(resultsDict)):
+            resultsDict[i]['neve'] = db.session.execute(
+                text("SELECT neve FROM termekek WHERE id = :id"),
+                {"id": resultsDict[i]['termek_id']}
+            ).fetchone()
+            resultsDict[i]['neve'] = resultsDict[i]['neve'][0]
+        return jsonify(resultsDict), 200
+    except Exception as e:
+        return str(e), 500
+    
+@order_bp.route("/getAllOrder/", methods=['GET'])
+@token_required
+def getAllOrder():
+    try:
+        results = db.session.execute(
+            text("SELECT * FROM rendelesek")
         ).fetchall()
         return jsonify([row._asdict() for row in results]), 200
     except Exception as e:
@@ -51,6 +69,7 @@ def createOrderFromCart(felhasznalo_id):
         vasarlas_osszeg = 1999
         for termek in kosar:
             vasarlas_osszeg += db.session.execute(text("SELECT ara FROM termekek WHERE id = :id"), {"id": termek['termek_id']}).fetchone()[0] * termek['mennyiseg']
+        rendeles_datum = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         if kupon:
             kupon_adat = db.session.execute(text("SELECT ertek FROM kuponkodok WHERE kod = :kod"), {"kod": kupon}).fetchone()
@@ -83,9 +102,7 @@ def createOrderFromCart(felhasznalo_id):
             else:
                 return "Érvénytelen kupon!", 400
  
-        timezone = pytz.timezone("Europe/Budapest") 
-        rendeles_datum = datetime.now(timezone).strftime('%Y-%m-%d %H:%M:%S')
-        print(rendeles_datum)
+        rendeles_datum = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
  
         cim = orszag + "" + iranyitoszam + "" + varos + "" + kozterulet + "" + kozterulet_jellege + "" + hazszam
         db.session.execute(

@@ -47,7 +47,7 @@ def update(id):
         print(e)
         return str(e), 500
 
-@admin_bp.route("/users/update/", methods=['PATCH'])
+""" @admin_bp.route("/users/update/", methods=['PATCH'])
 @token_required
 def update_user():
     try:
@@ -61,4 +61,21 @@ def update_user():
         db.session.commit()
         return {"message": "User updated!"}
     except (Exception) as e:
+        return str(e), 500 """
+
+@admin_bp.route("/orderReadyToggle/<order_id>", methods=['POST'])
+@token_required
+def orderReadyToggle(order_id):
+    try:
+        isReady = db.session.execute(text("SELECT kezbesitett FROM rendelesek WHERE id = :id"), {"id": order_id}).fetchone()[0]
+        if isReady == 1:
+            db.session.execute(text("UPDATE rendelesek SET kezbesitett = 0 WHERE id = :id"), {"id": order_id})
+            db.session.commit()
+            return {"message": "Rendelés folyamatban"}
+        else:
+            db.session.execute(text("UPDATE rendelesek SET kezbesitett = 1 WHERE id = :id"), {"id": order_id})
+            db.session.commit()
+            return {"message": "Rendelés kész"}
+    except (Exception) as e:
+        print(e)
         return str(e), 500
