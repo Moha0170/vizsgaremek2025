@@ -40,8 +40,8 @@ A **Hypercharge Market** egy webshop alkalmazás, amely lehetővé teszi a felha
 - Termékek listázása és keresése
 - Termék részleteinek megtekintése
 - Kosárba helyezés
-- Felhasználói profil
-- Admin felület a termékek kezelésére
+- Admin felület a termékek, rendelések kezelésére
+- Kuponok kipörgetése szerencsekeréken, majd fizetésnél kuponok felhasználása
 
 ---
 ## 📱 Mobil alkalmazás
