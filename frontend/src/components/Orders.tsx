@@ -9,11 +9,19 @@ interface Order {
   kezbesitett: boolean;
 }
 
+interface OrderProduct {
+  termek_id: number;
+  mennyiseg: number;
+  neve: string;
+}
+
 const Orders = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [userId, setUserId] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [expandedOrders, setExpandedOrders] = useState<number[]>([]);
+  const [orderProducts, setOrderProducts] = useState<{ [key: number]: OrderProduct[] }>({});
 
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
@@ -26,14 +34,28 @@ const Orders = () => {
   const fetchOrders = async (id: string) => {
     try {
       const response = await axios.get(`${import.meta.env.VITE_API_URI}/orders/getOrders/${id}`);
-      console.log("Kapott rendelések:", response.data);
       setOrders(response.data);
       setError(null);
     } catch (error) {
-      console.error("Hiba a rendelések lekérésekor:", error);
       setError("Hiba történt a rendelések lekérésekor.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const toggleOrderDetails = async (orderId: number) => {
+    if (expandedOrders.includes(orderId)) {
+      setExpandedOrders(expandedOrders.filter((id) => id !== orderId));
+    } else {
+      if (!orderProducts[orderId]) {
+        try {
+          const response = await axios.get(`${import.meta.env.VITE_API_URI}/orders/getProductsFromOrder/${orderId}`);
+          setOrderProducts({ ...orderProducts, [orderId]: response.data });
+        } catch (error) {
+          console.error("Nem sikerült lekérni a termékeket.");
+        }
+      }
+      setExpandedOrders([...expandedOrders, orderId]);
     }
   };
 
@@ -48,10 +70,24 @@ const Orders = () => {
         <ul className="orders-list">
           {orders.map((order) => (
             <li key={order.id} className="order-item">
-              <span><strong>Rendelési azonosító:</strong> {order.id}</span>
-              <span><strong>Státusz:</strong> {order.kezbesitett ? "Kézbesítve" : "Folyamatban"}</span>
-              <span><strong>Összeg:</strong> {order.vasarlas_osszeg ? `${order.vasarlas_osszeg} Ft` : "N/A"}</span>
-              <span><strong>Dátum:</strong> {order.rendeles_datum ? new Date(new Date(order.rendeles_datum).getTime() + new Date().getTimezoneOffset() * 60000).toLocaleString() : "Ismeretlen"}</span>
+              <div className="order-summary">
+                <span><strong>Rendelési azonosító:</strong> {order.id}</span>
+                <span><strong>Státusz:</strong> {order.kezbesitett ? "Kézbesítve" : "Folyamatban"}</span>
+                <span><strong>Összeg:</strong> {order.vasarlas_osszeg} Ft</span>
+                <span><strong>Dátum:</strong> {new Date(new Date(order.rendeles_datum).getTime() + new Date().getTimezoneOffset() * 60000).toLocaleString()}</span>
+                <button onClick={() => toggleOrderDetails(order.id)}>
+                  {expandedOrders.includes(order.id) ? "Bezárás" : "Termékek megtekintése"}
+                </button>
+              </div>
+              {expandedOrders.includes(order.id) && orderProducts[order.id] && (
+                <ul className="product-list">
+                  {orderProducts[order.id].map((product, index) => (
+                    <li key={index}>
+                      {product.neve} - {product.mennyiseg} db
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
         </ul>

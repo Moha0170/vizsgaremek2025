@@ -38,6 +38,27 @@
   .order-item strong {
     color: #222;
   }
+
+  .order-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .order-summary button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #4f67f0;
+    border: 1px solid #4f67f0;
+    cursor: pointer;
+    color: #f7f7f7;
+  }
+  
+
+  
+
+  
+  /*mobil*/
   
   @media (max-width: 600px) {
     .orders-container {
@@ -49,6 +70,7 @@
     }
   }
   
+  /*sötét mód*/
   .dark-mode .orders-container {
     background: #333;
   }
