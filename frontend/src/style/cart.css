@@ -104,6 +104,44 @@
     background-color: #c00000;
   }
   
+/* ne csússzanak el a gombok a termékek karakterszámától függően */
+.cart-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  background-color: #fafafa;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.product-name {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.product-price {
+  color: #444;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.remove-button {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #d00000;
+}
+
+/* sötét mód */
   .dark-mode .cart-container {
     background: #333;
   }
@@ -115,3 +153,30 @@
   .dark-mode .cart-container .product-price{
     color: #fff;
   }
+
+
+  .dark-mode .cart-item {
+    background-color: #444;
+    border-color: #666;
+  }
+  
+  .dark-mode .product-name {
+    color: #fff;
+  }
+  
+  .dark-mode .quantity-controls span {
+    color: #fff;
+  }
+  
+  .dark-mode .remove-button {
+    color: #ff6b6b;
+  }
+  
+  .dark-mode .cart-container p {
+    color: #ddd;
+  }
+  
+  .dark-mode .cart-summary strong {
+    color: #fff;
+  }
+  
