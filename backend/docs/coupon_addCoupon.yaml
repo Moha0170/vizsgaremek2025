@@ -1,0 +1,33 @@
+tags:
+  - Coupons
+summary: Add a new coupon based on the provided type.
+description: >
+  This endpoint allows the user to generate a coupon code based on the provided type. 
+  If the selected coupon type is "0", it returns a message indicating no win. 
+  Otherwise, it generates a unique coupon code, stores it in the database, and returns the code.
+parameters:
+  - name: type
+    in: path
+    required: true
+    description: >
+      The type of coupon to generate. It corresponds to an index in the predefined coupon list.
+    schema:
+      type: integer
+      example: 1
+responses:
+  200:
+    description: >
+      Successful response. Returns the generated coupon code or a message indicating no win.
+    content:
+      text/plain:
+        examples:
+          no_win:
+            value: "Most nem nyertél, de holnap újra megpróbálhatod!"
+          coupon_code:
+            value: "ABC-DEF-GHI"
+  500:
+    description: >
+      Internal server error. Indicates an issue occurred during coupon generation.
+    content:
+      text/plain:
+        example: "Hiba történt, kérlek próbáld újra!"

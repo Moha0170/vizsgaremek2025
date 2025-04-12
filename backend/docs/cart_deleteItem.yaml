@@ -1,0 +1,28 @@
+tags:
+  - Cart
+summary: Delete an item from the cart
+description: Deletes a specific item from a user's cart based on the provided cart ID and item ID.
+parameters:
+  - name: cartID
+    in: path
+    required: true
+    description: The ID of the cart from which the item will be deleted.
+    schema:
+      type: string
+  - name: itemID
+    in: path
+    required: true
+    description: The ID of the item to be deleted from the cart.
+    schema:
+      type: string
+responses:
+  200:
+    description: The item was successfully deleted from the cart.
+    content:
+      application/json:
+        example: "Sikeresen törölve"
+  400:
+    description: An error occurred while attempting to delete the item.
+    content:
+      application/json:
+        example: "Error message describing the issue"

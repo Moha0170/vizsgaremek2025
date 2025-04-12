@@ -1,0 +1,30 @@
+tags:
+  - Coupons
+summary: Retrieve coupon details by code
+description: >
+  This endpoint retrieves the details of a coupon based on the provided coupon code.
+  If the coupon code does not exist, a 404 error is returned.
+parameters:
+  - name: kod
+    in: path
+    required: true
+    description: The unique code of the coupon to retrieve.
+    schema:
+      type: string
+responses:
+  200:
+    description: Coupon details retrieved successfully.
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              field_name:
+                type: string
+                description: Description of the field.
+  404:
+    description: Coupon not found.
+  default:
+    description: Unexpected error.

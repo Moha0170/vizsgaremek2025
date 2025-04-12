@@ -1,0 +1,45 @@
+tags:
+  - "Admin"
+summary: "Create a new product"
+description: "Endpoint to create a new product in the database."
+parameters:
+  - name: "neve"
+    in: "formData"
+    description: "Name of the product"
+    required: true
+    type: "string"
+  - name: "ara"
+    in: "formData"
+    description: "Price of the product"
+    required: true
+    type: "integer"
+  - name: "kat"
+    in: "formData"
+    description: "Category of the product"
+    required: true
+    type: "string"
+  - name: "file"
+    in: "formData"
+    description: "Image file of the product"
+    required: true
+    type: "file"
+  - name: "gyarto_beszallito"
+    in: "formData"
+    description: "Manufacturer or supplier of the product"
+    required: true
+    type: "string"
+responses:
+  200:
+    description: "Product created successfully"
+    schema:
+      type: "object"
+      properties:
+        message:
+          type: "string"
+          example: "Product created!"
+  500:
+    description: "Internal server error"
+    schema:
+      type: "string"
+security:
+  - BearerAuth: []

@@ -1,0 +1,36 @@
+tags:
+  - "Admin"
+summary: "Toggle the readiness status of an order"
+description: "This endpoint allows an admin to toggle the 'kezbesitett' status of an order between ready and in-progress."
+parameters:
+  - name: "order_id"
+    in: "path"
+    description: "The ID of the order to toggle"
+    required: true
+    type: "integer"
+  - name: "Authorization"
+    in: "header"
+    description: "Bearer token for authentication"
+    required: true
+    type: "string"
+responses:
+  200:
+    description: "Success"
+    schema:
+      type: "object"
+      properties:
+        message:
+          type: "string"
+          example: "Rendelés kész"
+  500:
+    description: "Internal Server Error"
+    schema:
+      type: "string"
+      example: "Error message"
+  400:
+    description: "Bad Request"
+    schema:
+      type: "string"
+      example: "Error message"
+security:
+  - BearerAuth: []

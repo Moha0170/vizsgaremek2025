@@ -3,10 +3,12 @@ from backend import db
 from sqlalchemy import text
 import random
 import string
+from flasgger import swag_from
 
 coupon_bp = Blueprint("coupon_bp", __name__, url_prefix="/coupon")
 
 @coupon_bp.route("/<kod>", methods=["GET"])
+@swag_from("../docs/coupon_get.yaml")
 def couponById(kod):
     a = db.session.execute(text("SELECT * FROM kuponkodok WHERE kod = :kod"), {"kod": kod})
     result = [row._asdict() for row in a]
@@ -16,6 +18,7 @@ def couponById(kod):
         return result, 200
 
 @coupon_bp.route("/addCoupon/<type>", methods=["POST"])
+@swag_from("../docs/coupon_addCoupon.yaml")
 def addCoupon(type):
     couponList = ["10", "20", "0", "50", "1000", "ingyen"]
     selectedCoupon = couponList[int(type)]

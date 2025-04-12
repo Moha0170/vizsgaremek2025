@@ -3,11 +3,13 @@ from sqlalchemy import text
 from backend import db
 from ..dec import token_required
 from werkzeug.utils import secure_filename
+from flasgger import swag_from
 
 admin_bp = Blueprint("admin_bp", __name__, url_prefix="/admin")
 
 @admin_bp.route("/product/delete/<id>", methods=['DELETE'])
 @token_required
+@swag_from("../docs/admin_productDelete.yaml")
 def delete(id):
     db.session.execute(text("DELETE FROM termekek WHERE id = :id"), {"id": id})
     db.session.commit()
@@ -15,6 +17,7 @@ def delete(id):
 
 @admin_bp.route("/product/create/", methods=['POST'])
 @token_required
+@swag_from("../docs/admin_productCreate.yaml")
 def create():
     try:
         neve = request.form['neve']
@@ -32,6 +35,7 @@ def create():
 
 @admin_bp.route("/product/update/<id>", methods=['PATCH'])
 @token_required
+@swag_from("../docs/admin_productUpdate.yaml")
 def update(id):
     try:
         neve = request.form['neve']
@@ -65,6 +69,7 @@ def update_user():
 
 @admin_bp.route("/orderReadyToggle/<order_id>", methods=['POST'])
 @token_required
+@swag_from("../docs/admin_orderReadyToggle.yaml")
 def orderReadyToggle(order_id):
     try:
         isReady = db.session.execute(text("SELECT kezbesitett FROM rendelesek WHERE id = :id"), {"id": order_id}).fetchone()[0]

@@ -1,0 +1,19 @@
+tags:
+  - "Images"
+summary: "Retrieve an uploaded image"
+description: "Fetches an image file from the uploads directory by its filename."
+parameters:
+  - name: "filename"
+    in: "path"
+    description: "The name of the file to retrieve."
+    required: true
+    type: "string"
+responses:
+  200:
+    description: "File successfully retrieved."
+    schema:
+      type: "file"
+  404:
+    description: "File not found."
+  500:
+    description: "Internal server error."

@@ -1,0 +1,40 @@
+tags:
+  - Cart
+summary: "Get cart details by user ID"
+description: "Retrieve the cart details for a specific user, including product prices, names, quantities, and the total cost."
+parameters:
+  - name: "id"
+    in: "path"
+    description: "The ID of the user whose cart details are to be retrieved."
+    required: true
+    type: "string"
+responses:
+  200:
+    description: "Successful response with cart details."
+    schema:
+      type: "array"
+      items:
+        type: "object"
+        properties:
+          ara:
+            type: "integer"
+            description: "Total price for the product (price * quantity)."
+          neve:
+            type: "string"
+            description: "Name of the product."
+          mennyiseg:
+            type: "integer"
+            description: "Quantity of the product in the cart."
+          termek_id:
+            type: "integer"
+            description: "ID of the product."
+        example:
+          ara: 3998
+          neve: "Product Name"
+          mennyiseg: 2
+          termek_id: 1
+  404:
+    description: "Cart not found for the given user ID."
+    schema:
+      type: "string"
+      example: "Nincs ilyen kosar"

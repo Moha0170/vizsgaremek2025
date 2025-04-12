@@ -24,6 +24,7 @@ def upload():
     return jsonify({'message': 'File uploaded successfully', 'filename': filename})
 
 @images_bp.route("/getImg/<filename>", methods=["GET"])
+@swag_from("../docs/image_getImg.yaml")
 def uploaded_file(filename):
     try:
         return send_from_directory(os.path.join(app.root_path, "uploads"), filename)

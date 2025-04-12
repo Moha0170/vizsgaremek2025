@@ -1,0 +1,61 @@
+tags:
+  - Admin
+summary: Update a product
+description: Updates the details of an existing product in the database.
+parameters:
+  - name: id
+    in: path
+    required: true
+    description: The ID of the product to update.
+    schema:
+      type: string
+  - name: neve
+    in: formData
+    required: true
+    description: The new name of the product.
+    schema:
+      type: string
+  - name: ara
+    in: formData
+    required: true
+    description: The new price of the product.
+    schema:
+      type: integer
+  - name: kat
+    in: formData
+    required: true
+    description: The new category of the product.
+    schema:
+      type: string
+  - name: file
+    in: formData
+    required: true
+    description: The new image file for the product.
+    schema:
+      type: file
+  - name: gyarto_beszallito
+    in: formData
+    required: true
+    description: The new manufacturer or supplier of the product.
+    schema:
+      type: string
+responses:
+  200:
+    description: Product updated successfully.
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Product updated!
+  500:
+    description: Internal server error.
+    content:
+      application/json:
+        schema:
+          type: string
+        example: "Error message"
+security:
+  - BearerAuth: []
