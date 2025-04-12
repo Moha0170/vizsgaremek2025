@@ -1,0 +1,23 @@
+tags:
+  - Orders
+summary: Retrieve all orders
+description: >
+  This endpoint retrieves all orders from the database. 
+  Only users with admin privileges can access this endpoint.
+security:
+  - BearerAuth: []
+responses:
+  200:
+    description: A list of all orders
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              <column_name>:
+                type: <data_type>
+                description: Description of the column (replace <column_name> and <data_type> with actual values)
+  500:
+    description: Internal server error

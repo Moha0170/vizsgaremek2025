@@ -1,0 +1,37 @@
+tags:
+  - Orders
+summary: Retrieve orders for a specific user
+description: >
+  This endpoint retrieves all orders associated with a specific user ID.
+  It queries the database for orders where the `felhasznalo_id` matches
+  the provided parameter.
+parameters:
+  - name: felhasznalo_id
+    in: path
+    required: true
+    description: The ID of the user whose orders are to be retrieved.
+    schema:
+      type: string
+responses:
+  200:
+    description: A list of orders for the specified user.
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: The unique identifier of the order.
+              felhasznalo_id:
+                type: string
+                description: The ID of the user associated with the order.
+  500:
+    description: Internal server error.
+    content:
+      text/plain:
+        schema:
+          type: string
+          example: "An error occurred while processing the request."

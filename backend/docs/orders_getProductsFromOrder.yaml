@@ -1,0 +1,39 @@
+tags:
+  - Orders
+summary: Retrieve products from a specific order
+description: >
+  This endpoint retrieves the list of products associated with a specific order ID. 
+  It returns the quantity and product details for each product in the order.
+parameters:
+  - name: id
+    in: path
+    required: true
+    description: The ID of the order to retrieve products from.
+    schema:
+      type: string
+responses:
+  200:
+    description: A list of products associated with the order.
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              mennyiseg:
+                type: integer
+                description: The quantity of the product in the order.
+              termek_id:
+                type: integer
+                description: The ID of the product.
+              neve:
+                type: string
+                description: The name of the product.
+  500:
+    description: An error occurred while processing the request.
+    content:
+      text/plain:
+        schema:
+          type: string
+          example: "Internal server error"

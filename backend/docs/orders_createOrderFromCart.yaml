@@ -1,0 +1,49 @@
+tags:
+  - "Orders"
+summary: "Create an order from the user's cart"
+description: "This endpoint creates an order based on the items in the user's cart and the provided address details."
+parameters:
+  - name: "felhasznalo_id"
+    in: "path"
+    description: "The ID of the user creating the order"
+    required: true
+    type: "string"
+  - in: "body"
+    name: "body"
+    description: "Address and optional coupon details"
+    required: true
+    schema:
+      type: "object"
+      properties:
+        orszag:
+          type: "string"
+          description: "Country"
+        iranyitoszam:
+          type: "string"
+          description: "Postal code"
+        varos:
+          type: "string"
+          description: "City"
+        kozterulet:
+          type: "string"
+          description: "Street name"
+        kozterulet_jellege:
+          type: "string"
+          description: "Street type (e.g., avenue, road)"
+        hazszam:
+          type: "string"
+          description: "House number"
+        kupon:
+          type: "string"
+          description: "Optional coupon code"
+responses:
+  200:
+    description: "Order successfully created"
+  400:
+    description: "Missing address details or invalid coupon"
+  401:
+    description: "Coupon usage conditions not met"
+  404:
+    description: "Cart is empty"
+  500:
+    description: "Internal server error"

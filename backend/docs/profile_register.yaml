@@ -1,0 +1,94 @@
+tags:
+  - Profile
+summary: Register a new user
+description: |
+  This endpoint allows a new user to register by providing their username, password, email, phone number, date of birth, and name. 
+  If the username already exists, a conflict error is returned.
+parameters:
+  - name: user
+    in: body
+    required: true
+    schema:
+      type: string
+    description: The username for the new user.
+  - name: password
+    in: body
+    required: true
+    schema:
+      type: string
+    description: The password for the new user.
+  - name: email
+    in: body
+    required: true
+    schema:
+      type: string
+    description: The email address of the new user.
+  - name: telefonszam
+    in: body
+    required: true
+    schema:
+      type: string
+    description: The phone number of the new user.
+  - name: szuldatum
+    in: body
+    required: true
+    schema:
+      type: string
+      format: date
+    description: The date of birth of the new user.
+  - name: neve
+    in: body
+    required: true
+    schema:
+      type: string
+    description: The full name of the new user.
+responses:
+  200:
+    description: Registration successful
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Sikeres regisztráció
+            userId:
+              type: integer
+              example: 1
+            username:
+              type: string
+              example: John Doe
+            email:
+              type: string
+              example: johndoe@example.com
+            telefonszam:
+              type: string
+              example: +123456789
+            szuldatum:
+              type: string
+              format: date
+              example: 1990-01-01
+            isAdmin:
+              type: boolean
+              example: false
+  409:
+    description: Conflict - Username already exists
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Már létezik ilyen felhasználó!
+  400:
+    description: Bad Request - An error occurred during registration
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Hiba történt - _error_

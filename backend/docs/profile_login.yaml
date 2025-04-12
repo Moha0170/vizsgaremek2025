@@ -1,0 +1,59 @@
+tags:
+  - Profile
+summary: User login endpoint
+description: |
+  This endpoint allows a user to log in by providing their username and password. 
+  The password will be validated against the stored hashed password in the database.
+parameters:
+  - name: user
+    in: body
+    required: true
+    schema:
+      type: object
+      properties:
+        user:
+          type: string
+          description: The username of the user trying to log in.
+        password:
+          type: string
+          description: The password of the user trying to log in.
+responses:
+  200:
+    description: Login successful
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            password:
+              type: string
+              description: The hashed password of the user.
+            id:
+              type: integer
+              description: The ID of the user.
+            neve:
+              type: string
+              description: The name of the user.
+            email:
+              type: string
+              description: The email address of the user.
+            telefonszam:
+              type: string
+              description: The phone number of the user.
+            szuldatum:
+              type: string
+              format: date
+              description: The birth date of the user.
+            admin:
+              type: boolean
+              description: Whether the user has admin privileges.
+  404:
+    description: User not found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Nincs ilyen felhasználó!

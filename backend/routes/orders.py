@@ -3,10 +3,12 @@ from backend import db
 from sqlalchemy import text
 from datetime import datetime
 from backend.dec import token_required
+from flasgger import swag_from
  
 order_bp = Blueprint("order_bp", __name__, url_prefix="/orders")
  
 @order_bp.route("/getOrders/<felhasznalo_id>", methods=['GET'])
+@swag_from("../docs/orders_getOrders.yaml")
 def getOrder(felhasznalo_id):
     try:
         results = db.session.execute(
@@ -18,6 +20,7 @@ def getOrder(felhasznalo_id):
         return str(e), 500
  
 @order_bp.route("/getProductsFromOrder/<id>", methods=['GET'])
+@swag_from("../docs/orders_getProductsFromOrder.yaml")
 def getProductsFromOrder(id):
     try:
         results = db.session.execute(
@@ -37,6 +40,7 @@ def getProductsFromOrder(id):
     
 @order_bp.route("/getAllOrder/", methods=['GET'])
 @token_required
+@swag_from("../docs/orders_getAllOrder.yaml")
 def getAllOrder():
     try:
         results = db.session.execute(
@@ -47,6 +51,7 @@ def getAllOrder():
         return str(e), 500
  
 @order_bp.route("/createOrderFromCart/<felhasznalo_id>", methods=['POST'])
+@swag_from("../docs/orders_createOrderFromCart.yaml")
 def createOrderFromCart(felhasznalo_id):
     try:
         orszag = request.json["orszag"]

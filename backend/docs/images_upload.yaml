@@ -1,0 +1,31 @@
+tags:
+  - "Images"
+summary: "Upload an image"
+description: "Endpoint to upload an image file to the server."
+consumes:
+  - "multipart/form-data"
+produces:
+  - "application/json"
+parameters:
+  - in: "formData"
+    name: "file"
+    type: "file"
+    required: true
+    description: "The image file to upload."
+responses:
+  200:
+    description: "File uploaded successfully."
+    schema:
+      type: "object"
+      properties:
+        message:
+          type: "string"
+        filename:
+          type: "string"
+  400:
+    description: "Bad request. Either no file was provided or no file was selected."
+    schema:
+      type: "object"
+      properties:
+        error:
+          type: "string"

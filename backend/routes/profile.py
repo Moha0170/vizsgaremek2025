@@ -2,10 +2,12 @@ from flask import Blueprint, request, jsonify
 from backend import db, argon2, app
 from sqlalchemy import text
 from jwt import encode
+from flasgger import swag_from
 
 profile_bp = Blueprint("profile_bp", __name__, url_prefix="/profile")
 
 @profile_bp.route("/login/", methods=['POST'])
+@swag_from("../docs/profile_login.yaml")
 def login():
     results = db.session.execute(
         text("""
@@ -39,6 +41,7 @@ def login():
 
 
 @profile_bp.route("/register/", methods=['POST'])
+@swag_from("../docs/profile_register.yaml")
 def register():
     try:
         existing_user = db.session.execute(

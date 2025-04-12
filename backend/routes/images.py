@@ -4,10 +4,12 @@ from ..dec import token_required
 from sqlalchemy import text
 from werkzeug.utils import secure_filename
 import os
+from flasgger import swag_from
 
 images_bp = Blueprint("images_bp", __name__, url_prefix="/images")
 
 @images_bp.route("/upload", methods=["POST"])
+@swag_from("../docs/images_upload.yaml")
 def upload():
     if 'file' not in request.files:
         return jsonify({'error': 'No file part'}), 400
