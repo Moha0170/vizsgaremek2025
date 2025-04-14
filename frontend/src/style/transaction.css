@@ -171,12 +171,13 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
+    background: #86ec79;
     border-radius: 5px;
     width: 28%;
     margin: 2px;
   }
 
-  .dark-mode .btn-wrapper input, .coupon-inp {
+  .dark-mode .btn-wrapper input, .dark-mode .coupon-inp {
     background: #333;
     color: #ffffff;
     border: 1px solid #9e9e9e;
