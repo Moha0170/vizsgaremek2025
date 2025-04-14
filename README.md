@@ -1,4 +1,4 @@
-# 📌 Vizsgaremek 2025 
+# <img src="https://github.com/Moha0170/vizsgaremek2025/blob/main/frontend/hypercharge.png" alt="drawing" width="60" height="60"/> Hypercharge Market
 ---
 
 ## 1️⃣ Frontend futtatásához szükséges parancsok
