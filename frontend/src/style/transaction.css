@@ -155,7 +155,18 @@
     margin-bottom: 15px;
   }
 
-  .btn-wrapper input, .coupon-inp {
+  .btn-wrapper input {
+    display: inline-block;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    width: 60%;
+    margin: 2px;
+  }
+
+  .coupon-inp {
     display: inline-block;
     justify-content: space-between;
     align-items: center;
@@ -173,20 +184,6 @@
   }
 
 
-
-/*   @media (max-width: 768px) {
-    .btn-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .btn-wrapper input {
-      width: 100%;
-      margin: 5px 0;
-    }
-  }
- */
 
  /* hibaüzenetek stílusa */
 .error-message {

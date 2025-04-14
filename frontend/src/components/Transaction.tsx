@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "../style/transaction.css";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface CartItem {
   termek_id: number;
@@ -21,8 +23,7 @@ const Transaction = () => {
   const [kozteruletJellege, setKozteruletJellege] = useState("");
   const [hazszam, setHazszam] = useState("");
   const [kupon, setKupon] = useState("");
-  const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState<"success" | "error">("error");
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -80,15 +81,12 @@ const Transaction = () => {
           default:
             messageText = "Ismeretlen kuponkód!";
         }
-        setMessage(messageText);
-        setMessageType("success");
+        toast.success(messageText);
       } else {
-        setMessage("Érvénytelen kuponkód!");
-        setMessageType("error");
+        toast.error("Érvénytelen kuponkód!");
       }
     } catch (error) {
-      setMessage("Hiba történt a kupon ellenőrzésekor!");
-      setMessageType("error");
+      toast.error("Hiba történt a kupon ellenőrzésekor!");
     }
   };
 
@@ -103,16 +101,28 @@ const Transaction = () => {
     }
   };
 
+  const validateInputs = () => {
+    const newErrors: { [key: string]: string } = {};
+
+    if (!/^[A-Za-zÁ-űáéíóöőúüű\s]+$/.test(orszag)) newErrors.orszag = "Az ország csak betűket tartalmazhat!";
+    if (!/^\d{4}$/.test(iranyitoszam)) newErrors.iranyitoszam = "Az irányítószám pontosan 4 számjegy legyen!";
+    if (!/^[A-Za-zÁ-űáéíóöőúüű\s]+$/.test(varos)) newErrors.varos = "A város csak betűket tartalmazhat!";
+    if (!/^[A-Za-zÁ-űáéíóöőúüű\s]+$/.test(kozterulet)) newErrors.kozterulet = "A közterület csak betűket tartalmazhat!";
+    if (!/^[A-Za-zÁ-űáéíóöőúüű\s]+$/.test(kozteruletJellege)) newErrors.kozteruletJellege = "A közterület jellege csak betűket tartalmazhat!";
+    if (!/^\d+$/.test(hazszam)) newErrors.hazszam = "A házszám csak számokat tartalmazhat!";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const completePurchase = async () => {
     if (!userId || cartItems.length === 0) {
-      setMessage("A kosár üres vagy nincs bejelentkezve!");
-      setMessageType("error");
+      toast.error("A kosár üres vagy nincs bejelentkezve!");
       return;
     }
 
-    if (!orszag || !iranyitoszam || !varos || !kozterulet || !kozteruletJellege || !hazszam) {
-      setMessage("Minden mező kitöltése kötelező!");
-      setMessageType("error");
+    if (!validateInputs()) {
+      toast.error("Kérlek javítsd a hibákat a mezőkben!");
       return;
     }
 
@@ -134,16 +144,13 @@ const Transaction = () => {
         localStorage.removeItem("cartItems");
         clearCart();
         navigate("/orders");
-        setMessage("Rendelés sikeresen leadva!");
-        setMessageType("success");
+        toast.success("Rendelés sikeresen leadva!");
       } else {
-        setMessage(response.data);
-        setMessageType("error");
+        toast.error(response.data);
       }
     } catch (error) {
       console.error("Hiba a vásárlás során:", error);
-      setMessage("Hiba történt a rendelés során!");
-      setMessageType("error");
+      toast.error("Hiba történt a rendelés során!");
     }
   };
 
@@ -165,12 +172,42 @@ const Transaction = () => {
           </div>
           <div className="total-price">Összesen: {totalPrice} Ft</div>
           <div className="btn-wrapper">
-            <input type="text" placeholder="Ország" value={orszag} onChange={(e) => setOrszag(e.target.value)} />
-            <input type="text" placeholder="Irányítószám" value={iranyitoszam} onChange={(e) => setIranyitoszam(e.target.value)} />
-            <input type="text" placeholder="Város" value={varos} onChange={(e) => setVaros(e.target.value)} />
-            <input type="text" placeholder="Közterület" value={kozterulet} onChange={(e) => setKozterulet(e.target.value)} />
-            <input type="text" placeholder="Közterület jellege" value={kozteruletJellege} onChange={(e) => setKozteruletJellege(e.target.value)} />
-            <input type="text" placeholder="Házszám" value={hazszam} onChange={(e) => setHazszam(e.target.value)} />
+            <div>
+              <p>Oszág:</p>
+              <input type="text" placeholder="Ország" value={orszag} onChange={(e) => setOrszag(e.target.value)} />
+              {errors.orszag && <p className="error-message">{errors.orszag}</p>}
+            </div>
+    
+            <div>
+            <p>Irányítószám:</p>
+              <input type="text" placeholder="Irányítószám" value={iranyitoszam} onChange={(e) => setIranyitoszam(e.target.value)} />
+              {errors.iranyitoszam && <p className="error-message">{errors.iranyitoszam}</p>}
+            </div>
+    
+            <div>
+            <p>Város:</p>
+              <input type="text" placeholder="Város" value={varos} onChange={(e) => setVaros(e.target.value)} />
+              {errors.varos && <p className="error-message">{errors.varos}</p>}
+            </div>
+
+            <div>
+            <p>Közterület:</p>
+              <input type="text" placeholder="Közterület" value={kozterulet} onChange={(e) => setKozterulet(e.target.value)} />
+              {errors.kozterulet && <p className="error-message">{errors.kozterulet}</p>}
+            </div>
+
+            <div>
+            <p>Közterület jellege:</p>
+              <input type="text" placeholder="Közterület jellege" value={kozteruletJellege} onChange={(e) => setKozteruletJellege(e.target.value)} />
+              {errors.kozteruletJellege && <p className="error-message">{errors.kozteruletJellege}</p>}
+            </div>
+      
+            <div>
+            <p>Házszám:</p>
+              <input type="text" placeholder="Házszám" value={hazszam} onChange={(e) => setHazszam(e.target.value)} />
+              {errors.hazszam && <p className="error-message">{errors.hazszam}</p>}
+            </div>
+          <br></br>
           </div>
           <input type="text" className="coupon-inp" placeholder="Kuponkód (opcionális)" value={kupon} onChange={(e) => setKupon(e.target.value)} />
           <button onClick={validateCoupon} className="coupon-check">Kupon ellenőrzése</button>
@@ -181,7 +218,15 @@ const Transaction = () => {
         <p>Nincsenek termékek a vásárláshoz.</p>
       )}
 
-      {message && <p className={messageType === "success" ? "success-message" : "error-message"}>{message}</p>}
+    <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        pauseOnHover={true}
+        pauseOnFocusLoss={true}
+        aria-label="toast notifications"
+        theme="colored"
+      />
     </div>
   );
 };
