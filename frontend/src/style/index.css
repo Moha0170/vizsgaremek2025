@@ -633,6 +633,11 @@ h1 {
   transition: background 0.3s;
 }
 
+.statusz {
+  background: #4f67f0; 
+  color: #FFFFFF; 
+}
+
 .admin-container {
   height: 99vh;
 }

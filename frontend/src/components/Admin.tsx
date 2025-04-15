@@ -159,6 +159,27 @@ function Admin() {
     }
   };
   
+  const handleToggleOrderStatus = async (orderId: number) => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URI}/admin/orderReadyToggle/${orderId}`, {
+        method: "POST",
+        headers: {
+          "Authorization": localStorage.getItem("token") || "",
+        },
+      });
+  
+      if (response.ok) {
+        fetchAllOrders(); 
+      } else {
+        const errorData = await response.json();
+        console.error("Hiba a státusz frissítésekor:", errorData);
+      }
+    } catch (error) {
+      console.error("Hiba a rendelés státuszának módosításakor:", error);
+    }
+  };
+
+  
   return (
     <div className="admin-container">
       {isAdmin ? (
@@ -279,12 +300,13 @@ function Admin() {
         </tr>
       ))}
     </tbody>
+  
   </table>
   <h3>Összes rendelés</h3>
 <table className="admin-table">
   <thead>
     <tr>
-      <th>ID</th>
+      <th>Rendelési ID</th>
       <th>Felhasználó ID</th>
       <th>Cím</th>
       <th>Összeg</th>
@@ -293,17 +315,24 @@ function Admin() {
     </tr>
   </thead>
   <tbody>
-    {allOrders.map((order) => (
-      <tr key={order.id}>
-        <td>{order.id}</td>
-        <td>{order.felhasznalo_id}</td>
-        <td>{order.cim}</td>
-        <td>{order.vasarlas_osszeg} Ft</td>
-        <td>{new Date(order.rendeles_datum).toLocaleString()}</td>
-        <td>{order.kezbesitett ? "Kézbesítve" : "Folyamatban"}</td>
-      </tr>
-    ))}
-  </tbody>
+  {allOrders.map((order) => (
+    <tr key={order.id}>
+      <td>{order.id}</td>
+      <td>{order.felhasznalo_id}</td>
+      <td>{order.cim}</td>
+      <td>{order.vasarlas_osszeg} Ft</td>
+      <td>{new Date(order.rendeles_datum).toLocaleString()}</td>
+      <td>
+        {order.kezbesitett ? "Kézbesítve" : "Folyamatban"}
+        <br />
+        <button className="statusz" onClick={() => handleToggleOrderStatus(order.id)}>
+          Státusz módosítása
+        </button>
+      </td>
+    </tr>
+  ))}
+</tbody>
+
 </table>
 
 </div>
