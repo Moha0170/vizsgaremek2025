@@ -173,7 +173,7 @@ const Transaction = () => {
           <div className="total-price">Összesen: {totalPrice} Ft</div>
           <div className="btn-wrapper">
             <div>
-              <p>Oszág:</p>
+              <p>Ország:</p>
               <input type="text" placeholder="Ország" value={orszag} onChange={(e) => setOrszag(e.target.value)} />
               {errors.orszag && <p className="error-message">{errors.orszag}</p>}
             </div>
@@ -210,7 +210,7 @@ const Transaction = () => {
 
             <div>
             <p>Fizetési mód:</p>
-            <input type="text" value="Utánvét: készépnz vagy bankkártya" disabled className="form-input" />
+            <input type="text" value="Utánvét: készpénz vagy bankkártya" disabled className="form-input" />
             </div>
           <br></br>
           </div>

@@ -300,7 +300,7 @@ h1 {
 
 .contact-info p {
   font-size: 1.2rem;
-  color: #333333; /* dark gray */
+  color: #333333; 
   margin: 10px 0;
 }
 
@@ -317,7 +317,7 @@ h1 {
   max-width: 500px;
   padding: 15px;
   margin: 10px 0;
-  border: 2px solid #4f67f0; /* tomato */
+  border: 2px solid #4f67f0;
   border-radius: 8px;
   font-size: 1.1rem;
   font-family: 'Roboto', sans-serif;
@@ -355,7 +355,7 @@ h1 {
 .filter-container select {
   padding: 10px 15px;
   margin: 10px;
-  border: 2px solid #4f67f0; /* tomato */
+  border: 2px solid #4f67f0; 
   border-radius: 8px;
   font-size: 1rem;
   font-family: 'Roboto', sans-serif;
@@ -392,7 +392,7 @@ h1 {
 
 .profile-container h2 {
   font-size: 2rem;
-  color: #4f67f0; /* tomato */
+  color: #4f67f0; 
   margin-bottom: 20px;
 }
 
@@ -444,7 +444,7 @@ h1 {
 .profile-container h2,
 .contacts-container h1 {
   font-size: 2rem;
-  color: #4f67f0; /* tomato */
+  color: #4f67f0; 
   margin-bottom: 20px;
 }
 
@@ -466,13 +466,13 @@ h1 {
   max-width: 500px;
   padding: 15px;
   margin: 10px 0;
-  border: 2px solid #4f67f0; /* tomato */
+  border: 2px solid #4f67f0; 
   border-radius: 8px;
   font-size: 1.1rem;
   font-family: 'Roboto', sans-serif;
 }
 
-.register-container button,
+.register-container button:not(.Toastify__close-button),
 .contact-form button {
   background: #4f67f0;
   color: #FFFFFF; 
@@ -484,7 +484,7 @@ h1 {
   transition: background 0.3s;
 }
 
-.register-container button:hover,
+.register-container button:hover:not(.Toastify__close-button),
 .contact-form button:hover {
   background: #0c30fa; 
 }
@@ -544,24 +544,6 @@ h1 {
   color: #333333;
 }
 
-
-.register-container button,
-.contact-form button {
-  background: #4f67f0;
-  color: #FFFFFF;
-  padding: 15px 30px;
-  border: 2px solid #4f67f0;
-  border-radius: 8px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-
-.register-container button:hover,
-.contact-form button:hover {
-  background: #0c30fa;
-}
 
 .delete-button {
   background: #ff4d4d;

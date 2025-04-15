@@ -207,3 +207,16 @@
 }
 
 
+  /*mobil reszponzivitás */
+  @media (max-width: 768px) {
+  .btn-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-wrapper input {
+    width: 80%;
+    margin: 5px 0;
+  }
+}
