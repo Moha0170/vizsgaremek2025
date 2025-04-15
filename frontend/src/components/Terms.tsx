@@ -18,10 +18,17 @@ const Terms = () => {
         <li>A megrendelés fizetési kötelezettséggel jár.</li>
         <li>A szállítási idő a termék elérhetőségétől függ.</li>
         <li>A rendelés csak a teljes ár beérkezése után kerül feldolgozásra.</li>
+        <li>Fizetés kizárólag utánvéttel történhet a futárnál történő átvételkor.</li>
+        <li>
+          Amennyiben a megrendelés a vevő hibájából nem jön létre (pl. hibás adatok, sikertelen átvétel),
+          a sikertelen kiszállítás költsége, azaz a futár díja, a vevőt terheli.
+        </li>
       </ul>
 
       <h2>3. Visszatérítési szabályzat</h2>
-      <p>A vásárlók 14 napon belül visszaküldhetik a termékeket, amennyiben azok sértetlenek és eredeti csomagolásban vannak.</p>
+      <p>
+        A vásárlók 14 napon belül visszaküldhetik a termékeket, amennyiben azok sértetlenek és eredeti csomagolásban vannak.
+      </p>
 
       <h2>4. Kapcsolat</h2>
       <p>Ha bármilyen kérdése van, lépjen kapcsolatba velünk az ügyfélszolgálatunkon keresztül.</p>

@@ -105,7 +105,7 @@ const Transaction = () => {
     const newErrors: { [key: string]: string } = {};
 
     if (!/^[A-Za-zÁ-űáéíóöőúüű\s]+$/.test(orszag)) newErrors.orszag = "Az ország csak betűket tartalmazhat!";
-    if (!/^\d{4}$/.test(iranyitoszam)) newErrors.iranyitoszam = "Az irányítószám pontosan 4 számjegy legyen!";
+    if (!/^\d+$/.test(iranyitoszam)) newErrors.iranyitoszam = "Az irányítószám csak számokat tartalmazhat!";
     if (!/^[A-Za-zÁ-űáéíóöőúüű\s]+$/.test(varos)) newErrors.varos = "A város csak betűket tartalmazhat!";
     if (!/^[A-Za-zÁ-űáéíóöőúüű\s]+$/.test(kozterulet)) newErrors.kozterulet = "A közterület csak betűket tartalmazhat!";
     if (!/^[A-Za-zÁ-űáéíóöőúüű\s]+$/.test(kozteruletJellege)) newErrors.kozteruletJellege = "A közterület jellege csak betűket tartalmazhat!";
@@ -206,6 +206,11 @@ const Transaction = () => {
             <p>Házszám:</p>
               <input type="text" placeholder="Házszám" value={hazszam} onChange={(e) => setHazszam(e.target.value)} />
               {errors.hazszam && <p className="error-message">{errors.hazszam}</p>}
+            </div>
+
+            <div>
+            <p>Fizetési mód:</p>
+            <input type="text" value="Utánvét: készépnz vagy bankkártya" disabled className="form-input" />
             </div>
           <br></br>
           </div>

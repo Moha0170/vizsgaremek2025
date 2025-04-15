@@ -8,7 +8,9 @@ const About = () => {
   return (
     <div className="container">
       <h1>Rólunk</h1>
-      <p>A Hypercharge Market célja, hogy a legjobb minőségű termékeket kínálja versenyképes áron.</p>
+      <p>A Hypercharge Market célja, hogy a legjobb minőségű termékeket kínálja versenyképes áron.
+        <br></br>
+        Jelenleg kizárólag utánvétes fizetési lehetőséget biztosítunk.</p>
 
       <h2>Kik vagyunk?</h2>
       <p>Egy dinamikus csapat vagyunk, akik elkötelezettek az online vásárlási élmény fejlesztése mellett.</p>
