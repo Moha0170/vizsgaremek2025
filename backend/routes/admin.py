@@ -35,21 +35,39 @@ def create():
 
 @admin_bp.route("/product/update/<id>", methods=['PATCH'])
 @token_required
-@swag_from("../docs/admin_productUpdate.yaml")
 def update(id):
     try:
         neve = request.form['neve']
         ara = request.form['ara']
         kat = request.form['kat']
-        file = request.files['file']
-        filename = secure_filename(file.filename)
         gyarto_beszallito = request.form['gyarto_beszallito']
-        db.session.execute(text("UPDATE termekek SET neve = :nev, ara = :ar, kat = :kat, gyarto_beszallito = :gyarto, kep = :kep WHERE id = :id"), {"nev": neve, "ar": int(ara), "kat": kat, "gyarto": gyarto_beszallito, "id": id, "kep": filename})
+
+        # Csak akkor frissítjük a képet, ha van új fájl
+        if 'file' in request.files and request.files['file'].filename != '':
+            file = request.files['file']
+            filename = secure_filename(file.filename)
+            db.session.execute(text("""
+                UPDATE termekek SET neve = :nev, ara = :ar, kat = :kat,
+                gyarto_beszallito = :gyarto, kep = :kep WHERE id = :id
+            """), {
+                "nev": neve, "ar": int(ara), "kat": kat,
+                "gyarto": gyarto_beszallito, "kep": filename, "id": id
+            })
+        else:
+            db.session.execute(text("""
+                UPDATE termekek SET neve = :nev, ara = :ar, kat = :kat,
+                gyarto_beszallito = :gyarto WHERE id = :id
+            """), {
+                "nev": neve, "ar": int(ara), "kat": kat,
+                "gyarto": gyarto_beszallito, "id": id
+            })
+
         db.session.commit()
         return {"message": "Product updated!"}
-    except (Exception) as e:
+    except Exception as e:
         print(e)
         return str(e), 500
+
 
 """ @admin_bp.route("/users/update/", methods=['PATCH'])
 @token_required

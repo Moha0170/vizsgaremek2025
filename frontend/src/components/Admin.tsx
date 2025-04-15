@@ -72,17 +72,19 @@ function Admin() {
       formData.append("ara", editProduct.ara.toString());
       formData.append("kat", editProduct.kat);
       formData.append("gyarto_beszallito", editProduct.gyarto_beszallito);
-
+  
       if (editProduct.kep) {
         formData.append("file", editProduct.kep);
       }
-
+  
       const response = await fetch(`${import.meta.env.VITE_API_URI}/admin/product/update/${editProduct.id}`, {
         method: "PATCH",
-        headers: { "Authorization": localStorage.getItem("token") || "" },
+        headers: {
+          "Authorization": localStorage.getItem("token") || "",
+        },
         body: formData,
       });
-
+  
       if (response.status === 401) {
         const message = await response.json();
         console.log(message);
@@ -92,6 +94,7 @@ function Admin() {
       }
     }
   };
+  
 
   const handleUploadImage = async () => {
     if (newProduct.kep) {
