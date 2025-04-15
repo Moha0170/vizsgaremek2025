@@ -24,6 +24,8 @@ function Admin() {
     kep: undefined,
   });
   const [editProduct, setEditProduct] = useState<Product | null>(null);
+  const [allOrders, setAllOrders] = useState<any[]>([]);
+
 
   useEffect(() => {
     fetchProducts();
@@ -139,6 +141,24 @@ function Admin() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  useEffect(() => {
+    fetchAllOrders();
+  }, []);
+  
+  const fetchAllOrders = async () => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URI}/orders/getAllOrder/`, {
+        headers: { "Authorization": localStorage.getItem("token") || "" },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setAllOrders(data);
+      }
+    } catch (error) {
+      console.error("Hiba a rendelések lekérésekor:", error);
+    }
+  };
+  
   return (
     <div className="admin-container">
       {isAdmin ? (
@@ -260,6 +280,32 @@ function Admin() {
       ))}
     </tbody>
   </table>
+  <h3>Összes rendelés</h3>
+<table className="admin-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Felhasználó ID</th>
+      <th>Cím</th>
+      <th>Összeg</th>
+      <th>Dátum</th>
+      <th>Állapot</th>
+    </tr>
+  </thead>
+  <tbody>
+    {allOrders.map((order) => (
+      <tr key={order.id}>
+        <td>{order.id}</td>
+        <td>{order.felhasznalo_id}</td>
+        <td>{order.cim}</td>
+        <td>{order.vasarlas_osszeg} Ft</td>
+        <td>{new Date(order.rendeles_datum).toLocaleString()}</td>
+        <td>{order.kezbesitett ? "Kézbesítve" : "Folyamatban"}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
 </div>
 
         </>

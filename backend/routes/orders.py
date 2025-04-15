@@ -109,7 +109,7 @@ def createOrderFromCart(felhasznalo_id):
  
         rendeles_datum = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
  
-        cim = orszag + "" + iranyitoszam + "" + varos + "" + kozterulet + "" + kozterulet_jellege + "" + hazszam
+        cim = orszag + ", " + iranyitoszam + " " + varos + ", " + kozterulet + " " + kozterulet_jellege + " " + hazszam + "."
         db.session.execute(
             text("""INSERT INTO rendelesek (felhasznalo_id, cim, vasarlas_osszeg, rendeles_datum, kezbesitett) VALUES(:felhasznalo_id, :cim, :vasarlas_osszeg, :rendeles_datum, 0)"""),
             {"felhasznalo_id": felhasznalo_id, "cim": cim, "vasarlas_osszeg": vasarlas_osszeg, "rendeles_datum": rendeles_datum}
