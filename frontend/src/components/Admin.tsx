@@ -223,42 +223,45 @@ function Admin() {
             <button onClick={() => { handleCreateProduct(); handleUploadImage(); }}>Hozzáadás</button>
             </div>
 
-          <h3>Termékek</h3>
-          <table className="admin-table">
-            <thead>
-              <tr>
-                <th>Név</th>
-                <th>Ár</th>
-                <th>Kategória</th>
-                <th>Gyártó</th>
-                <th>Műveletek</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr key={product.id}>
-                  <td>{product.neve}</td>
-                  <td>{product.ara} Ft</td>
-                  <td>{product.kat}</td>
-                  <td>{product.gyarto_beszallito}</td>
-                  <td>
-                    <button
-                      className="delete-button"
-                      onClick={() => handleDeleteProduct(product.id)}
-                    >
-                      Törlés
-                    </button>
-                    <button
-                      className="edit-button"
-                      onClick={() => handleEditClick(product)}
-                    >
-                      Szerkeszt
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            <h3>Termékek</h3>
+<div className="admin-table-container">
+  <table className="admin-table">
+    <thead>
+      <tr>
+        <th>Név</th>
+        <th>Ár</th>
+        <th>Kategória</th>
+        <th>Gyártó</th>
+        <th>Műveletek</th>
+      </tr>
+    </thead>
+    <tbody>
+      {products.map((product) => (
+        <tr key={product.id}>
+          <td>{product.neve}</td>
+          <td>{product.ara} Ft</td>
+          <td>{product.kat}</td>
+          <td>{product.gyarto_beszallito}</td>
+          <td>
+            <button
+              className="delete-button"
+              onClick={() => handleDeleteProduct(product.id)}
+            >
+              Törlés
+            </button>
+            <button
+              className="edit-button"
+              onClick={() => handleEditClick(product)}
+            >
+              Szerkeszt
+            </button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
         </>
       ) : (
         <h2>Nincs jogosultságod az adminisztrációs felülethez</h2>

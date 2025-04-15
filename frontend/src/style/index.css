@@ -520,9 +520,14 @@ h1 {
 .admin-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px 0;
   table-layout: fixed;
+  min-width: 600px;
 }
+
+.admin-table-container {
+  overflow-x: auto;
+}
+
 
 .admin-table th,
 .admin-table td {
