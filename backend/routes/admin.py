@@ -35,6 +35,7 @@ def create():
 
 @admin_bp.route("/product/update/<id>", methods=['PATCH'])
 @token_required
+@swag_from("../docs/admin_productUpdate.yaml")
 def update(id):
     try:
         neve = request.form['neve']
@@ -42,7 +43,6 @@ def update(id):
         kat = request.form['kat']
         gyarto_beszallito = request.form['gyarto_beszallito']
 
-        # Csak akkor frissítjük a képet, ha van új fájl
         if 'file' in request.files and request.files['file'].filename != '':
             file = request.files['file']
             filename = secure_filename(file.filename)
