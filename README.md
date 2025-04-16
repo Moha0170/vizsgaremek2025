@@ -3,7 +3,7 @@
 
 ## 1️⃣ Frontend futtatásához szükséges parancsok
 
-Frontend fájlban kell lenni a terminálban a parancsok futtatásához. 
+Frontend mappában kell lenni a terminálban a parancsok futtatásához. 
 
 ```sh
 cd frontend
