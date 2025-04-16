@@ -68,7 +68,6 @@ def update(id):
         print(e)
         return str(e), 500
 
-
 """ @admin_bp.route("/users/update/", methods=['PATCH'])
 @token_required
 def update_user():

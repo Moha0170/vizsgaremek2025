@@ -6,4 +6,3 @@ flask_argon2
 pyjwt
 flask_cors
 flasgger
-pytz
