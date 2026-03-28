@@ -68,7 +68,8 @@ def register():
         )
         db.session.commit()
 
-        user_id = db.session.execute(text("SELECT LAST_INSERT_ID()")).scalar()
+        user_id = int(db.session.execute(text("SELECT id FROM felhasznalok ORDER BY id DESC LIMIT 1;")).scalar())
+        print(user_id)
 
         db.session.execute(
             text("INSERT INTO login (user, password, felhasznalo_id) VALUES (:user, :password, :felhasznalo_id)"), 
@@ -88,4 +89,5 @@ def register():
 
     except Exception as e:
         db.session.rollback()
+        print(str(e))
         return {"message": "Hiba történt: " + str(e)}, 400
